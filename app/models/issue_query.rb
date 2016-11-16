@@ -81,8 +81,7 @@ class IssueQuery < Query
         principals += Principal.member_of(all_projects)
       end
       versions = Version.visible.find_all_by_sharing('system')
-	#Jacky@20161108 Removed , :is_for_all => true	
-      issue_custom_fields = IssueCustomField.where(:is_filter => true).all
+      issue_custom_fields = IssueCustomField.where(:is_filter => true, :is_for_all => true).all
     end
     principals.uniq!
     principals.sort!

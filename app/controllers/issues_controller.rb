@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+require 'net/http'
 
 class IssuesController < ApplicationController
   menu_item :new_issue, :only => [:new, :create]
@@ -52,6 +53,7 @@ class IssuesController < ApplicationController
   helper :timelog
   include Redmine::Export::PDF
 
+  
   def index
     retrieve_query
     @is_short_by_parent = params['sort_by_parent'] == '1'
@@ -143,6 +145,13 @@ class IssuesController < ApplicationController
     call_hook(:controller_issues_new_before_save, { :params => params, :issue => @issue })
     @issue.save_attachments(params[:attachments] || (params[:issue] && params[:issue][:uploads]))
     if @issue.save
+      
+      if params[:chkLetstalk][:yesno_attribute] == 'yes'
+		uri = URI('http://10.19.10.55:808/api/IMMessage')
+		res = Net::HTTP.post_form(uri, 'id' => @issue.id.to_s, 'Comment' => params[:txtletstalk])
+		puts res.body
+	end
+      
       call_hook(:controller_issues_new_after_save, { :params => params, :issue => @issue})
       respond_to do |format|
         format.html {
@@ -155,7 +164,9 @@ class IssuesController < ApplicationController
             redirect_to issue_path(@issue)
           end
         }
+        
         format.api  { render :action => 'show', :status => :created, :location => issue_url(@issue) }
+        
       end
       return
     else
@@ -190,9 +201,17 @@ class IssuesController < ApplicationController
     end
 
     if saved
-      render_attachment_warning_if_needed(@issue)
-      flash[:notice] = l(:notice_successful_update) unless @issue.current_journal.new_record?
 
+	if params[:chkLetstalk][:yesno_attribute] == 'yes'
+		uri = URI('http://10.19.10.55:808/api/IMMessage')
+		res = Net::HTTP.post_form(uri, 'id' => @issue.id.to_s, 'Comment' => params[:txtletstalk])
+		puts res.body
+	end
+            
+      render_attachment_warning_if_needed(@issue)          
+      
+      flash[:notice] = l(:notice_successful_update) unless @issue.current_journal.new_record?         
+      
       respond_to do |format|
         format.html { redirect_back_or_default issue_path(@issue) }
         format.api  { render_api_ok }
