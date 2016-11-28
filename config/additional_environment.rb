@@ -8,6 +8,6 @@
 #   ...
 #
 #Logger.new(PATH,NUM_FILES_TO_ROTATE,FILE_SIZE)
-config.logger = Logger.new('/usr/local/redmine_im/log/redmine_im.log', 7, 3000000)
-config.logger.level = Logger::INFO
+#config.logger = Logger.new('/usr/local/redmine_im/log/redmine_im.log', 7, 3000000)
+#config.logger.level = Logger::INFO
 
