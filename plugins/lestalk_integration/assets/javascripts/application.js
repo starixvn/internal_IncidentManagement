@@ -2,17 +2,23 @@ var CORE = (function ($) {
 	return {
 		initialize: function () 
 		{
- 			
+			if( $('#issue_priority_id').val() == 1)
+			{
+				$('.lbl-letstalk-checkbox').removeClass('hidden');
+				$('#chkLetstalk_yesno_attribute').attr('checked', false);
+			}			
+
 
 			$('#chkLetstalk_yesno_attribute').on('change',function(){
-				if (this.checked) {
-					$('.lbl-letstalk-comment').removeClass('hidden');
-				}	
-				else
-				{
-					$('.lbl-letstalk-comment').addClass('hidden');
-				}
+				CORE.chkLetstalkChecking(this);			
 			});
+
+
+			$('#issue_priority_id').on('change',function(){
+				CORE.lblLetstalkChecking(this);
+			});
+
+			
 
 			$("input[name = 'commit']").on('click', function(){
                                return CORE.ConfirmSubmit();			
@@ -33,6 +39,36 @@ var CORE = (function ($) {
 					}					
 					
 				}
+		},
+		
+		chkLetstalkChecking: function(obj){
+				if (obj.checked) 
+				{
+					$('.lbl-letstalk-comment').removeClass('hidden');
+				}	
+				else
+				{
+					$('.lbl-letstalk-comment').addClass('hidden');
+				}
+
+		},
+
+		lblLetstalkChecking: function(obj)
+		{
+			if($(obj).val() == 1)
+				{
+					$('.lbl-letstalk-checkbox').removeClass('hidden');
+					
+	
+				}
+				else
+				{
+					$('.lbl-letstalk-checkbox').addClass('hidden');
+					$('#chkLetstalk_yesno_attribute').attr('checked', false);	
+					$('.lbl-letstalk-comment').addClass('hidden');
+									
+				}
+
 		}
 	};
 }(jQuery));

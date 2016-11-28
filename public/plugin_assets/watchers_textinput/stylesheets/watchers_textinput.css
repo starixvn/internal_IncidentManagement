@@ -6,7 +6,6 @@
 #watchers_form {
     overflow: visible;   /* so the autocomplete dropdown will not be clipped */
     min-height: 120px;
-display: none;
 }
 
 span#watchers_inputs {

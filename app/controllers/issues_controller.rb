@@ -147,9 +147,7 @@ class IssuesController < ApplicationController
     if @issue.save
       
       if params[:chkLetstalk][:yesno_attribute] == 'yes'
-		uri = URI('http://10.19.10.55:808/api/IMMessage')
-		res = Net::HTTP.post_form(uri, 'id' => @issue.id.to_s, 'Comment' => params[:txtletstalk])
-		puts res.body
+		call_hook(:controller_letstalk_api, { :params => params, :issue => @issue})
 	end
       
       call_hook(:controller_issues_new_after_save, { :params => params, :issue => @issue})
@@ -203,10 +201,7 @@ class IssuesController < ApplicationController
     if saved
 
 	if params[:chkLetstalk][:yesno_attribute] == 'yes'
-		#uri = URI('http://10.19.10.55:808/api/IMMessage')
-		#res = Net::HTTP.post_form(uri, 'id' => @issue.id.to_s, 'Comment' => params[:txtletstalk])
-		#puts res.body
-		call_hook(:controller_letstalk_api)
+		call_hook(:controller_letstalk_api, { :params => params, :issue => @issue})
 	end
             
       render_attachment_warning_if_needed(@issue)          
@@ -461,3 +456,4 @@ class IssuesController < ApplicationController
     attributes
   end
 end
+
