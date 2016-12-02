@@ -27,7 +27,9 @@
       <% end %>
     </tr>
   </thead>
-  <% previous_group = false %>
+  <%# Forrest#02/12/2016 - Add highlight to those created rows in 24 hours from current date%>
+  <% previous_group = false, current_date = DateTime.now - 1 %>
+  <%# End Comment%>
   <tbody>
   <% issue_list(issues) do |issue, level| -%>
   <% if @query.grouped? && (group = @query.group_by_column.value(issue)) != previous_group %>
@@ -43,7 +45,9 @@
     </tr>
     <% previous_group = group %>
   <% end %>
-  <tr id="issue-<%= issue.id %>" class="hascontextmenu <%= cycle('odd', 'even') %> <%= issue.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
+  <%# Forrest#02/12/2016 - Add highlight to those created rows in 24 hours from current date%>
+  <tr id="issue-<%= issue.id %>" class="hascontextmenu <%= cycle('odd', 'even') %> <%= issue.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %> <%= issue.created_on > current_date ? 'highlight token-4' : '' %>">
+  <%# End Comment%>
     <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", issue.id, false, :id => nil) %></td>
     <% if Redmine::VERSION::MAJOR < 2 || Redmine::VERSION::MINOR < 3 || defined?(ChiliProject) %>
     <td class="id"><%= link_to issue.to_param, :controller => 'issues', :action => 'show', :id => issue %></td>
