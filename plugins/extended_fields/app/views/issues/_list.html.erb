@@ -46,7 +46,7 @@
     <% previous_group = group %>
   <% end %>
   <%# Forrest#02/12/2016 - Add highlight to those created rows in 24 hours from current date%>
-  <tr id="issue-<%= issue.id %>" class="hascontextmenu <%= cycle('odd', 'even') %> <%= issue.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %> <%= issue.created_on > current_date ? 'highlight token-4' : '' %>">
+  <tr id="issue-<%= issue.id %>" class="hascontextmenu <%= cycle('odd', 'even') %> <%= issue.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %> <%= issue.updated_on > current_date ? 'highlight token-4' : '' %>">
   <%# End Comment%>
     <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", issue.id, false, :id => nil) %></td>
     <% if Redmine::VERSION::MAJOR < 2 || Redmine::VERSION::MINOR < 3 || defined?(ChiliProject) %>
