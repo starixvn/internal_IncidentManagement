@@ -58,6 +58,16 @@ function set_pulldown(tracker, target_url, token) {
     }).done(function( html ) {
         $('#issue_template').html(html);
         $('#allow_overwrite_description').attr("checked", allow_overwrite);
+
+        //@Forrest - 12/12/2016 default selecting first option
+        $options = $('#issue_template').find("option[value!='']");
+        
+        if($options) {
+            var firstOptionValue = $($options[0]).val();
+            $('#issue_template').val(firstOptionValue);
+
+            load_template(load_url, token);
+        }
     });
 }
 
