@@ -304,7 +304,7 @@ span.search_for_watchers a, span.add_attachment a {padding-left:16px; background
 .highlight.token-2 { background-color: #afa;}
 .highlight.token-3 { background-color: #aaf;}
 /* Forrest#02/12/2016 - Add highlight to those created rows in 24 hours from current date */
-.highlight.token-4 { background-color: #FADACD; }
+.highlight.token-4 { background-color: #fdeee8 !important;}
 /* End Comment */
 
 .box{
