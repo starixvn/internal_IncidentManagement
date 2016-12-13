@@ -328,20 +328,24 @@ module ApplicationHelper
 
   # Returns a string for users/groups option tags
   def principals_options_for_select(collection, selected=nil)
-	result = ''
+    result = ''
     s = ''
+
     if collection.include?(User.current)
       result << content_tag('option', "<< #{l(:label_me)} >>", :value => User.current.id)
     end
+
     groups = ''
     collection.sort.each do |element|
       selected_attribute = ' selected="selected"' if option_value_selected?(element, selected)
       (element.is_a?(Group) ? groups : s) << %(<option value="#{element.id}"#{selected_attribute}>#{h element.name}</option>)
     end
+
     unless groups.empty?
-     result << %(<optgroup label="#{h(l(:label_group_plural))}">#{groups}</optgroup>)
-	 result << s
+      result << %(<optgroup label="#{h(l(:label_group_plural))}">#{groups}</optgroup>)
+      result << s
     end
+    
     result.html_safe
   end
 
