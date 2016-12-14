@@ -65143,3 +65143,267 @@ Processing by IssuesController#index as HTML
   Rendered plugins/redmine_homepage_custom_queries/app/views/_menu_queries.html.erb (3.5ms)
   Rendered plugins/clipboard_image_paste/app/views/clipboard_image_paste/_add_form.html.erb (3.5ms)
 Completed 200 OK in 766ms (Views: 594.8ms | ActiveRecord: 110.8ms)
+Connecting to database specified by database.yml
+Starting Extended Fields plugin for Redmine
+Starting Announcememts plugin for RedMine
+Starting Extended Watchers plugin for Redmine
+Creating scope :sorted. Overwriting existing method User.sorted.
+OpenIdAuthentication.store is nil. Using in-memory store.
+Creating scope :logged. Overwriting existing method User.logged.
+Creating scope :status. Overwriting existing method User.status.
+Creating scope :in_group. Overwriting existing method User.in_group.
+Creating scope :not_in_group. Overwriting existing method User.not_in_group.
+Creating scope :sorted. Overwriting existing method User.sorted.
+Creating scope :has_module. Overwriting existing method Project.has_module.
+Creating scope :active. Overwriting existing method Project.active.
+Creating scope :status. Overwriting existing method Project.status.
+Creating scope :all_public. Overwriting existing method Project.all_public.
+Creating scope :visible. Overwriting existing method Project.visible.
+Creating scope :allowed_to. Overwriting existing method Project.allowed_to.
+Creating scope :like. Overwriting existing method Project.like.
+Creating scope :visible. Overwriting existing method Issue.visible.
+Creating scope :open. Overwriting existing method Issue.open.
+Creating scope :recently_updated. Overwriting existing method Issue.recently_updated.
+Creating scope :on_active_project. Overwriting existing method Issue.on_active_project.
+Creating scope :fixed_version. Overwriting existing method Issue.fixed_version.
+
+
+Started GET "/projects/affiliate/issues/new" for 127.0.0.1 at 2016-12-14 10:36:52 +0700
+Processing by IssuesController#new as HTML
+  Parameters: {"project_id"=>"affiliate"}
+  [1m[36mSetting Load (0.5ms)[0m  [1mSELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'session_lifetime' LIMIT 1[0m
+  [1m[35mSetting Load (1.5ms)[0m  SELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'session_timeout' LIMIT 1
+  [1m[36m (0.5ms)[0m  [1mSELECT MAX(`settings`.`updated_on`) AS max_id FROM `settings` [0m
+  [1m[35mUser Load (1.5ms)[0m  SELECT `users`.* FROM `users` WHERE `users`.`type` IN ('User', 'AnonymousUser') AND `users`.`status` = 1 AND `users`.`id` = 238 LIMIT 1
+  Current user: forrest.nguyen (id=238)
+  [1m[36mProject Load (0.5ms)[0m  [1mSELECT `projects`.* FROM `projects` WHERE `projects`.`identifier` = 'affiliate' LIMIT 1[0m
+  [1m[35mEnabledModule Load (0.5ms)[0m  SELECT name FROM `enabled_modules` WHERE `enabled_modules`.`project_id` = 26
+  [1m[36mIssueStatus Load (0.5ms)[0m  [1mSELECT `issue_statuses`.* FROM `issue_statuses` WHERE `issue_statuses`.`is_default` = 1 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `issue_statuses`.* FROM `issue_statuses` WHERE `issue_statuses`.`is_default` = 1 LIMIT 1
+  [1m[36mIssuePriority Load (0.5ms)[0m  [1mSELECT `enumerations`.* FROM `enumerations` WHERE `enumerations`.`type` IN ('IssuePriority') AND `enumerations`.`is_default` = 1 ORDER BY enumerations.position ASC LIMIT 1[0m
+  [1m[35mProject Load (1.0ms)[0m  SELECT `projects`.* FROM `projects` WHERE `projects`.`id` = 26 LIMIT 1
+  [1m[36mTracker Load (0.5ms)[0m  [1mSELECT `trackers`.* FROM `trackers` INNER JOIN `projects_trackers` ON `trackers`.`id` = `projects_trackers`.`tracker_id` WHERE `projects_trackers`.`project_id` = 26 ORDER BY trackers.position LIMIT 1[0m
+  [1m[35mSetting Load (1.0ms)[0m  SELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'default_issue_start_date_to_creation_date' LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `issue_statuses`.* FROM `issue_statuses` WHERE `issue_statuses`.`is_default` = 1 LIMIT 1[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` 
+  [1m[36mWorkflowTransition Load (1.5ms)[0m  [1mSELECT `workflows`.* FROM `workflows` WHERE `workflows`.`type` IN ('WorkflowTransition') AND `workflows`.`old_status_id` = 1 AND (role_id IN (1,2,3,4,6) AND tracker_id = 4 AND ((author = 0 AND assignee = 0) OR author = 1))[0m
+  [1m[35mIssueStatus Load (1.0ms)[0m  SELECT `issue_statuses`.* FROM `issue_statuses` WHERE `issue_statuses`.`id` IN (2, 7, 4, 3, 5, 6)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `issue_statuses`.* FROM `issue_statuses` WHERE `issue_statuses`.`is_default` = 1 LIMIT 1[0m
+  [1m[35mUser Load (3.5ms)[0m  SELECT `users`.* FROM `users` INNER JOIN `members` ON `users`.`id` = `members`.`user_id` WHERE `users`.`type` IN ('User', 'AnonymousUser') AND `members`.`project_id` = 26 AND (users.type='User' AND users.status=1)
+  [1m[36mSetting Load (1.0ms)[0m  [1mSELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'user_format' LIMIT 1[0m
+  [1m[35mEnabledModule Load (1.0ms)[0m  SELECT `enabled_modules`.* FROM `enabled_modules` WHERE `enabled_modules`.`project_id` = 26
+  [1m[36mIssueTemplateSetting Load (0.5ms)[0m  [1mSELECT `issue_template_settings`.* FROM `issue_template_settings` WHERE (project_id = 26) LIMIT 1[0m
+  Rendered plugins/redmine_issue_templates/app/views/issue_templates/_issue_select_form.html.erb (31.6ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT `issue_statuses`.* FROM `issue_statuses` WHERE `issue_statuses`.`is_default` = 1 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `roles`.* FROM `roles` [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `workflows`.* FROM `workflows` WHERE `workflows`.`type` IN ('WorkflowTransition') AND `workflows`.`old_status_id` = 1 AND (role_id IN (1,2,3,4,6) AND tracker_id = 4 AND ((author = 0 AND assignee = 0) OR author = 1))
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `issue_statuses`.* FROM `issue_statuses` WHERE `issue_statuses`.`id` IN (2, 7, 4, 3, 5, 6)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT name FROM `enabled_modules` WHERE `enabled_modules`.`project_id` = 26
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `issue_statuses`.* FROM `issue_statuses` WHERE `issue_statuses`.`is_default` = 1 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `roles`.* FROM `roles` 
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `workflows`.* FROM `workflows` WHERE `workflows`.`type` IN ('WorkflowTransition') AND `workflows`.`old_status_id` = 1 AND (role_id IN (1,2,3,4,6) AND tracker_id = 4 AND ((author = 0 AND assignee = 0) OR author = 1))[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `issue_statuses`.* FROM `issue_statuses` WHERE `issue_statuses`.`id` IN (2, 7, 4, 3, 5, 6)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT `roles`.* FROM `roles` [0m
+  [1m[35mWorkflowPermission Load (1.5ms)[0m  SELECT `workflows`.* FROM `workflows` WHERE `workflows`.`type` IN ('WorkflowPermission') AND `workflows`.`tracker_id` = 4 AND `workflows`.`old_status_id` = 1 AND `workflows`.`role_id` IN (1, 2, 3, 4, 6)
+  [1m[36mTracker Load (0.5ms)[0m  [1mSELECT `trackers`.* FROM `trackers` INNER JOIN `projects_trackers` ON `trackers`.`id` = `projects_trackers`.`tracker_id` WHERE `projects_trackers`.`project_id` = 26 ORDER BY trackers.position[0m
+  [1m[35mSetting Load (1.0ms)[0m  SELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'text_formatting' LIMIT 1
+  [1m[36mSetting Load (1.5ms)[0m  [1mSELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'plugin_redmine_ckeditor' LIMIT 1[0m
+  [1m[35mIssuePriority Load (1.0ms)[0m  SELECT `enumerations`.* FROM `enumerations` WHERE `enumerations`.`type` IN ('IssuePriority') AND `enumerations`.`active` = 1 ORDER BY enumerations.position ASC
+  [1m[36mSetting Load (1.2ms)[0m  [1mSELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'issue_group_assignment' LIMIT 1[0m
+  [1m[35mSQL (4.5ms)[0m  SELECT `members`.`id` AS t0_r0, `members`.`user_id` AS t0_r1, `members`.`project_id` AS t0_r2, `members`.`created_on` AS t0_r3, `members`.`mail_notification` AS t0_r4, `members`.`dmsf_mail_notification` AS t0_r5, `users`.`id` AS t1_r0, `users`.`login` AS t1_r1, `users`.`hashed_password` AS t1_r2, `users`.`firstname` AS t1_r3, `users`.`lastname` AS t1_r4, `users`.`mail` AS t1_r5, `users`.`admin` AS t1_r6, `users`.`status` AS t1_r7, `users`.`last_login_on` AS t1_r8, `users`.`language` AS t1_r9, `users`.`auth_source_id` AS t1_r10, `users`.`created_on` AS t1_r11, `users`.`updated_on` AS t1_r12, `users`.`type` AS t1_r13, `users`.`identity_url` AS t1_r14, `users`.`mail_notification` AS t1_r15, `users`.`salt` AS t1_r16, `users`.`phone` AS t1_r17, `users`.`address` AS t1_r18, `users`.`skype` AS t1_r19, `users`.`birthday` AS t1_r20, `users`.`job_title` AS t1_r21, `users`.`company` AS t1_r22, `users`.`middlename` AS t1_r23, `users`.`gender` AS t1_r24, `users`.`twitter` AS t1_r25, `users`.`facebook` AS t1_r26, `users`.`linkedin` AS t1_r27, `users`.`background` AS t1_r28, `users`.`appearance_date` AS t1_r29, `users`.`department_id` AS t1_r30 FROM `members` LEFT OUTER JOIN `users` ON `users`.`id` = `members`.`user_id` WHERE `members`.`project_id` = 26 AND (users.type='Group' OR (users.type='User' AND users.status=1))
+Creating scope :sorted. Overwriting existing method Group.sorted.
+  [1m[36mRole Load (1.5ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 161[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 162
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 343[0m
+  [1m[35mRole Load (1.5ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 344
+  [1m[36mRole Load (0.5ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 356[0m
+  [1m[35mRole Load (1.5ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 408
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 409[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 410
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 411[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 412
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 413[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 414
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 501[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 619
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 820[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 842
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 864[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 886
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 907[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 913
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 919[0m
+  [1m[35mRole Load (0.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 925
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1021[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1093
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1106[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1152
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1153[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1154
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1155[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1201
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1202[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1203
+  [1m[36mRole Load (1.4ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1204[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1387
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1388[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1389
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1486[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1503
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1520[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1537
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1551[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 1775
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3228[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3229
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3230[0m
+  [1m[35mRole Load (1.5ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3231
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3234[0m
+  [1m[35mRole Load (1.5ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3235
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3236[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3237
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3238[0m
+  [1m[35mRole Load (0.5ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3239
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3240[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3241
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3242[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3243
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3244[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3245
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3246[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3247
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3248[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3249
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3250[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3251
+  [1m[36mRole Load (1.5ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3252[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3253
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3254[0m
+  [1m[35mRole Load (1.5ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3255
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3256[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3257
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3258[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3259
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3260[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3261
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3262[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3263
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3264[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3265
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3266[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3267
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3268[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3269
+  [1m[36mRole Load (0.5ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3270[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3271
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3272[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3273
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3274[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3275
+  [1m[36mRole Load (1.5ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3276[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3277
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3278[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3279
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3280[0m
+  [1m[35mRole Load (1.5ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3281
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3282[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3283
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3284[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3402
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3403[0m
+  [1m[35mRole Load (1.2ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3404
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3405[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3406
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3407[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3408
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3409[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3410
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3411[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3412
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 3413[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5282
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5332[0m
+  [1m[35mRole Load (0.5ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5372
+  [1m[36mRole Load (1.5ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5385[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5468
+  [1m[36mRole Load (2.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5469[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5595
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5637[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5778
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5815[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5893
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5894[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5895
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 5996[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 6029
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 6068[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 6104
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 6140[0m
+  [1m[35mRole Load (1.5ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 6176
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 6241[0m
+  [1m[35mRole Load (1.0ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 6415
+  [1m[36mRole Load (1.0ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 6539[0m
+  [1m[35mRole Load (0.5ms)[0m  SELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 6569
+  [1m[36mRole Load (1.5ms)[0m  [1mSELECT `roles`.* FROM `roles` INNER JOIN `member_roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `member_roles`.`member_id` = 6570[0m
+  [1m[35mSetting Load (0.5ms)[0m  SELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'start_of_week' LIMIT 1
+  [1m[36mIssueCustomField Load (1.0ms)[0m  [1mSELECT `custom_fields`.* FROM `custom_fields` WHERE `custom_fields`.`type` IN ('IssueCustomField') AND `custom_fields`.`is_for_all` = 1 ORDER BY position[0m
+  [1m[35mIssueCustomField Load (1.5ms)[0m  SELECT `custom_fields`.* FROM `custom_fields` INNER JOIN `custom_fields_projects` ON `custom_fields`.`id` = `custom_fields_projects`.`custom_field_id` WHERE `custom_fields`.`type` IN ('IssueCustomField') AND `custom_fields_projects`.`project_id` = 26 ORDER BY custom_fields.position
+  [1m[36mIssueCustomField Load (1.5ms)[0m  [1mSELECT `custom_fields`.* FROM `custom_fields` INNER JOIN `custom_fields_trackers` ON `custom_fields`.`id` = `custom_fields_trackers`.`custom_field_id` WHERE `custom_fields`.`type` IN ('IssueCustomField') AND `custom_fields_trackers`.`tracker_id` = 4[0m
+  Rendered issues/_form_custom_fields.html.erb (153.5ms)
+  Rendered issues/_attributes.html.erb (586.3ms)
+  Rendered plugins/redmine_issue_checklist/app/views/issues/_checklist_form.html.erb (21.0ms)
+  Rendered issues/_form.html.erb (758.5ms)
+  [1m[35mSetting Load (1.0ms)[0m  SELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'attachment_max_size' LIMIT 1
+  Rendered attachments/_form.html.erb (4.5ms)
+  Rendered plugins/watchers_textinput/app/views/watchers_textinput/_watchers_textinput.html.erb (1.5ms)
+  Rendered plugins/watchers_textinput/app/views/issues/new.html.erb within layouts/base (917.6ms)
+  [1m[36mSetting Load (1.0ms)[0m  [1mSELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'app_title' LIMIT 1[0m
+  [1m[35mSetting Load (1.0ms)[0m  SELECT `settings`.* FROM `settings` WHERE `settings`.`name` = 'ui_theme' LIMIT 1
+  [1m[36mUserPreference Load (1.0ms)[0m  [1mSELECT `user_preferences`.* FROM `user_preferences` WHERE `user_preferences`.`user_id` = 238 LIMIT 1[0m
+  Rendered plugins/redmine_improved_searchbox/app/views/redmine_improved_searchbox/_redmine_improved_searchbox_partial.html.erb (1.5ms)
+  Rendered plugins/watchers_textinput/app/views/watchers_textinput/_include_stylesheet.html.erb (0.5ms)
+  Rendered plugins/clipboard_image_paste/app/views/clipboard_image_paste/_headers.html.erb (2.0ms)
+  [1m[35mFavoriteProject Load (0.5ms)[0m  SELECT `favorite_projects`.* FROM `favorite_projects` WHERE `favorite_projects`.`user_id` = 238
+  [1m[36mSQL (2.0ms)[0m  [1mSELECT `members`.`id` AS t0_r0, `members`.`user_id` AS t0_r1, `members`.`project_id` AS t0_r2, `members`.`created_on` AS t0_r3, `members`.`mail_notification` AS t0_r4, `members`.`dmsf_mail_notification` AS t0_r5, `projects`.`id` AS t1_r0, `projects`.`name` AS t1_r1, `projects`.`description` AS t1_r2, `projects`.`homepage` AS t1_r3, `projects`.`is_public` AS t1_r4, `projects`.`parent_id` AS t1_r5, `projects`.`created_on` AS t1_r6, `projects`.`updated_on` AS t1_r7, `projects`.`identifier` AS t1_r8, `projects`.`status` AS t1_r9, `projects`.`lft` AS t1_r10, `projects`.`rgt` AS t1_r11, `projects`.`inherit_members` AS t1_r12, `projects`.`dmsf_description` AS t1_r13, `projects`.`dmsf_notification` AS t1_r14, `roles`.`id` AS t2_r0, `roles`.`name` AS t2_r1, `roles`.`position` AS t2_r2, `roles`.`assignable` AS t2_r3, `roles`.`builtin` AS t2_r4, `roles`.`permissions` AS t2_r5, `roles`.`issues_visibility` AS t2_r6 FROM `members` LEFT OUTER JOIN `projects` ON `projects`.`id` = `members`.`project_id` LEFT OUTER JOIN `member_roles` ON `member_roles`.`member_id` = `members`.`id` LEFT OUTER JOIN `roles` ON `roles`.`id` = `member_roles`.`role_id` WHERE `members`.`user_id` = 238 AND (projects.status<>9) ORDER BY projects.name[0m
+  [1m[35mGroup Load (1.5ms)[0m  SELECT `users`.* FROM `users` INNER JOIN `groups_users` ON `users`.`id` = `groups_users`.`group_id` WHERE `users`.`type` IN ('Group') AND `groups_users`.`user_id` = 238
+  [1m[36mSQL (1.5ms)[0m  [1mSELECT `issues`.`id` AS t0_r0, `issues`.`tracker_id` AS t0_r1, `issues`.`project_id` AS t0_r2, `issues`.`subject` AS t0_r3, `issues`.`description` AS t0_r4, `issues`.`due_date` AS t0_r5, `issues`.`category_id` AS t0_r6, `issues`.`status_id` AS t0_r7, `issues`.`assigned_to_id` AS t0_r8, `issues`.`priority_id` AS t0_r9, `issues`.`fixed_version_id` AS t0_r10, `issues`.`author_id` AS t0_r11, `issues`.`lock_version` AS t0_r12, `issues`.`created_on` AS t0_r13, `issues`.`updated_on` AS t0_r14, `issues`.`start_date` AS t0_r15, `issues`.`done_ratio` AS t0_r16, `issues`.`estimated_hours` AS t0_r17, `issues`.`parent_id` AS t0_r18, `issues`.`root_id` AS t0_r19, `issues`.`lft` AS t0_r20, `issues`.`rgt` AS t0_r21, `issues`.`is_private` AS t0_r22, `issues`.`closed_on` AS t0_r23, `issues`.`s2b_position` AS t0_r24, `watchers`.`id` AS t1_r0, `watchers`.`watchable_type` AS t1_r1, `watchers`.`watchable_id` AS t1_r2, `watchers`.`user_id` AS t1_r3 FROM `issues` LEFT OUTER JOIN `watchers` ON `watchers`.`watchable_id` = `issues`.`id` AND `watchers`.`watchable_type` = 'Issue' WHERE (watchers.user_id = 238)[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(DISTINCT `issues`.`id`) FROM `issues` LEFT OUTER JOIN `projects` ON `projects`.`id` = `issues`.`project_id` LEFT OUTER JOIN `watchers` ON `watchers`.`watchable_id` = `issues`.`id` AND `watchers`.`watchable_type` = 'Issue' WHERE (( projects.status <> 9 AND projects.id IN (SELECT em.project_id FROM enabled_modules em WHERE em.name='issue_tracking')) ) AND (watchers.user_id = 238)
+  [1m[36mProject Load (1.0ms)[0m  [1mSELECT `projects`.* FROM `projects` WHERE (`projects`.`lft` <= 38 AND `projects`.`rgt` >= 39) AND (`projects`.id != 26) AND (projects.status <> 9) ORDER BY `projects`.`lft`[0m
+  [1m[35mProject Load (1.0ms)[0m  SELECT `projects`.* FROM `projects` WHERE `projects`.`parent_id` IS NULL AND (`projects`.`lft` <= 38 AND `projects`.`rgt` >= 39) ORDER BY `projects`.`lft` LIMIT 1
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(DISTINCT `versions`.`id`) FROM `versions` LEFT OUTER JOIN `projects` ON `projects`.`id` = `versions`.`project_id` WHERE (projects.id = 26 OR (projects.status <> 9 AND ( versions.sharing = 'system' OR (projects.lft >= 37 AND projects.rgt <= 48 AND versions.sharing = 'tree') OR (projects.lft < 38 AND projects.rgt > 39 AND versions.sharing IN ('hierarchy', 'descendants')) OR (projects.lft > 38 AND projects.rgt < 39 AND versions.sharing = 'hierarchy'))))[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT `issues`.`id` AS t0_r0, `issues`.`tracker_id` AS t0_r1, `issues`.`project_id` AS t0_r2, `issues`.`subject` AS t0_r3, `issues`.`description` AS t0_r4, `issues`.`due_date` AS t0_r5, `issues`.`category_id` AS t0_r6, `issues`.`status_id` AS t0_r7, `issues`.`assigned_to_id` AS t0_r8, `issues`.`priority_id` AS t0_r9, `issues`.`fixed_version_id` AS t0_r10, `issues`.`author_id` AS t0_r11, `issues`.`lock_version` AS t0_r12, `issues`.`created_on` AS t0_r13, `issues`.`updated_on` AS t0_r14, `issues`.`start_date` AS t0_r15, `issues`.`done_ratio` AS t0_r16, `issues`.`estimated_hours` AS t0_r17, `issues`.`parent_id` AS t0_r18, `issues`.`root_id` AS t0_r19, `issues`.`lft` AS t0_r20, `issues`.`rgt` AS t0_r21, `issues`.`is_private` AS t0_r22, `issues`.`closed_on` AS t0_r23, `issues`.`s2b_position` AS t0_r24, `watchers`.`id` AS t1_r0, `watchers`.`watchable_type` AS t1_r1, `watchers`.`watchable_id` AS t1_r2, `watchers`.`user_id` AS t1_r3 FROM `issues` LEFT OUTER JOIN `watchers` ON `watchers`.`watchable_id` = `issues`.`id` AND `watchers`.`watchable_type` = 'Issue' WHERE (watchers.user_id = 238)
+  Rendered plugins/redmine_announcements/app/views/application/_announcements.html.erb (0.5ms)
+  Rendered plugins/sidebar_hide/app/views/sidebar/_hideButton_partial.html.erb (1.0ms)
+  [1m[36mSQL (2.5ms)[0m  [1mSELECT `queries`.`id` AS t0_r0, `queries`.`project_id` AS t0_r1, `queries`.`name` AS t0_r2, `queries`.`filters` AS t0_r3, `queries`.`user_id` AS t0_r4, `queries`.`is_public` AS t0_r5, `queries`.`column_names` AS t0_r6, `queries`.`sort_criteria` AS t0_r7, `queries`.`group_by` AS t0_r8, `queries`.`type` AS t0_r9, `projects`.`id` AS t1_r0, `projects`.`name` AS t1_r1, `projects`.`description` AS t1_r2, `projects`.`homepage` AS t1_r3, `projects`.`is_public` AS t1_r4, `projects`.`parent_id` AS t1_r5, `projects`.`created_on` AS t1_r6, `projects`.`updated_on` AS t1_r7, `projects`.`identifier` AS t1_r8, `projects`.`status` AS t1_r9, `projects`.`lft` AS t1_r10, `projects`.`rgt` AS t1_r11, `projects`.`inherit_members` AS t1_r12, `projects`.`dmsf_description` AS t1_r13, `projects`.`dmsf_notification` AS t1_r14 FROM `queries` LEFT OUTER JOIN `projects` ON `projects`.`id` = `queries`.`project_id` WHERE `queries`.`type` IN ('IssueQuery') AND ((queries.project_id IS NULL OR (projects.status <> 9 AND projects.id IN (SELECT em.project_id FROM enabled_modules em WHERE em.name='issue_tracking'))) AND (queries.is_public = 1 OR queries.user_id = 238)) AND (project_id IS NULL OR project_id = 26) ORDER BY queries.name ASC[0m
+  Rendered plugins/redmine_homepage_custom_queries/app/views/_menu_queries.html.erb (30.0ms)
+  Rendered plugins/clipboard_image_paste/app/views/clipboard_image_paste/_add_form.html.erb (2.0ms)
+Completed 200 OK in 1925ms (Views: 1116.6ms | ActiveRecord: 255.7ms)
+
+
+Started POST "/projects/affiliate/issue_templates/set_pulldown" for 127.0.0.1 at 2016-12-14 10:36:54 +0700
+Processing by IssueTemplatesController#set_pulldown as */*
+  Parameters: {"issue_tracker_id"=>"4", "authenticity_token"=>"+ZovgjR6qdDxN3t74/8Rx2HysxdoVjvt0U/UTbe2vbM=", "project_id"=>"affiliate"}
+  [1m[35m (1.5ms)[0m  SELECT MAX(`settings`.`updated_on`) AS max_id FROM `settings` 
+  [1m[36mUser Load (1.5ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`type` IN ('User', 'AnonymousUser') AND `users`.`status` = 1 AND `users`.`id` = 238 LIMIT 1[0m
+  Current user: forrest.nguyen (id=238)
+  [1m[35mProject Load (1.5ms)[0m  SELECT `projects`.* FROM `projects` WHERE `projects`.`identifier` = 'affiliate' LIMIT 1
+  [1m[36mEnabledModule Load (1.5ms)[0m  [1mSELECT name FROM `enabled_modules` WHERE `enabled_modules`.`project_id` = 26[0m
+  [1m[35mTracker Load (3.5ms)[0m  SELECT `trackers`.* FROM `trackers` WHERE `trackers`.`id` = 4 LIMIT 1
+  [1m[36mIssueTemplate Load (1.0ms)[0m  [1mSELECT `issue_templates`.* FROM `issue_templates` WHERE (project_id = 26 AND tracker_id = 4 AND enabled = 1 AND is_default = 1) LIMIT 1[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM `issue_templates` WHERE (project_id = 26 AND tracker_id = 4 AND enabled = 1)
+  [1m[36mIssueTemplate Load (1.0ms)[0m  [1mSELECT `issue_templates`.* FROM `issue_templates` WHERE (project_id = 26 AND tracker_id = 4 AND enabled = 1) ORDER BY position[0m
+  Rendered plugins/redmine_issue_templates/app/views/issue_templates/_template_pulldown.html.erb (1.0ms)
+Completed 200 OK in 117ms (Views: 59.5ms | ActiveRecord: 16.0ms)
+
+
+Started POST "/projects/affiliate/issue_templates/load" for 127.0.0.1 at 2016-12-14 10:36:55 +0700
+Processing by IssueTemplatesController#load as */*
+  Parameters: {"issue_template"=>"15", "authenticity_token"=>"+ZovgjR6qdDxN3t74/8Rx2HysxdoVjvt0U/UTbe2vbM=", "project_id"=>"affiliate"}
+  [1m[35m (2.0ms)[0m  SELECT MAX(`settings`.`updated_on`) AS max_id FROM `settings` 
+  [1m[36mUser Load (1.5ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`type` IN ('User', 'AnonymousUser') AND `users`.`status` = 1 AND `users`.`id` = 238 LIMIT 1[0m
+  Current user: forrest.nguyen (id=238)
+  [1m[35mProject Load (1.0ms)[0m  SELECT `projects`.* FROM `projects` WHERE `projects`.`identifier` = 'affiliate' LIMIT 1
+  [1m[36mEnabledModule Load (1.0ms)[0m  [1mSELECT name FROM `enabled_modules` WHERE `enabled_modules`.`project_id` = 26[0m
+  [1m[35mIssueTemplate Load (1.0ms)[0m  SELECT `issue_templates`.* FROM `issue_templates` WHERE `issue_templates`.`id` = 15 LIMIT 1
+  Rendered text template (0.0ms)
+Completed 200 OK in 56ms (Views: 6.0ms | ActiveRecord: 6.5ms)
