@@ -60,14 +60,21 @@ function set_pulldown(tracker, target_url, token) {
         $('#allow_overwrite_description').attr("checked", allow_overwrite);
 
         //@Forrest - 12/12/2016 default selecting first option
-        $options = $('#issue_template').find("option[value!='']");
-        
-        if($options) {
-            var firstOptionValue = $($options[0]).val();
-            $('#issue_template').val(firstOptionValue);
+        $("#issue_subject")
 
-            load_template(load_url, token);
+        var $issueSubject = $("#issue_subject");
+
+        if($issueSubject && $issueSubject.val() === "") {
+            $options = $('#issue_template').find("option[value!='']");
+        
+            if($options) {
+                var firstOptionValue = $($options[0]).val();
+                $('#issue_template').val(firstOptionValue);
+
+                load_template(load_url, token);
+            }
         }
+        // End Comment
     });
 }
 
