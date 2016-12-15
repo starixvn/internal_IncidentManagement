@@ -15,6 +15,10 @@ $(document).ready(function() {
 
 // TODO: When update description, confirmation dialog should be appeared.
 function load_template(target_url, token, confirm_msg) {
+    //@Forrest - 15/12/2016 Does not allow change template when editing issue
+    if (!create_new_issue) return;
+    // End Comment
+
     var allow_overwrite = $('#allow_overwrite_description').prop('checked');
     if ($("#issue_template").val() != "") {
         $.ajax({
@@ -60,11 +64,7 @@ function set_pulldown(tracker, target_url, token) {
         $('#allow_overwrite_description').attr("checked", allow_overwrite);
 
         //@Forrest - 12/12/2016 default selecting first option
-        $("#issue_subject")
-
-        var $issueSubject = $("#issue_subject");
-
-        if($issueSubject && $issueSubject.val() === "") {
+        if(create_new_issue) {
             $options = $('#issue_template').find("option[value!='']");
         
             if($options) {

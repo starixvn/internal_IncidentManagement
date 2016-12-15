@@ -49,7 +49,9 @@
   <%= submit_tag l(:button_create_and_continue), :name => 'continue' %>
   <%= preview_link preview_new_issue_path(:project_id => @project), 'issue-form' %>
 
-  <%= javascript_tag "$('#issue_subject').focus();" %>
+  <%# Forrest - 15/12/2016 - Added create new issue flag %>
+  <%= javascript_tag "$('#issue_subject').focus(); var create_new_issue = true;" %>
+  <%# End Comment %>
 <% end %>
 
 <div id="preview" class="wiki"></div>
