@@ -59,7 +59,39 @@
     <% end %>
     </p>
 <% end %>
-
+<%# Forrest - 14/12/2016 - Add color block explanation %>
+<fieldset class="collapsible collapsed">
+      <legend onclick="toggleFieldset(this);">Color Guide</legend>
+      <div style="display: none;">
+        <table class="issue-table-guide">
+          <tr>
+            <td width="45px" style="background: #FDEEE8;" class="issue-guild-block"></td>
+            <td>Issue(s) has been updated within 24 hours</td>
+          </tr>
+          <tr>
+            <td width="45px" style="background: #EAF7FF;" class="issue-guild-block"></td>
+            <td>Issue(s) could cause critical impact/system down</td>
+          </tr>
+          <tr>
+            <td width="45px" style="background: #FFFFDD;" class="issue-guild-block"></td>
+            <td>Issue is currently focusing on</td>
+          </tr>
+          <tr>
+            <td width="45px" style="background: #507AAA;" class="issue-guild-block"></td>
+            <td>Issue is just clicked</td>
+          </tr>
+          <tr>
+            <td width="45px" style="background: #F6F7F8;" class="issue-guild-block"></td>
+            <td>Odd line</td>
+          </tr>
+          <tr>
+            <td width="45px" class="issue-guild-block"></td>
+            <td>Even line</td>
+          </tr>
+        </table>
+      </div>
+</fieldset>
+<%# End Comment %>
 <%= error_messages_for 'query' %>
 <% if @query.valid? %>
 <% if @issues.empty? %>

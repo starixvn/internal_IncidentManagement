@@ -1171,3 +1171,14 @@ h2 img { vertical-align:middle; }
   overflow:hidden;
 }
 
+/* Forrest - 14/12/2016 - Add color block explanation */
+
+.issue-table-guide tr td {
+  padding: 2px;
+}
+
+.issue-table-guide tr td.issue-guild-block {
+  border: 1px solid #BABABA;
+}
+
+/* End Comment */
