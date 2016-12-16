@@ -59,6 +59,15 @@
     <% end %>
     </p>
 <% end %>
+<%= error_messages_for 'query' %>
+<% if @query.valid? %>
+<% if @issues.empty? %>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% else %>
+<%= render :partial => 'issues/list', :locals => {:issues => @issues, :query => @query} %>
+<p class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></p>
+<% end %>
+
 <%# Forrest - 14/12/2016 - Add color block explanation %>
 <fieldset class="collapsible">
       <legend onclick="toggleFieldset(this);"><strong>Color Guide</strong></legend>
@@ -92,14 +101,6 @@
       </div>
 </fieldset>
 <%# End Comment %>
-<%= error_messages_for 'query' %>
-<% if @query.valid? %>
-<% if @issues.empty? %>
-<p class="nodata"><%= l(:label_no_data) %></p>
-<% else %>
-<%= render :partial => 'issues/list', :locals => {:issues => @issues, :query => @query} %>
-<p class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></p>
-<% end %>
 
 <% other_formats_links do |f| %>
   <%= f.link_to 'Atom', :url => params.merge(:key => User.current.rss_key) %>
