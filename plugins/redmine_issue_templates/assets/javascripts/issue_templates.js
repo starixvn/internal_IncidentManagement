@@ -71,7 +71,9 @@ function set_pulldown(tracker, target_url, token) {
                 var firstOptionValue = $($options[0]).val();
                 $('#issue_template').val(firstOptionValue);
 
-                load_template(load_url, token);
+                if($("#errorExplanation").length === 0) {
+                    load_template(load_url, token);
+                }
             }
         }
         // End Comment
