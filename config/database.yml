@@ -13,10 +13,10 @@ production:
 
 development:
   adapter: mysql2
-  database: redmine
-  host: 10.70.70.233
-  username: quinn.vo
-  password: 1234aa
+  database: redmine_im
+  host: 10.18.200.114
+  username: internalteam
+  password: '@357$abc^FFZ%'
   encoding: utf8
 
 # Warning: The database defined as "test" will be erased and
