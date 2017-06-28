@@ -1,13 +1,13 @@
 class CreateIssueNotifications < ActiveRecord::Migration  
   def self.up
     create_table :issue_notifications do |t|
-      t.integer :issue_id
-      t.integer :user_id
-      t.integer :journal_id
+      t.integer :issue_id, null: false
+      t.integer :user_id, null: false
+      t.integer :journal_detail_id, null: false
       t.boolean :is_new, :default => true
       t.boolean :is_viewed, :default => false
     end
-    add_index :issue_notifications, [:issue_id, :user_id, :journal_id]
+    add_index :issue_notifications, [:issue_id, :user_id, :journal_detail_id], :unique => true, :name => 'issue_notification_index'
   end
   
   def self.down

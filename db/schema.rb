@@ -194,22 +194,6 @@ ActiveRecord::Schema.define(:version => 20131003230330) do
   add_index "custom_values", ["custom_field_id"], :name => "index_custom_values_on_custom_field_id"
   add_index "custom_values", ["customized_type", "customized_id"], :name => "custom_values_customized"
 
-  create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
-    t.text     "handler"
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
-
   create_table "departments", :force => true do |t|
     t.integer  "parent_id"
     t.integer  "lft"
@@ -392,6 +376,16 @@ ActiveRecord::Schema.define(:version => 20131003230330) do
     t.integer "position", :default => 1
     t.integer "issue_id",                    :null => false
   end
+
+  create_table "issue_notifications", :force => true do |t|
+    t.integer "issue_id",                             :null => false
+    t.integer "user_id",                              :null => false
+    t.integer "journal_detail_id",                    :null => false
+    t.boolean "is_new",            :default => true
+    t.boolean "is_viewed",         :default => false
+  end
+
+  add_index "issue_notifications", ["issue_id", "user_id", "journal_detail_id"], :name => "issue_notification_index", :unique => true
 
   create_table "issue_relations", :force => true do |t|
     t.integer "issue_from_id",                 :null => false

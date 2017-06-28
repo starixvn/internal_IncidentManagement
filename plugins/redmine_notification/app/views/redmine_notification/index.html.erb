@@ -1,6 +1,5 @@
 <h2>New Notifications</h2>
 
-
 <div>	
 	<table class="list">
 		<thead>
@@ -8,21 +7,35 @@
 			<th style="width: 5%">#</th>
 			<th>Subject</th>
 			<th style="width: 15%">Updated by</th>
-			<th style="width: 10%">Mark viewed</th>
+			<th style="width: 10%; text-align: center;">
+				Mark viewed
+				<br />
+				<% if @notifications.any? %>
+					<%= check_box_tag '', false, false,
+						:data => { :remote => true, :url => url_for( :action => 'mark_all_viewed'), :method => :put },
+						:class => 'mark_all_viewed' %>
+				<% end %>
+			</th>
 		  </tr>
 		</thead>
 		<tbody>
 			<% @notifications.each do |notification| %>
 		  		<tr>
 				  	<td><%= link_to notification.issue_id, { :controller => 'issues', :action => 'show', :id => notification.issue_id } %></td>
-				  	<td align="center">
-				  		
+				  	<td>
+				  		<ul class="details">
+					      	<% redmine_notification_details_to_strings([notification.detail]).each do |string| %>
+					       		<li><%= string %></li>
+					      	<% end %>
+					    </ul>
 				  	</td>
 				  	<td>
-				  		<%= notification %>
+				  		<%= notification.user.name %>
 				  	</td>
 				  	<td align="center">
-				  		
+				  		<%= check_box_tag '', notification.is_viewed, notification.is_viewed,
+				  			:data => { :remote => true, :url => url_for( :action => 'mark_viewed'), :id => notification.id, :method => :post },
+				  			:class => 'mark_viewed' %>
 				  	</td>
 			  	</tr>
 			<% end %>
