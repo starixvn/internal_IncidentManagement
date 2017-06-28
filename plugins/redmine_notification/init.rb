@@ -1,4 +1,6 @@
 require 'redmine'
+require 'redmine_notification/view_notification_hook'
+require 'redmine_notification/application_controller_patch'
 
 Redmine::Plugin.register :redmine_notification do
   name 'Redmine Notification plugin'
