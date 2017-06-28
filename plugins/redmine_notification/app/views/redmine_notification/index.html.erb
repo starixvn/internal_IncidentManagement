@@ -1,0 +1,39 @@
+<h2>New Notifications</h2>
+
+
+<div>	
+	<table class="list">
+		<thead>
+		  <tr>
+			<th style="width: 5%">#</th>
+			<th>Subject</th>
+			<th style="width: 15%">Updated by</th>
+			<th style="width: 10%">Mark viewed</th>
+		  </tr>
+		</thead>
+		<tbody>
+			<% @notifications.each do |notification| %>
+		  		<tr>
+				  	<td><%= link_to notification.issue_id, { :controller => 'issues', :action => 'show', :id => notification.issue_id } %></td>
+				  	<td align="center">
+				  		
+				  	</td>
+				  	<td>
+				  		<%= notification %>
+				  	</td>
+				  	<td align="center">
+				  		
+				  	</td>
+			  	</tr>
+			<% end %>
+			<% if @notifications.empty? %>
+			  	<tr>
+				  	<td colspan="4" align="center">
+				  		No data available!
+				  	</td>
+			  	</tr>
+			<% end %>
+		</tbody>
+	</table>
+<div>
+
