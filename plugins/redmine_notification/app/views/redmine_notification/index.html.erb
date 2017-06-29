@@ -1,7 +1,7 @@
 <h2>New Notifications</h2>
 
 <div>	
-	<table class="list">
+	<table class="list tbl-notifications">
 		<thead>
 		  <tr>
 			<th style="width: 5%">#</th>
@@ -11,9 +11,10 @@
 				Mark viewed
 				<br />
 				<% if @notifications.any? %>
-					<%= check_box_tag '', false, false,
-						:data => { :remote => true, :url => url_for( :action => 'mark_all_viewed'), :method => :put },
-						:class => 'mark_all_viewed' %>
+					<%= form_tag({ action: "mark_all_viewed" }, method: "put", :style => 'display: none;') do %>
+					  	<%= submit_tag("Update") %>
+					<% end %>
+					<%= check_box_tag '', false, false, :class => 'mark_all_viewed' %>
 				<% end %>
 			</th>
 		  </tr>
@@ -21,21 +22,28 @@
 		<tbody>
 			<% @notifications.each do |notification| %>
 		  		<tr>
-				  	<td><%= link_to notification.issue_id, { :controller => 'issues', :action => 'show', :id => notification.issue_id } %></td>
 				  	<td>
-				  		<ul class="details">
-					      	<% redmine_notification_details_to_strings([notification.detail]).each do |string| %>
-					       		<li><%= string %></li>
-					      	<% end %>
-					    </ul>
+				  		<%= link_to notification.issue_id, { :controller => 'issues', :action => 'show', :id => notification.issue_id } %>
+			  		</td>
+				  	<td>
+				  		<% if notification.journal.details.any? %>
+					  		<ul class="details">
+						      	<% redmine_notification_details_to_strings(notification.journal.details).each do |string| %>
+						       		<li><%= string %></li>
+						      	<% end %>
+						    </ul>
+					    <% end %>
+					    <%= redmine_notification_render_notes(notification.issue, notification.journal) unless notification.journal.notes.blank? %>
 				  	</td>
 				  	<td>
-				  		<%= notification.user.name %>
+				  		<%= redmine_notification_render_user_info(notification.updated_by) %>
 				  	</td>
 				  	<td align="center">
-				  		<%= check_box_tag '', notification.is_viewed, notification.is_viewed,
-				  			:data => { :remote => true, :url => url_for( :action => 'mark_viewed'), :id => notification.id, :method => :post },
-				  			:class => 'mark_viewed' %>
+				  		<%= form_for notification, url: { action: "mark_viewed" }, method: :post, :html => { :style => 'display: none;' } do |f| %>
+							 <%= f.text_field(:id) %>
+							 <%= f.submit 'Update' %>
+						<% end %>
+				  		<%= check_box_tag '', notification.is_viewed, notification.is_viewed, :class => 'mark_viewed' %>
 				  	</td>
 			  	</tr>
 			<% end %>

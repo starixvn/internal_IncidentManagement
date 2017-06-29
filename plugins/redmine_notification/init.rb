@@ -1,4 +1,5 @@
 require 'redmine'
+require 'redmine_notification/controller_notification_hook'
 require 'redmine_notification/view_notification_hook'
 require 'redmine_notification/application_controller_patch'
 

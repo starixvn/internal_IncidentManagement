@@ -8,6 +8,21 @@ module RedmineNotificationHelper
 end
 
 module RedmineNotificationViewHelper
+  def redmine_notification_render_user_info(user_id)
+    user = User.where('id = ?', user_id).first
+    
+    content_tag('div', user.name)
+  end
+  
+  def redmine_notification_render_notes(issue, journal)
+    content = ''
+    links = []
+    content << content_tag('div', links.join(' ').html_safe, :class => 'contextual') unless links.empty?
+    content << textilizable(journal, :notes)
+    css_classes = "wiki"
+    content_tag('div', content.html_safe, :class => css_classes)
+  end
+  
   # Returns the textual representation of a journal details
   # as an array of strings
   def redmine_notification_details_to_strings(details, no_html=false, options={})

@@ -7,26 +7,11 @@ $(document).ready(function() {
 		notification_menu.html(notification_menu.html() + " <span class='total-notifications'>" + total_notifications + "</span>");
 	}
 	
-	$('#main').bind('change', 'table.tbl-notifications .mark_viewed', function() {
-	  	$.ajax({
-      		type: $(this).data('method'),
-      		url: $(this).data('url'),
-      		data: { id: $(this).data('id') }
-   		}).done(function() {
-    		alert( "success" );
-	  	}).fail(function() {
-    		alert( "error" );
-  		});    
+	$('table.tbl-notifications .mark_viewed').bind('change', function() {
+	  	$(this).closest('td').find('form').submit();
 	});
 	
 	$('table.tbl-notifications .mark_all_viewed').bind('change', function() {
-  		$.ajax({
-      		type: $(this).data('method'),
-      		url: $(this).data('url')
-   		}).done(function() {
-    		alert( "success" );
-	  	}).fail(function() {
-    		alert( "error" );
-  		});     
+	    $(this).closest('th').find('form').submit();
 	});
 });

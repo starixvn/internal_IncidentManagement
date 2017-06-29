@@ -1,13 +1,13 @@
 module RedmineNotification
   module Hooks
     class ControllerNotificationHook < Redmine::Hook::ViewListener
+
+      #def controller_issues_new_after_save(context={})
+        #save_notification_to_issue(context)
+        #context[:issue].save
+      #end
       
       def controller_issues_edit_after_save(context={})        
-        save_notification_to_issue(context)
-        context[:issue].save
-      end
-
-      def controller_issues_new_after_save(context={})
         save_notification_to_issue(context)
         context[:issue].save
       end
@@ -16,12 +16,27 @@ module RedmineNotification
       def save_notification_to_issue(context)
         params = context[:params]
         if params && params[:issue]
-          #if User.current.allowed_to?(:edit_issues, context[:issue].project)            
-          #end
+          user_ids = Watcher.where('watchable_type = ? and watchable_id = ? and user_id != ?', 'Issue', context[:issue].id, User.current.id).select(:user_id)
           
-          #context[:issue].current_journal.details
+          user_ids.each do |id|
+            IssueNotification.create(
+                issue_id: context[:issue].id,
+                user_id: id.user_id,
+                journal_id: context[:issue].current_journal.id,
+                updated_by: User.current.id,
+                is_new: true,
+                is_viewed: false)
+          end          
           
-          #IssueNotification.create(issue_id: 1, user_id: 1, journal_id: 1, is_new: 0, is_viewed: 0)
+          if context[:issue].assigned_to.id != User.current.id
+            IssueNotification.create(
+              issue_id: context[:issue].id,
+              user_id: context[:issue].assigned_to.id,
+              journal_id: context[:issue].current_journal.id,
+              updated_by: User.current.id,
+              is_new: true,
+              is_viewed: false)
+          end
         end
       end
 
