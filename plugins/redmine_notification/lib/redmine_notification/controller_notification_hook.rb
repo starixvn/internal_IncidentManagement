@@ -33,7 +33,7 @@ module RedmineNotification
           if context[:issue].assigned_to.present? && context[:issue].assigned_to.id != User.current.id
             
             if context[:issue].assigned_to.type == 'Group'
-              user_ids = Group.where('id = ?', context[:issue].assigned_to.id).first.members.select(:id)
+              user_ids = Group.where('id = ?', context[:issue].assigned_to.id).first.users.where('status = ?', 1).select(:id)
               
               user_ids.each do |id|
                 IssueNotification.create(
