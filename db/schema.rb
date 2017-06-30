@@ -689,6 +689,19 @@ ActiveRecord::Schema.define(:version => 20140330155030) do
 
   add_index "repositories", ["project_id"], :name => "index_repositories_on_project_id"
 
+  create_table "rich_rich_files", :force => true do |t|
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.string   "rich_file_file_name"
+    t.string   "rich_file_content_type"
+    t.integer  "rich_file_file_size"
+    t.datetime "rich_file_updated_at"
+    t.string   "owner_type"
+    t.integer  "owner_id"
+    t.text     "uri_cache"
+    t.string   "simplified_type",        :default => "file"
+  end
+
   create_table "roles", :force => true do |t|
     t.string  "name",              :limit => 30, :default => "",        :null => false
     t.integer "position",                        :default => 1
