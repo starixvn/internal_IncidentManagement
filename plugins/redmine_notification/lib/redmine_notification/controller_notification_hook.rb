@@ -30,7 +30,7 @@ module RedmineNotification
                 is_viewed: false)
           end  
           
-          if context[:issue].current_journal.present? && context[:issue].assigned_to.present? && context[:issue].assigned_to.id != User.current.id
+          if context[:issue].assigned_to.present? && context[:issue].assigned_to.id != User.current.id
             
             if context[:issue].assigned_to.type == 'Group'
               user_ids = Group.where('id = ?', context[:issue].assigned_to.id).first.members.select(:id)
@@ -39,7 +39,7 @@ module RedmineNotification
                 IssueNotification.create(
                     issue_id: context[:issue].id,
                     user_id: id.id,
-                    journal_id: context[:issue].current_journal.id.present? ? context[:issue].current_journal.id : nil,
+                    journal_id: context[:issue].current_journal.present? ? context[:issue].current_journal.id : nil,
                     updated_by: User.current.id,
                     is_issue_new: is_issue_new ? true : false,
                     is_new: true,
@@ -49,7 +49,7 @@ module RedmineNotification
               IssueNotification.create(
                 issue_id: context[:issue].id,
                 user_id: context[:issue].assigned_to.id,
-                journal_id: context[:issue].current_journal.id.present? ? context[:issue].current_journal.id : nil,
+                journal_id: context[:issue].current_journal.present? ? context[:issue].current_journal.id : nil,
                 updated_by: User.current.id,
                 is_issue_new: is_issue_new ? true : false,
                 is_new: true,

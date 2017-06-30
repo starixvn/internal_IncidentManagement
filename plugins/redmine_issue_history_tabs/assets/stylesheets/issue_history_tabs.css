@@ -19,3 +19,11 @@
 .diff-table .thead div {
 	background-color: #f0fff0;
 }
+
+.diff_in > * {
+	background: #cfc;
+}
+
+.diff_out > * {
+    background: #fcc;
+}

@@ -1,59 +1,60 @@
 <h2>New Notifications</h2>
 
-<div>	
-	<table class="list tbl-notifications">
-		<thead>
-		  <tr>
-			<th style="width: 5%">#</th>
-			<th><%= l(:label_incident_title) %></th>
-			<th><%= l(:label_history) %></th>
-			<th style="width: 15%"><%= l(:label_updated_by) %></th>
-			<th style="width: 10%; text-align: center;">
-				Mark viewed
-				<br />
-				<% if @notifications.any? %>
-					<%= link_to 'Update', { :action => 'mark_all_viewed' }, :method => :put, :style => 'display: none;' %>
-					<%= check_box_tag '', false, false, :class => 'mark_all_viewed' %>
-				<% end %>
-			</th>
-		  </tr>
-		</thead>
-		<tbody>
-			<% @notifications.each do |notification| %>
-		  		<tr>
-				  	<td>
-				  		<%= link_to notification.issue_id, { :action => 'mark_viewed', :id => notification.id, :issue_id => notification.issue_id }, :method => :post %>
-			  		</td>
-			  		<td>
-			  			<%= link_to notification.issue.subject, { :action => 'mark_viewed', :id => notification.id, :issue_id => notification.issue_id }, :method => :post %>
-			  		</td>>
-				  	<td>
-				  		<% if notification.journal.details.any? %>
-					  		<ul class="details">
-						      	<% redmine_notification_details_to_strings(notification.journal.details).each do |string| %>
-						       		<li><%= string %></li>
-						      	<% end %>
-						    </ul>
-					    <% end %>
-					    <%= redmine_notification_render_notes(notification.issue, notification.journal) unless notification.journal.notes.blank? %>
-				  	</td>
-				  	<td>
-				  		<%= redmine_notification_render_user_info(notification.updated_by) %>
-				  	</td>
-				  	<td align="center">
-						<%= link_to 'Update', { :action => 'mark_viewed', :id => notification.id }, :method => :post, :style => 'display: none;' %>
-				  		<%= check_box_tag '', notification.is_viewed, notification.is_viewed, :class => 'mark_viewed' %>
-				  	</td>
-			  	</tr>
+<table class="list tbl-notifications">
+	<thead>
+	  <tr>
+		<th style="width: 5%">#</th>
+		<th><%= l(:label_incident_title) %></th>
+		<th><%= l(:label_history) %></th>
+		<th style="width: 15%"><%= l(:label_updated_by) %></th>
+		<th style="width: 10%; text-align: center;">
+			Mark viewed
+			<br />
+			<% if @notifications.any? %>
+				<%= link_to 'Update', { :action => 'mark_all_viewed' }, :method => :put, :style => 'display: none;' %>
+				<%= check_box_tag '', false, false, :class => 'mark_all_viewed' %>
 			<% end %>
-			<% if @notifications.empty? %>
-			  	<tr>
-				  	<td colspan="5" align="center">
-				  		<%= l(:label_no_data) %>
-				  	</td>
-			  	</tr>
-			<% end %>
-		</tbody>
-	</table>
-<div>
+		</th>
+	  </tr>
+	</thead>
+	<tbody>
+		<% @notifications.each do |notification| %>
+	  		<tr>
+			  	<td>
+			  		<%= link_to notification.issue_id, { :action => 'mark_viewed', :id => notification.id, :issue_id => notification.issue_id }, :method => :post %>
+		  		</td>
+		  		<td>
+		  			<%= link_to notification.issue.subject, { :action => 'mark_viewed', :id => notification.id, :issue_id => notification.issue_id }, :method => :post %>
+		  		</td>>
+			  	<td>
+			  		<% if notification.is_issue_new %>
+			  			<%= l(:label_incident_reported) %>
+			  		<% end %>
+			  		<% if notification.journal_id.present? %>
+				  		<ul class="details">
+					      	<% redmine_notification_details_to_strings(notification.journal_id).each do |string| %>
+					       		<li><%= string %></li>
+					      	<% end %>
+					    </ul>
+					    <%= redmine_notification_render_notes(notification.issue, notification.journal_id) %>
+				    <% end %>
+			  	</td>
+			  	<td>
+			  		<%= redmine_notification_render_user_info(notification.updated_by) %>
+			  	</td>
+			  	<td align="center">
+					<%= link_to 'Update', { :action => 'mark_viewed', :id => notification.id }, :method => :post, :style => 'display: none;' %>
+			  		<%= check_box_tag '', notification.is_viewed, notification.is_viewed, :class => 'mark_viewed' %>
+			  	</td>
+		  	</tr>
+		<% end %>
+		<% if @notifications.empty? %>
+		  	<tr>
+			  	<td colspan="5" align="center">
+			  		<%= l(:label_no_data) %>
+			  	</td>
+		  	</tr>
+		<% end %>
+	</tbody>
+</table>
 
