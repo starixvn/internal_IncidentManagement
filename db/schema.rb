@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131003230330) do
+ActiveRecord::Schema.define(:version => 20140330155030) do
 
   create_table "announcements", :force => true do |t|
     t.text     "message"
@@ -351,6 +351,27 @@ ActiveRecord::Schema.define(:version => 20131003230330) do
 
   add_index "favorite_projects", ["project_id", "user_id"], :name => "index_favorite_projects_on_project_id_and_user_id"
 
+  create_table "global_issue_templates", :force => true do |t|
+    t.string   "title"
+    t.string   "issue_title"
+    t.integer  "tracker_id"
+    t.integer  "author_id"
+    t.string   "note"
+    t.text     "description"
+    t.boolean  "enabled"
+    t.integer  "position"
+    t.datetime "created_on"
+    t.datetime "updated_on"
+  end
+
+  add_index "global_issue_templates", ["author_id"], :name => "index_global_issue_templates_on_author_id"
+  add_index "global_issue_templates", ["tracker_id"], :name => "index_global_issue_templates_on_tracker_id"
+
+  create_table "global_issue_templates_projects", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "global_issue_template_id"
+  end
+
   create_table "groups_users", :id => false, :force => true do |t|
     t.integer "group_id", :null => false
     t.integer "user_id",  :null => false
@@ -416,21 +437,24 @@ ActiveRecord::Schema.define(:version => 20131003230330) do
     t.integer "project_id"
     t.text    "help_message"
     t.boolean "enabled"
+    t.boolean "should_replaced",   :default => false
+    t.boolean "inherit_templates", :default => false, :null => false
   end
 
   create_table "issue_templates", :force => true do |t|
-    t.string   "title",                          :null => false
+    t.string   "title",                              :null => false
     t.integer  "project_id"
-    t.integer  "tracker_id",                     :null => false
-    t.integer  "author_id",                      :null => false
+    t.integer  "tracker_id",                         :null => false
+    t.integer  "author_id",                          :null => false
     t.string   "note"
     t.text     "description"
     t.boolean  "enabled"
     t.datetime "created_on"
     t.datetime "updated_on"
     t.string   "issue_title"
-    t.integer  "position",    :default => 1
-    t.boolean  "is_default",  :default => false
+    t.integer  "position",        :default => 1
+    t.boolean  "is_default",      :default => false
+    t.boolean  "enabled_sharing", :default => false
   end
 
   add_index "issue_templates", ["author_id"], :name => "index_issue_templates_on_author_id"
