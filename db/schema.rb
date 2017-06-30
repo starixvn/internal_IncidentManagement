@@ -378,15 +378,16 @@ ActiveRecord::Schema.define(:version => 20131003230330) do
   end
 
   create_table "issue_notifications", :force => true do |t|
-    t.integer "issue_id",                      :null => false
-    t.integer "user_id",                       :null => false
-    t.integer "journal_id",                    :null => false
-    t.integer "updated_by",                    :null => false
-    t.boolean "is_new",     :default => true
-    t.boolean "is_viewed",  :default => false
+    t.integer "issue_id",                        :null => false
+    t.integer "user_id",                         :null => false
+    t.integer "updated_by",                      :null => false
+    t.integer "journal_id"
+    t.boolean "is_issue_new", :default => false
+    t.boolean "is_new",       :default => true
+    t.boolean "is_viewed",    :default => false
   end
 
-  add_index "issue_notifications", ["issue_id", "user_id", "journal_id"], :name => "issue_notification_index", :unique => true
+  add_index "issue_notifications", ["issue_id", "user_id"], :name => "issue_notification_index"
 
   create_table "issue_relations", :force => true do |t|
     t.integer "issue_from_id",                 :null => false

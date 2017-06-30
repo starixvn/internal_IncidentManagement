@@ -8,10 +8,14 @@ class RedmineNotificationController < ApplicationController
   end
   
   def mark_viewed
-    IssueNotification.where('id = ? and user_id = ? and is_viewed = false', params[:issue_notification][:id], User.current.id).update(is_viewed: true)
+    IssueNotification.where('id = ? and user_id = ? and is_viewed = false', params[:id], User.current.id).update_all(is_viewed: true)
 
     respond_to do |format|
-      format.html { redirect_to :action => 'index' }
+      if params[:issue_id].present?
+        format.html { redirect_to issue_path(params[:issue_id]) }
+      else
+        format.html { redirect_to :action => 'index' }
+      end
     end
   end
   

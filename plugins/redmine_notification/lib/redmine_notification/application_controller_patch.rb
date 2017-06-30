@@ -14,21 +14,23 @@ module RedmineNotificationViewHelper
     content_tag('div', user.name)
   end
   
-  def redmine_notification_render_notes(issue, journal)
+  def redmine_notification_render_notes(issue, journal_id)
+    journal = Journal.where('id = ?', journal_id).first
     content = ''
-    links = []
-    content << content_tag('div', links.join(' ').html_safe, :class => 'contextual') unless links.empty?
-    content << textilizable(journal, :notes)
+    content << textilizable(journal, :notes) unless journal.notes.blank?
     css_classes = "wiki"
     content_tag('div', content.html_safe, :class => css_classes)
   end
   
   # Returns the textual representation of a journal details
   # as an array of strings
-  def redmine_notification_details_to_strings(details, no_html=false, options={})
+  def redmine_notification_details_to_strings(journal_id, no_html=false, options={})
     options[:only_path] = (options[:only_path] == false ? false : true)
     strings = []
     values_by_field = {}
+    
+    details = Journal.where('id = ?', journal_id).first.details
+    
     details.each do |detail|
       if detail.property == 'cf'
         field_id = detail.prop_key

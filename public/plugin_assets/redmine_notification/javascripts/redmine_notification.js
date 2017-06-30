@@ -8,10 +8,10 @@ $(document).ready(function() {
 	}
 	
 	$('table.tbl-notifications .mark_viewed').bind('change', function() {
-	  	$(this).closest('td').find('form').submit();
+	  	$(this).closest('td').find('a').trigger('click');
 	});
 	
 	$('table.tbl-notifications .mark_all_viewed').bind('change', function() {
-	    $(this).closest('th').find('form').submit();
+	    $(this).closest('th').find('a').trigger('click');
 	});
 });

@@ -5,15 +5,14 @@
 		<thead>
 		  <tr>
 			<th style="width: 5%">#</th>
-			<th>Subject</th>
-			<th style="width: 15%">Updated by</th>
+			<th><%= l(:label_incident_title) %></th>
+			<th><%= l(:label_history) %></th>
+			<th style="width: 15%"><%= l(:label_updated_by) %></th>
 			<th style="width: 10%; text-align: center;">
 				Mark viewed
 				<br />
 				<% if @notifications.any? %>
-					<%= form_tag({ action: "mark_all_viewed" }, method: "put", :style => 'display: none;') do %>
-					  	<%= submit_tag("Update") %>
-					<% end %>
+					<%= link_to 'Update', { :action => 'mark_all_viewed' }, :method => :put, :style => 'display: none;' %>
 					<%= check_box_tag '', false, false, :class => 'mark_all_viewed' %>
 				<% end %>
 			</th>
@@ -23,8 +22,11 @@
 			<% @notifications.each do |notification| %>
 		  		<tr>
 				  	<td>
-				  		<%= link_to notification.issue_id, { :controller => 'issues', :action => 'show', :id => notification.issue_id } %>
+				  		<%= link_to notification.issue_id, { :action => 'mark_viewed', :id => notification.id, :issue_id => notification.issue_id }, :method => :post %>
 			  		</td>
+			  		<td>
+			  			<%= link_to notification.issue.subject, { :action => 'mark_viewed', :id => notification.id, :issue_id => notification.issue_id }, :method => :post %>
+			  		</td>>
 				  	<td>
 				  		<% if notification.journal.details.any? %>
 					  		<ul class="details">
@@ -39,18 +41,15 @@
 				  		<%= redmine_notification_render_user_info(notification.updated_by) %>
 				  	</td>
 				  	<td align="center">
-				  		<%= form_for notification, url: { action: "mark_viewed" }, method: :post, :html => { :style => 'display: none;' } do |f| %>
-							 <%= f.text_field(:id) %>
-							 <%= f.submit 'Update' %>
-						<% end %>
+						<%= link_to 'Update', { :action => 'mark_viewed', :id => notification.id }, :method => :post, :style => 'display: none;' %>
 				  		<%= check_box_tag '', notification.is_viewed, notification.is_viewed, :class => 'mark_viewed' %>
 				  	</td>
 			  	</tr>
 			<% end %>
 			<% if @notifications.empty? %>
 			  	<tr>
-				  	<td colspan="4" align="center">
-				  		No data available!
+				  	<td colspan="5" align="center">
+				  		<%= l(:label_no_data) %>
 				  	</td>
 			  	</tr>
 			<% end %>
