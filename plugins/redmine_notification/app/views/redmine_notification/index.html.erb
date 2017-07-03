@@ -1,6 +1,6 @@
 <% html_title "Notifications" %>
 
-<h2>New Notifications</h2>
+<h2>Notifications</h2>
 
 <table class="list tbl-notifications">
 	<thead>
@@ -14,7 +14,7 @@
 			<br />
 			<% if @notifications.any? %>
 				<%= link_to 'Update', { :action => 'mark_all_viewed' }, :method => :put, :style => 'display: none;' %>
-				<%= check_box_tag '', false, false, :class => 'mark_all_viewed' %>
+				<%= check_box_tag '', @is_all_viewed, @is_all_viewed, :class => 'mark_all_viewed', :disabled => @is_all_viewed %>
 			<% end %>
 		</th>
 	  </tr>
@@ -46,7 +46,7 @@
 			  	</td>
 			  	<td align="center">
 					<%= link_to 'Update', { :action => 'mark_viewed', :id => notification.id }, :method => :post, :style => 'display: none;' %>
-			  		<%= check_box_tag '', notification.is_viewed, notification.is_viewed, :class => 'mark_viewed' %>
+			  		<%= check_box_tag '', notification.is_viewed, notification.is_viewed, :class => 'mark_viewed', :disabled => notification.is_viewed %>
 			  	</td>
 		  	</tr>
 		<% end %>

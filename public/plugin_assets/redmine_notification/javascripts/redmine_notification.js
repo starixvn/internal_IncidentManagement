@@ -10,13 +10,19 @@ $(document).ready(function() {
 	}
 	
 	$('table.tbl-notifications .mark_viewed').bind('change', function() {
-	  	$(this).closest('td').find('a').trigger('click');
+		var el = $(this);
+		if(el.prop('checked') && el.not(':disabled')) {
+	  		el.closest('td').find('a').trigger('click');
+  		}
 	});
 	
 	$('table.tbl-notifications .mark_all_viewed').bind('change', function() {
-		$('table.tbl-notifications .mark_viewed').prop('checked', true);
-		
-	    $(this).closest('th').find('a').trigger('click');
+		var el = $(this);
+		if(el.prop('checked') && el.not(':disabled')) {
+			$('table.tbl-notifications .mark_viewed').prop('checked', true);
+			
+		    el.closest('th').find('a').trigger('click');
+	   	}
 	});
 	
 	tabDiff.on('click', function(e) {

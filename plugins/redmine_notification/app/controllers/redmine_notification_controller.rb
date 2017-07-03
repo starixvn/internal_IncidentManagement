@@ -7,7 +7,8 @@ class RedmineNotificationController < ApplicationController
   def index
     IssueNotification.where('user_id = ? and is_new = true', User.current.id).update_all(is_new: false)
     
-    @notifications = IssueNotification.where('user_id = ? and is_viewed = false', User.current.id)
+    @notifications = IssueNotification.where('user_id = ?', User.current.id).order(:is_viewed)
+    @is_all_viewed = !IssueNotification.where('user_id = ? and is_viewed = false', User.current.id).exists?
   end
   
   def mark_viewed

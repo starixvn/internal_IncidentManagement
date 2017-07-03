@@ -17,12 +17,12 @@ module RedmineNotification
         params = context[:params]
         if params && params[:issue] && context[:issue] && context[:issue].id.present?
           
-          user_ids = Watcher.where('watchable_type = ? and watchable_id = ? and user_id != ?', 'Issue', context[:issue].id, User.current.id).select(:user_id)
+          watchers = Watcher.where('watchable_type = ? and watchable_id = ?', 'Issue', context[:issue].id).select(:user_id)
             
-          user_ids.each do |id|
+          watchers.each do |watcher|
             IssueNotification.create(
                 issue_id: context[:issue].id,
-                user_id: id.user_id,
+                user_id: watcher.user_id,
                 journal_id: context[:issue].current_journal.id,
                 updated_by: User.current.id,
                 is_issue_new: is_issue_new ? true : false,
@@ -30,22 +30,24 @@ module RedmineNotification
                 is_viewed: false)
           end  
           
-          if context[:issue].assigned_to.present? && context[:issue].assigned_to.id != User.current.id
+          if context[:issue].assigned_to.present?
             
             if context[:issue].assigned_to.type == 'Group'
-              user_ids = Group.where('id = ?', context[:issue].assigned_to.id).first.users.where('status = ?', 1).select(:id)
+              members = Group.where('id = ?', context[:issue].assigned_to.id).first.users.where('status = ?', 1).select(:id)
               
-              user_ids.each do |id|
-                IssueNotification.create(
-                    issue_id: context[:issue].id,
-                    user_id: id.id,
-                    journal_id: context[:issue].current_journal.present? ? context[:issue].current_journal.id : nil,
-                    updated_by: User.current.id,
-                    is_issue_new: is_issue_new ? true : false,
-                    is_new: true,
-                    is_viewed: false)
+              members.each do |member|
+                if !watchers.exists?(:user_id => member.id)
+                  IssueNotification.create(
+                      issue_id: context[:issue].id,
+                      user_id: member.id,
+                      journal_id: context[:issue].current_journal.present? ? context[:issue].current_journal.id : nil,
+                      updated_by: User.current.id,
+                      is_issue_new: is_issue_new ? true : false,
+                      is_new: true,
+                      is_viewed: false)
+                end
               end
-            else
+            elsif !watchers.exists?(:user_id => User.current.id)
               IssueNotification.create(
                 issue_id: context[:issue].id,
                 user_id: context[:issue].assigned_to.id,
