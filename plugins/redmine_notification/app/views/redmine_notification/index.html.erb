@@ -17,6 +17,7 @@
 				<%= check_box_tag '', @is_all_viewed, @is_all_viewed, :class => 'mark_all_viewed', :disabled => @is_all_viewed, :autocomplete => :off %>
 			<% end %>
 		</th>
+		<th style="width: 5%; text-align: center;">Delete</th>
 	  </tr>
 	</thead>
 	<tbody>
@@ -48,11 +49,16 @@
 					<%= link_to 'Update', { :action => 'mark_viewed', :id => notification.id }, :method => :post, :style => 'display: none;' %>
 			  		<%= check_box_tag '', notification.is_viewed, notification.is_viewed, :class => 'mark_viewed', :disabled => notification.is_viewed, :autocomplete => :off %>
 			  	</td>
+			  	<td align="center">
+			  		<%= link_to '', { :action => 'delete', :id => notification.id }, :method => :delete,
+			  			:class => 'icon icon-del',
+			  			:data => { confirm: 'Are you sure you want to delete the selected notification?' } %>
+			  	</td>
 		  	</tr>
 		<% end %>
 		<% if @notifications.empty? %>
 		  	<tr>
-			  	<td colspan="5" align="center">
+			  	<td colspan="6" align="center">
 			  		<%= l(:label_no_data) %>
 			  	</td>
 		  	</tr>
