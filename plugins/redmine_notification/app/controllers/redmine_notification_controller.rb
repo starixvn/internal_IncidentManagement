@@ -7,8 +7,12 @@ class RedmineNotificationController < ApplicationController
   def index
     IssueNotification.where('user_id = ? and is_new = true', User.current.id).update_all(is_new: false)
     
-    @notifications = IssueNotification.where('user_id = ?', User.current.id).order(:is_viewed)
-    @is_all_viewed = !IssueNotification.where('user_id = ? and is_viewed = false', User.current.id).exists?
+    notifications = IssueNotification.where('user_id = ?', User.current.id).order(:is_viewed)
+    @is_all_viewed = !notifications.exists?(:is_viewed => false)
+    
+    @notification_count = notifications.count
+    @notification_pages = Paginator.new @notification_count, per_page_option, params['page']
+    @notifications = notifications.limit(@notification_pages.per_page).offset(@notification_pages.offset)
   end
   
   def mark_viewed
