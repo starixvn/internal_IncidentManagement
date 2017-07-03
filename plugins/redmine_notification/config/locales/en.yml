@@ -5,3 +5,7 @@ en:
   label_updated_by: 'Updated by'
   label_incident_reported: 'Incident has been reported'
   label_no_data: 'No data to display!'
+  label_tab_diff: Diff
+  label_tab_comparison: 'Manual Comparison'
+  label_before: Before
+  label_after: After

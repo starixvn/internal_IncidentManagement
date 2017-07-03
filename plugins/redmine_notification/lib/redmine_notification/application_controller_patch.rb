@@ -136,6 +136,13 @@ module RedmineNotificationViewHelper
 
     if detail.property == 'attr' && detail.prop_key == 'description'
       s = l(:text_journal_changed_no_detail, :label => label)
+      unless no_html
+        diff_link = link_to 'diff',
+          {:controller => 'redmine_notification', :action => 'diff', :id => detail.journal_id,
+           :detail_id => detail.id, :only_path => options[:only_path]},
+          :title => l(:label_view_diff)
+        s << " (#{ diff_link })"
+      end
       s.html_safe
     elsif detail.value.present?
       case detail.property
