@@ -1,8 +1,7 @@
-/*
- Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
+﻿/*
+ Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
  For licensing, see LICENSE.md or http://ckeditor.com/license
 */
-
 CKEDITOR.plugins.setLang("specialchar","pt-br",{euro:"Euro",lsquo:"Aspas simples esquerda",rsquo:"Aspas simples direita",ldquo:"Aspas duplas esquerda",rdquo:"Aspas duplas direita",ndash:"Traço",mdash:"Travessão",iexcl:"Ponto de exclamação invertido",cent:"Cent",pound:"Cerquilha",curren:"Dinheiro",yen:"Yen",brvbar:"Bara interrompida",sect:"Símbolo de Parágrafo",uml:"Trema",copy:"Direito de Cópia",ordf:"Indicador ordinal feminino",laquo:"Aspas duplas angulares esquerda",not:"Negação",reg:"Marca Registrada",
 macr:"Mácron",deg:"Grau",sup2:"2 Superscrito",sup3:"3 Superscrito",acute:"Acento agudo",micro:"Micro",para:"Pé de mosca",middot:"Ponto mediano",cedil:"Cedilha",sup1:"1 Superscrito",ordm:"Indicador ordinal masculino",raquo:"Aspas duplas angulares direita",frac14:"Um quarto",frac12:"Um meio",frac34:"Três quartos",iquest:"Interrogação invertida",Agrave:"A maiúsculo com acento grave",Aacute:"A maiúsculo com acento agudo",Acirc:"A maiúsculo com acento circunflexo",Atilde:"A maiúsculo com til",Auml:"A maiúsculo com trema",
 Aring:"A maiúsculo com anel acima",AElig:"Æ maiúsculo",Ccedil:"Ç maiúlculo",Egrave:"E maiúsculo com acento grave",Eacute:"E maiúsculo com acento agudo",Ecirc:"E maiúsculo com acento circumflexo",Euml:"E maiúsculo com trema",Igrave:"I maiúsculo com acento grave",Iacute:"I maiúsculo com acento agudo",Icirc:"I maiúsculo com acento circunflexo",Iuml:"I maiúsculo com crase",ETH:"Eth maiúsculo",Ntilde:"N maiúsculo com til",Ograve:"O maiúsculo com acento grave",Oacute:"O maiúsculo com acento agudo",Ocirc:"O maiúsculo com acento circunflexo",

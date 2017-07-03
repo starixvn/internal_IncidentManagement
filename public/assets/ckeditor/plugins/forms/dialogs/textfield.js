@@ -1,8 +1,7 @@
-/*
- Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
+﻿/*
+ Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
  For licensing, see LICENSE.md or http://ckeditor.com/license
 */
-
 CKEDITOR.dialog.add("textfield",function(b){function e(a){var a=a.element,c=this.getValue();c?a.setAttribute(this.id,c):a.removeAttribute(this.id)}function f(a){this.setValue(a.hasAttribute(this.id)&&a.getAttribute(this.id)||"")}var g={email:1,password:1,search:1,tel:1,text:1,url:1};return{title:b.lang.forms.textfield.title,minWidth:350,minHeight:150,onShow:function(){delete this.textField;var a=this.getParentEditor().getSelection().getSelectedElement();if(a&&"input"==a.getName()&&(g[a.getAttribute("type")]||
 !a.getAttribute("type")))this.textField=a,this.setupContent(a)},onOk:function(){var a=this.getParentEditor(),c=this.textField,b=!c;b&&(c=a.document.createElement("input"),c.setAttribute("type","text"));c={element:c};b&&a.insertElement(c.element);this.commitContent(c);b||a.getSelection().selectElement(c.element)},onLoad:function(){this.foreach(function(a){if(a.getValue&&(a.setup||(a.setup=f),!a.commit))a.commit=e})},contents:[{id:"info",label:b.lang.forms.textfield.title,title:b.lang.forms.textfield.title,
 elements:[{type:"hbox",widths:["50%","50%"],children:[{id:"_cke_saved_name",type:"text",label:b.lang.forms.textfield.name,"default":"",accessKey:"N",setup:function(a){this.setValue(a.data("cke-saved-name")||a.getAttribute("name")||"")},commit:function(a){a=a.element;this.getValue()?a.data("cke-saved-name",this.getValue()):(a.data("cke-saved-name",!1),a.removeAttribute("name"))}},{id:"value",type:"text",label:b.lang.forms.textfield.value,"default":"",accessKey:"V",commit:function(a){if(CKEDITOR.env.ie&&

@@ -1,8 +1,7 @@
-/*
- Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
+﻿/*
+ Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
  For licensing, see LICENSE.md or http://ckeditor.com/license
 */
-
 CKEDITOR.plugins.setLang("specialchar","sk",{euro:"Znak eura",lsquo:"Ľavá jednoduchá úvodzovka",rsquo:"Pravá jednoduchá úvodzovka",ldquo:"Pravá dvojitá úvodzovka",rdquo:"Pravá dvojitá úvodzovka",ndash:"En pomlčka",mdash:"Em pomlčka",iexcl:"Obrátený výkričník",cent:"Znak centu",pound:"Znak libry",curren:"Znak meny",yen:"Znak jenu",brvbar:"Prerušená zvislá čiara",sect:"Znak odseku",uml:"Prehláska",copy:"Znak copyrightu",ordf:"Ženský indikátor rodu",laquo:"Znak dvojitých lomených úvodzoviek vľavo",not:"Logistický zápor",
 reg:"Znak registrácie",macr:"Pomlčka nad",deg:"Znak stupňa",sup2:"Dvojka ako horný index",sup3:"Trojka ako horný index",acute:"Dĺžeň",micro:"Znak mikro",para:"Znak odstavca",middot:"Bodka uprostred",cedil:"Chvost vľavo",sup1:"Jednotka ako horný index",ordm:"Mužský indikátor rodu",raquo:"Znak dvojitých lomených úvodzoviek vpravo",frac14:"Obyčajný zlomok jedna štvrtina",frac12:"Obyčajný zlomok jedna polovica",frac34:"Obyčajný zlomok tri štvrtiny",iquest:"Otočený otáznik",Agrave:"Veľké písmeno latinky A s accentom",
 Aacute:"Veľké písmeno latinky A s dĺžňom",Acirc:"Veľké písmeno latinky A s mäkčeňom",Atilde:"Veľké písmeno latinky A s tildou",Auml:"Veľké písmeno latinky A s dvoma bodkami",Aring:"Veľké písmeno latinky A s krúžkom nad",AElig:"Veľké písmeno latinky Æ",Ccedil:"Veľké písmeno latinky C s chvostom vľavo",Egrave:"Veľké písmeno latinky E s accentom",Eacute:"Veľké písmeno latinky E s dĺžňom",Ecirc:"Veľké písmeno latinky E s mäkčeňom",Euml:"Veľké písmeno latinky E s dvoma bodkami",Igrave:"Veľké písmeno latinky I s accentom",
