@@ -23,13 +23,13 @@
 	<tbody>
 		<% @notifications.each do |notification| %>
 	  		<tr>
-			  	<td>
-			  		<%= link_to notification.issue_id, { :action => 'mark_viewed', :id => notification.id, :issue_id => notification.issue_id }, :method => :post %>
-		  		</td>
-		  		<td>
-		  			<%= link_to notification.issue.subject, { :action => 'mark_viewed', :id => notification.id, :issue_id => notification.issue_id }, :method => :post %>
-		  		</td>>
-			  	<td>
+	  			<td>
+	  				<%= link_to notification.issue_id, { :action => 'mark_viewed', :id => notification.id, :issue_id => notification.issue_id }, :method => :post %>
+	  			</td>
+	  			<td>
+	  				<%= link_to notification.issue.subject, { :action => 'mark_viewed', :id => notification.id, :issue_id => notification.issue_id }, :method => :post %>
+	  			</td>
+	  			<td>
 			  		<% if notification.is_issue_new %>
 			  			<%= l(:label_incident_reported) %>
 			  		<% end %>
