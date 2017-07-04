@@ -47,6 +47,13 @@ class RedmineNotificationController < ApplicationController
     end
   end
   
+  def delete_all
+    IssueNotification.where('user_id = ?', User.current.id).delete_all
+    respond_to do |format|
+      format.html { redirect_to :action => 'index' }
+    end
+  end
+  
   def diff
     @issue = @journal.issue
     if params[:detail_id].present?

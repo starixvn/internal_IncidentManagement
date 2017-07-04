@@ -10,3 +10,5 @@ en:
   label_tab_comparison: 'Manual Comparison'
   label_before: Before
   label_after: After
+  label_mark_viewed: 'Mark viewed'
+  label_delete: Delete
