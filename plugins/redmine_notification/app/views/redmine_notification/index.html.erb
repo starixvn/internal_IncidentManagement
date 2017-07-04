@@ -9,6 +9,7 @@
 		<th><%= l(:label_incident_title) %></th>
 		<th><%= l(:label_history) %></th>
 		<th style="width: 15%"><%= l(:label_updated_by) %></th>
+		<th style="width: 15%"><%= l(:label_updated_at) %></th>
 		<th style="width: 10%; text-align: center;">
 			Mark viewed
 			<br />
@@ -35,7 +36,7 @@
 			  		<% end %>
 			  		<% if notification.journal_id.present? %>
 				  		<ul class="details">
-					      	<% redmine_notification_details_to_strings(notification.journal_id).each do |string| %>
+					      	<% redmine_notification_details_to_strings(notification.id, notification.journal_id).each do |string| %>
 					       		<li><%= string %></li>
 					      	<% end %>
 					    </ul>
@@ -44,6 +45,9 @@
 			  	</td>
 			  	<td>
 			  		<%= redmine_notification_render_user_info(notification.updated_by) %>
+			  	</td>
+			  	<td>
+			  		<%= format_time(notification.updated_at) %>
 			  	</td>
 			  	<td align="center">
 					<%= link_to 'Update', { :action => 'mark_viewed', :id => notification.id }, :method => :post, :style => 'display: none;' %>
@@ -58,7 +62,7 @@
 		<% end %>
 		<% if @notifications.empty? %>
 		  	<tr>
-			  	<td colspan="6" align="center">
+			  	<td colspan="7" align="center">
 			  		<%= l(:label_no_data) %>
 			  	</td>
 		  	</tr>

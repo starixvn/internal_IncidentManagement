@@ -7,7 +7,7 @@ class RedmineNotificationController < ApplicationController
   def index
     IssueNotification.where('user_id = ? and is_new = true', User.current.id).update_all(is_new: false)
     
-    notifications = IssueNotification.where('user_id = ?', User.current.id).order(:is_viewed)
+    notifications = IssueNotification.where('user_id = ?', User.current.id).order('is_viewed, updated_at DESC')
     
     respond_to do |format|
       format.html {
@@ -55,6 +55,9 @@ class RedmineNotificationController < ApplicationController
       @detail = @journal.details.detect {|d| d.prop_key == 'description'}
     end
     (render_404; return false) unless @issue && @detail
+    
+    IssueNotification.where('id = ? and user_id = ? and is_viewed = false', params[:id], User.current.id).update_all(is_viewed: true)
+    
     @diff = DiffHelper.new(@detail.value, @detail.old_value)
     @detail
   end
@@ -62,7 +65,7 @@ class RedmineNotificationController < ApplicationController
   private
 
   def find_journal
-    @journal = Journal.visible.find(params[:id])
+    @journal = Journal.visible.find(params[:journal_id])
     @project = @journal.journalized.project
   rescue ActiveRecord::RecordNotFound
     render_404

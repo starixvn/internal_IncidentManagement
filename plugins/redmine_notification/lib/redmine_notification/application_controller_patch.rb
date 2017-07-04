@@ -24,7 +24,7 @@ module RedmineNotificationViewHelper
   
   # Returns the textual representation of a journal details
   # as an array of strings
-  def redmine_notification_details_to_strings(journal_id, no_html=false, options={})
+  def redmine_notification_details_to_strings(notification_id, journal_id, no_html=false, options={})
     options[:only_path] = (options[:only_path] == false ? false : true)
     strings = []
     values_by_field = {}
@@ -46,24 +46,24 @@ module RedmineNotificationViewHelper
           next
         end
       end
-      strings << redmine_notification_show_detail(detail, no_html, options)
+      strings << redmine_notification_show_detail(notification_id, detail, no_html, options)
     end
     
     values_by_field.each do |field_id, changes|
       detail = JournalDetail.new(:property => 'cf', :prop_key => field_id)
       if changes[:added].any?
         detail.value = changes[:added]
-        strings << redmine_notification_show_detail(detail, no_html, options)
+        strings << redmine_notification_show_detail(notification_id, detail, no_html, options)
       elsif changes[:deleted].any?
         detail.old_value = changes[:deleted]
-        strings << redmine_notification_show_detail(detail, no_html, options)
+        strings << redmine_notification_show_detail(notification_id, detail, no_html, options)
       end
     end
     strings
   end
   
   # Returns the textual representation of a single journal detail
-  def redmine_notification_show_detail(detail, no_html=false, options={})
+  def redmine_notification_show_detail(notification_id, detail, no_html=false, options={})
     multiple = false
     case detail.property
     when 'attr'
@@ -138,9 +138,13 @@ module RedmineNotificationViewHelper
       s = l(:text_journal_changed_no_detail, :label => label)
       unless no_html
         diff_link = link_to 'diff',
-          {:controller => 'redmine_notification', :action => 'diff', :id => detail.journal_id,
-           :detail_id => detail.id, :only_path => options[:only_path]},
-          :title => l(:label_view_diff)
+          {:controller => 'redmine_notification',
+            :action => 'diff',
+            :id => notification_id,
+            :journal_id => detail.journal_id,
+            :detail_id => detail.id,
+            :only_path => options[:only_path]},
+            :title => l(:label_view_diff)
         s << " (#{ diff_link })"
       end
       s.html_safe

@@ -25,6 +25,7 @@ module RedmineNotification
                 user_id: watcher.user_id,
                 journal_id: context[:issue].current_journal.id,
                 updated_by: User.current.id,
+                updated_at: Time.now,
                 is_issue_new: is_issue_new ? true : false,
                 is_new: true,
                 is_viewed: false)
@@ -42,6 +43,7 @@ module RedmineNotification
                       user_id: member.id,
                       journal_id: context[:issue].current_journal.present? ? context[:issue].current_journal.id : nil,
                       updated_by: User.current.id,
+                      updated_at: Time.now,
                       is_issue_new: is_issue_new ? true : false,
                       is_new: true,
                       is_viewed: false)
@@ -53,6 +55,7 @@ module RedmineNotification
                 user_id: context[:issue].assigned_to.id,
                 journal_id: context[:issue].current_journal.present? ? context[:issue].current_journal.id : nil,
                 updated_by: User.current.id,
+                updated_at: Time.now,
                 is_issue_new: is_issue_new ? true : false,
                 is_new: true,
                 is_viewed: false)

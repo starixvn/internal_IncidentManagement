@@ -3,6 +3,7 @@ en:
   label_incident_title: 'Incident title'
   label_history: 'History'
   label_updated_by: 'Updated by'
+  label_updated_at: 'Updated at'
   label_incident_reported: 'Incident has been reported'
   label_no_data: 'No data to display!'
   label_tab_diff: Diff
