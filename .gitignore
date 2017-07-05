@@ -11,6 +11,7 @@
 /log/mongrel_debug
 /public/dispatch.*
 /public/plugin_assets
+/public/system/rich
 /tmp/*
 /tmp/cache/*
 /tmp/pdf/*
