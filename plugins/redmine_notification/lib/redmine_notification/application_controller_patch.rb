@@ -8,6 +8,8 @@ module RedmineNotificationHelper
 end
 
 module RedmineNotificationViewHelper
+  include CustomFieldsHelper
+  
   def redmine_notification_render_user_info(user_id)
     user = User.where('id = ?', user_id).first
     

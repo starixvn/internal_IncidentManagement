@@ -1,4 +1,6 @@
 module CustomizeJournalsHelper
+  include CustomFieldsHelper
+  
   # Returns the textual representation of a journal details
   # as an array of strings
   def customize_details_to_strings(details, no_html=false, options={})
