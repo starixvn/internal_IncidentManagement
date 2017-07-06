@@ -48,8 +48,5 @@
 </div>
 
 <%= call_hook(:view_issues_form_details_bottom, { :issue => @issue, :form => f }) %>
-<%= call_hook(:view_letstalk_checkbox, :issue => @issue) %>
-<%= call_hook(:view_letstalk_comment, :issue => @issue) %>
-<%= call_hook(:view_letstalk_include_javascript) %>
 <% end %>
 

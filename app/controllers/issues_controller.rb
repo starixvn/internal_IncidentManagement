@@ -14,7 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-require 'net/http'
 
 class IssuesController < ApplicationController
   menu_item :new_issue, :only => [:new, :create]
@@ -146,10 +145,6 @@ class IssuesController < ApplicationController
     @issue.save_attachments(params[:attachments] || (params[:issue] && params[:issue][:uploads]))
     if @issue.save
       
-      if params[:chkLetstalk][:yesno_attribute] == 'yes'
-		call_hook(:controller_letstalk_api, { :params => params, :issue => @issue})
-	end
-      
       call_hook(:controller_issues_new_after_save, { :params => params, :issue => @issue})
       respond_to do |format|
         format.html {
@@ -199,13 +194,8 @@ class IssuesController < ApplicationController
     end
 
     if saved
-
-	if params[:chkLetstalk][:yesno_attribute] == 'yes'
-		call_hook(:controller_letstalk_api, { :params => params, :issue => @issue})
-	end
             
-      render_attachment_warning_if_needed(@issue)          
-      
+      render_attachment_warning_if_needed(@issue)
       flash[:notice] = l(:notice_successful_update) unless @issue.current_journal.new_record?         
       
       respond_to do |format|
