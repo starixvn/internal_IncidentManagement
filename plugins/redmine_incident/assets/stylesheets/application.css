@@ -1,0 +1,15 @@
+.highlight.token-4 {
+	background-color: #fdeee8 !important;
+}
+
+.highlight.token-4 {
+	background-color: #fdeee8;
+}
+
+tr.priority-lowest.highlight.token-4 {
+	background-color: #fdeee8;
+}
+
+tr.priority-lowest.highlight.token-4:hover {
+	background-color: #FFFFDD;
+}
