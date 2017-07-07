@@ -14,6 +14,6 @@ table.issue-table-guide tr td {
 	padding: 2px;
 }
 
-table.issue-table-guide tr td.issue-guild-block {
-	border: 1px solid #BABABA;
+table.issue-table-guide tr td.issue-guide-block {
+	border: 1px solid #abbaba;
 }

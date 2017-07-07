@@ -37,13 +37,13 @@ should_replaced = '<%= @setting.should_replaced %>';
 confirm_msg = '<%= escape_javascript(l(:confirm_replace_description_with_template)) %>'
 tracker =  '<%= @issue.tracker.id %>'
 
-$(document).ready(function() {
+$(document).ready(function() {	
 	$('#template_area').insertBefore($('#issue_subject').parent());
 	set_pulldown(tracker, pulldown_url, token);
 	
-    $("#issue_template").change(function(){
-        load_template(load_url, token, confirm_msg, should_replaced);
-    });
+	$("#issue_template").change(function(){
+    	load_template(load_url, token, confirm_msg, should_replaced);
+	});
 });
 
 </script>
