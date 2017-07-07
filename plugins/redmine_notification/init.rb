@@ -9,5 +9,12 @@ Redmine::Plugin.register :redmine_notification do
   description 'This is a plugin for Redmine'
   version '0.0.1'
   
+  settings :default => {
+    :notification_to_creator => false,
+    :notification_to_modifier => false,
+    :notification_to_assignee => false,
+    :notification_to_watcher => false
+  }, :partial => 'settings/notification'
+  
   menu :top_menu, :redmine_notification, { :controller => 'redmine_notification', :action => 'index' }, :caption => 'Notifications', :last => true
 end

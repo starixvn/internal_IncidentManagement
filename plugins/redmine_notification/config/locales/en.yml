@@ -12,3 +12,8 @@ en:
   label_after: After
   label_mark_viewed: 'Mark viewed'
   label_delete: Delete
+  notification_to_creator: 'Creator'
+  notification_to_modifier: 'Modifier'
+  notification_to_assignee: 'Assignee'
+  notification_to_watcher: 'Watcher'
+  
