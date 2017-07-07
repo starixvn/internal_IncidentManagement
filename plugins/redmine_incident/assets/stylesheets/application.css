@@ -1,8 +1,4 @@
 .highlight.token-4 {
-	background-color: #fdeee8 !important;
-}
-
-.highlight.token-4 {
 	background-color: #fdeee8;
 }
 
@@ -11,5 +7,13 @@ tr.priority-lowest.highlight.token-4 {
 }
 
 tr.priority-lowest.highlight.token-4:hover {
-	background-color: #FFFFDD;
+	background-color: #ffffdd;
+}
+
+table.issue-table-guide tr td {
+	padding: 2px;
+}
+
+table.issue-table-guide tr td.issue-guild-block {
+	border: 1px solid #BABABA;
 }
