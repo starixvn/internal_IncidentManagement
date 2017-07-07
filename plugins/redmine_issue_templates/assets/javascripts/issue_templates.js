@@ -6,8 +6,7 @@ changeType = "";
 
 function checkExpand(ch) {
     var obj=document.all && document.all(ch) || document.getElementById && document.getElementById(ch);
-    if(obj && obj.style) obj.style.display=
-    "none" == obj.style.display ?"" : "none"
+    if(obj && obj.style) obj.style.display = "none" == obj.style.display ? "" : "none";
 }
 
 function eraseSubjectAndDescription() {
@@ -29,6 +28,10 @@ $(document).ready(function() {
 
 // TODO: When update description, confirmation dialog should be appeared.
 function load_template(target_url, token, confirm_msg, should_replaced) {
+	//@Forrest - 15/12/2016 Does not allow change template when editing issue
+    if (!create_new_issue) return;
+    // End Comment
+    
     var allow_overwrite = $('#allow_overwrite_description').prop('checked');
     if ($("#issue_template").val() != "") {
         var template_type = "";
@@ -40,31 +43,31 @@ function load_template(target_url, token, confirm_msg, should_replaced) {
             async:true,
             type:'post',
             data:$.param({issue_template:$("#issue_template").val(), authenticity_token:token, template_type:template_type})
-        }).done(function (html) {
-                oldSubj = "";
-                oldVal = "";
-                eval('var template = ' + html);
-                if ($("#issue_description").val() != '' && should_replaced == 'false') {
-                    oldVal = $("#issue_description").val() + "\n\n";
-                }
+        }).done(function (html) {    		
+            oldSubj = "";
+            oldVal = "";
+            eval('var template = ' + html);
+            if ($("#issue_description").val() != '' && should_replaced == 'false') {
+                oldVal = $("#issue_description").val() + "\n\n";
+            }
 
-                if ($("#issue_subject").val() != '' && should_replaced == 'false') {
-                    oldSubj = $("#issue_subject").val() + ' ';
-                }
-                for(var issue_template in template) {
-                    template[issue_template].description = (template[issue_template].description == null)? '' : template[issue_template].description;
-                    template[issue_template].issue_title = (template[issue_template].issue_title == null)? '' : template[issue_template].issue_title;
+            if ($("#issue_subject").val() != '' && should_replaced == 'false') {
+                oldSubj = $("#issue_subject").val() + ' ';
+            }
+            for(var issue_template in template) {
+                template[issue_template].description = (template[issue_template].description == null)? '' : template[issue_template].description;
+                template[issue_template].issue_title = (template[issue_template].issue_title == null)? '' : template[issue_template].issue_title;
 
-                    $("#issue_description").val(oldVal + template[issue_template].description);
-                    $("#issue_subject").val(oldSubj + template[issue_template].issue_title);
-                    try {
-                        if (CKEDITOR.instances.issue_description)
-                            CKEDITOR.instances.issue_description.setData(oldVal + template[issue_template].description);
-                    } catch(e) {
-                        // do nothing.
-                    }
+                $("#issue_description").val(oldVal + template[issue_template].description);
+                $("#issue_subject").val(oldSubj + template[issue_template].issue_title);
+                try {
+                    if (CKEDITOR.instances.issue_description)
+                        CKEDITOR.instances.issue_description.setData(oldVal + template[issue_template].description);
+                } catch(e) {
+                    // do nothing.
                 }
-            });
+            }
+        });
     }
 }
 
@@ -78,6 +81,23 @@ function set_pulldown(tracker, target_url, token) {
     }).done(function( html ) {
         $('#issue_template').html(html);
         $('#allow_overwrite_description').attr("checked", allow_overwrite);
+        
+        //@Forrest - 12/12/2016 default selecting first option
+        if(create_new_issue) {
+            $options = $('#issue_template').find("option[value!='']");
+        
+            if($options) {
+                var firstOptionValue = $($options[0]).val();
+                $('#issue_template').val(firstOptionValue);
+
+                if($("#errorExplanation").length === 0) {                	
+    				setTimeout(function() {
+    					load_template(load_url, token, '', true);
+    				}, 200);
+                }
+            }
+        }
+        // End Comment
     });
 }
 

@@ -162,7 +162,7 @@ en-GB:
   notice_successful_connection: Successful connection.
   notice_file_not_found: The page you were trying to access doesn't exist or has been removed.
   notice_locking_conflict: Data has been updated by another user.
-  notice_not_authorized: You are not authorised to access this page.
+  notice_not_authorized: You are not authorized to access this page.
   notice_not_authorized_archived_project: The project you're trying to access has been archived.
   notice_email_sent: "An email was sent to %{value}"
   notice_email_error: "An error occurred while sending mail (%{value})"
@@ -215,7 +215,7 @@ en-GB:
 
 
   field_name: Name
-  field_description: Description
+  field_description: Summary
   field_summary: Summary
   field_is_required: Required
   field_firstname: First name
@@ -224,11 +224,11 @@ en-GB:
   field_filename: File
   field_filesize: Size
   field_downloads: Downloads
-  field_author: Author
+  field_author: Creator
   field_created_on: Created
   field_updated_on: Updated
   field_field_format: Format
-  field_is_for_all: For all projects
+  field_is_for_all: For all categories
   field_possible_values: Possible values
   field_regexp: Regular expression
   field_min_length: Minimum length
@@ -236,15 +236,15 @@ en-GB:
   field_value: Value
   field_category: Category
   field_title: Title
-  field_project: Project
-  field_issue: Issue
+  field_project: Category
+  field_issue: Incident
   field_status: Status
   field_notes: Notes
-  field_is_closed: Issue closed
+  field_is_closed: Incident closed
   field_is_default: Default value
   field_tracker: Tracker
-  field_subject: Subject
-  field_due_date: Due date
+  field_subject: Incident title
+  field_due_date: Resolved date
   field_assigned_to: Assignee
   field_priority: Priority
   field_fixed_version: Target version
@@ -253,8 +253,8 @@ en-GB:
   field_role: Role
   field_homepage: Homepage
   field_is_public: Public
-  field_parent: Subproject of
-  field_is_in_roadmap: Issues displayed in roadmap
+  field_parent: SubCategory of
+  field_is_in_roadmap: Incidents displayed in roadmap
   field_login: Login
   field_mail_notification: Email notifications
   field_admin: Administrator
@@ -275,14 +275,14 @@ en-GB:
   field_attr_lastname: Lastname attribute
   field_attr_mail: Email attribute
   field_onthefly: On-the-fly user creation
-  field_start_date: Start date
+  field_start_date: Reported date
   field_done_ratio: "% Done"
   field_auth_source: Authentication mode
   field_hide_mail: Hide my email address
   field_comments: Comment
   field_url: URL
   field_start_page: Start page
-  field_subproject: Subproject
+  field_subproject: Subcategory
   field_hours: Hours
   field_activity: Activity
   field_spent_on: Date
@@ -290,7 +290,7 @@ en-GB:
   field_is_filter: Used as a filter
   field_issue_to: Related issue
   field_delay: Delay
-  field_assignable: Issues can be assigned to this role
+  field_assignable: Incidents can be assigned to this role
   field_redirect_existing_links: Redirect existing links
   field_estimated_hours: Estimated time
   field_column_names: Columns
@@ -319,32 +319,32 @@ en-GB:
   setting_default_language: Default language
   setting_login_required: Authentication required
   setting_self_registration: Self-registration
-  setting_attachment_max_size: Attachment max. size
-  setting_issues_export_limit: Issues export limit
+  setting_attachment_max_size: Maximum attachment size
+  setting_issues_export_limit: Incidents export limit
   setting_mail_from: Emission email address
   setting_bcc_recipients: Blind carbon copy recipients (bcc)
   setting_plain_text_mail: Plain text mail (no HTML)
   setting_host_name: Host name and path
   setting_text_formatting: Text formatting
   setting_wiki_compression: Wiki history compression
-  setting_feeds_limit: Feed content limit
-  setting_default_projects_public: New projects are public by default
-  setting_autofetch_changesets: Autofetch commits
+  setting_feeds_limit: Maximum number of items in Atom feeds
+  setting_default_projects_public: New categories are public by default
+  setting_autofetch_changesets: Fetch commits automatically
   setting_sys_api_enabled: Enable WS for repository management
   setting_commit_ref_keywords: Referencing keywords
   setting_commit_fix_keywords: Fixing keywords
   setting_autologin: Autologin
   setting_date_format: Date format
   setting_time_format: Time format
-  setting_cross_project_issue_relations: Allow cross-project issue relations
+  setting_cross_project_issue_relations: Allow cross-category issue relations
   setting_issue_list_default_columns: Default columns displayed on the issue list
   setting_emails_header: Email header
   setting_emails_footer: Email footer
   setting_protocol: Protocol
   setting_per_page_options: Objects per page options
   setting_user_format: Users display format
-  setting_activity_days_default: Days displayed on project activity
-  setting_display_subprojects_issues: Display subprojects issues on main projects by default
+  setting_activity_days_default: Days displayed on category activity
+  setting_display_subprojects_issues: Display subcategories issues on main categories by default
   setting_enabled_scm: Enabled SCM
   setting_mail_handler_body_delimiters: "Truncate emails after one of these lines"
   setting_mail_handler_api_enabled: Enable WS for incoming emails
@@ -352,8 +352,8 @@ en-GB:
   setting_sequential_project_identifiers: Generate sequential project identifiers
   setting_gravatar_enabled: Use Gravatar user icons
   setting_gravatar_default: Default Gravatar image
-  setting_diff_max_lines_displayed: Max number of diff lines displayed
-  setting_file_max_size_displayed: Max size of text files displayed inline
+  setting_diff_max_lines_displayed: Maximum number of diff lines displayed
+  setting_file_max_size_displayed: Maximum size of text files displayed inline
   setting_repository_log_display_limit: Maximum number of revisions displayed on file log
   setting_openid: Allow OpenID login and registration
   setting_password_min_length: Minimum password length
@@ -380,15 +380,15 @@ en-GB:
   permission_manage_project_activities: Manage project activities
   permission_manage_versions: Manage versions
   permission_manage_categories: Manage issue categories
-  permission_view_issues: View Issues
-  permission_add_issues: Add issues
-  permission_edit_issues: Edit issues
-  permission_manage_issue_relations: Manage issue relations
+  permission_view_issues: View Incidents
+  permission_add_issues: Add incidents
+  permission_edit_issues: Edit incidents
+  permission_manage_issue_relations: Manage incident relations
   permission_add_issue_notes: Add notes
   permission_edit_issue_notes: Edit notes
   permission_edit_own_issue_notes: Edit own notes
-  permission_move_issues: Move issues
-  permission_delete_issues: Delete issues
+  permission_view_private_notes: View private notes
+  permission_set_notes_private: Set notes as private
   permission_manage_public_queries: Manage public queries
   permission_save_queries: Save queries
   permission_view_gantt: View gantt chart
@@ -427,7 +427,7 @@ en-GB:
   permission_export_wiki_pages: Export wiki pages
   permission_manage_subtasks: Manage subtasks
 
-  project_module_issue_tracking: Issue tracking
+  project_module_issue_tracking: Incident tracking
   project_module_time_tracking: Time tracking
   project_module_news: News
   project_module_documents: Documents
@@ -442,22 +442,22 @@ en-GB:
   label_user_plural: Users
   label_user_new: New user
   label_user_anonymous: Anonymous
-  label_project: Project
-  label_project_new: New project
-  label_project_plural: Projects
+  label_project: Categories
+  label_project_new: New category
+  label_project_plural: Categories
   label_x_projects:
-    zero:  no projects
-    one:   1 project
-    other: "%{count} projects"
-  label_project_all: All Projects
-  label_project_latest: Latest projects
-  label_issue: Issue
-  label_issue_new: New issue
-  label_issue_plural: Issues
-  label_issue_view_all: View all issues
-  label_issues_by: "Issues by %{value}"
-  label_issue_added: Issue added
-  label_issue_updated: Issue updated
+    zero:  no categories
+    one:   1 category
+    other: "%{count} categories"
+  label_project_all: All Categories
+  label_project_latest: Latest categories
+  label_issue: Incident
+  label_issue_new: New incident
+  label_issue_plural: Incidents
+  label_issue_view_all: View all incidents
+  label_issues_by: "Incidents by %{value}"
+  label_issue_added: Incident added
+  label_issue_updated: Incident updated
   label_document: Document
   label_document_new: New document
   label_document_plural: Documents
@@ -475,11 +475,11 @@ en-GB:
   label_tracker_plural: Trackers
   label_tracker_new: New tracker
   label_workflow: Workflow
-  label_issue_status: Issue status
-  label_issue_status_plural: Issue statuses
+  label_issue_status: Incident status
+  label_issue_status_plural: Incident statuses
   label_issue_status_new: New status
-  label_issue_category: Issue category
-  label_issue_category_plural: Issue categories
+  label_issue_category: Incident category
+  label_issue_category_plural: Incident categories
   label_issue_category_new: New category
   label_custom_field: Custom field
   label_custom_field_plural: Custom fields
@@ -495,14 +495,14 @@ en-GB:
   label_home: Home
   label_my_page: My page
   label_my_account: My account
-  label_my_projects: My projects
+  label_my_projects: My categories
   label_my_page_block: My page block
   label_administration: Administration
   label_login: Sign in
   label_logout: Sign out
   label_help: Help
-  label_reported_issues: Reported issues
-  label_assigned_to_me_issues: Issues assigned to me
+  label_reported_issues: Reported incidents
+  label_assigned_to_me_issues: Incidents assigned to me
   label_last_login: Last connection
   label_registered_on: Registered on
   label_activity: Activity
@@ -515,9 +515,9 @@ en-GB:
   label_auth_source: Authentication mode
   label_auth_source_new: New authentication mode
   label_auth_source_plural: Authentication modes
-  label_subproject_plural: Subprojects
-  label_subproject_new: New subproject
-  label_and_its_subprojects: "%{value} and its subprojects"
+  label_subproject_plural: Subcategories
+  label_subproject_new: New subcategory
+  label_and_its_subprojects: "%{value} and its subcategories"
   label_min_max_length: Min - Max length
   label_list: List
   label_date: Date
@@ -554,7 +554,7 @@ en-GB:
   label_confirmation: Confirmation
   label_export_to: 'Also available in:'
   label_read: Read...
-  label_public_projects: Public projects
+  label_public_projects: Public categories
   label_open_issues: open
   label_open_issues_plural: open
   label_closed_issues: closed
@@ -590,7 +590,7 @@ en-GB:
   label_internal: Internal
   label_last_changes: "last %{count} changes"
   label_change_view_all: View all changes
-  label_personalize_page: Personalise this page
+  label_personalize_page: Personalize this page
   label_comment: Comment
   label_comment_plural: Comments
   label_x_comments:
@@ -655,7 +655,7 @@ en-GB:
   label_roadmap: Roadmap
   label_roadmap_due_in: "Due in %{value}"
   label_roadmap_overdue: "%{value} late"
-  label_roadmap_no_issues: No issues for this version
+  label_roadmap_no_issues: No incidents for this version
   label_search: Search
   label_result_plural: Results
   label_all_words: All words
@@ -670,7 +670,7 @@ en-GB:
   label_preview: Preview
   label_feed_plural: Feeds
   label_changes_details: Details of all changes
-  label_issue_tracking: Issue tracking
+  label_issue_tracking: Incident tracking
   label_spent_time: Spent time
   label_overall_spent_time: Overall spent time
   label_f_hour: "%{value} hour"
@@ -686,19 +686,19 @@ en-GB:
   label_options: Options
   label_copy_workflow_from: Copy workflow from
   label_permissions_report: Permissions report
-  label_watched_issues: Watched issues
-  label_related_issues: Related issues
+  label_watched_issues: Watched incidents
+  label_related_issues: Related incidents
   label_applied_status: Applied status
   label_loading: Loading...
   label_relation_new: New relation
   label_relation_delete: Delete relation
-  label_relates_to: related to
-  label_duplicates: duplicates
-  label_duplicated_by: duplicated by
-  label_blocks: blocks
-  label_blocked_by: blocked by
-  label_precedes: precedes
-  label_follows: follows
+  label_relates_to: Related to
+  label_duplicates: Duplicates
+  label_duplicated_by: Duplicated by
+  label_blocks: Blocks
+  label_blocked_by: Blocked by
+  label_precedes: Precedes
+  label_follows: Follows
   label_end_to_start: end to start
   label_end_to_end: end to end
   label_start_to_start: start to start
@@ -734,17 +734,17 @@ en-GB:
   label_added_time_by: "Added by %{author} %{age} ago"
   label_updated_time_by: "Updated by %{author} %{age} ago"
   label_updated_time: "Updated %{value} ago"
-  label_jump_to_a_project: Jump to a project...
+  label_jump_to_a_project: Jump to a category...
   label_file_plural: Files
   label_changeset_plural: Changesets
   label_default_columns: Default columns
   label_no_change_option: (No change)
-  label_bulk_edit_selected_issues: Bulk edit selected issues
+  label_bulk_edit_selected_issues: Bulk edit selected Incidents
   label_theme: Theme
   label_default: Default
   label_search_titles_only: Search titles only
-  label_user_mail_option_all: "For any event on all my projects"
-  label_user_mail_option_selected: "For any event on the selected projects only..."
+  label_user_mail_option_all: "For any event on all my categories"
+  label_user_mail_option_selected: "For any event on the selected categories only..."
   label_user_mail_option_none: "No events"
   label_user_mail_option_only_my_events: "Only for things I watch or I'm involved in"
   label_user_mail_option_only_assigned: "Only for things I am assigned to"
@@ -784,11 +784,11 @@ en-GB:
   label_group_new: New group
   label_time_entry_plural: Spent time
   label_version_sharing_none: Not shared
-  label_version_sharing_descendants: With subprojects
-  label_version_sharing_hierarchy: With project hierarchy
-  label_version_sharing_tree: With project tree
-  label_version_sharing_system: With all projects
-  label_update_issue_done_ratios: Update issue done ratios
+  label_version_sharing_descendants: With subcategories
+  label_version_sharing_hierarchy: With category hierarchy
+  label_version_sharing_tree: With category tree
+  label_version_sharing_system: With all categories
+  label_update_issue_done_ratios: Update incident done ratios
   label_copy_source: Source
   label_copy_target: Target
   label_copy_same_as_target: Same as target
@@ -798,7 +798,7 @@ en-GB:
   label_api_access_key_created_on: "API access key created %{value} ago"
   label_profile: Profile
   label_subtask_plural: Subtasks
-  label_project_copy_notifications: Send email notifications during the project copy
+  label_project_copy_notifications: Send email notifications during the category copy
   label_principal_search: "Search for user or group:"
   label_user_search: "Search for user:"
 
@@ -871,9 +871,9 @@ en-GB:
   text_journal_set_to: "%{label} set to %{value}"
   text_journal_deleted: "%{label} deleted (%{old})"
   text_journal_added: "%{label} %{value} added"
-  text_tip_issue_begin_day: task beginning this day
-  text_tip_issue_end_day: task ending this day
-  text_tip_issue_begin_end_day: task beginning and ending this day
+  text_tip_issue_begin_day: issue beginning this day
+  text_tip_issue_end_day: issue ending this day
+  text_tip_issue_begin_end_day: issue beginning and ending this day
   text_project_identifier_info: 'Only lower case letters (a-z), numbers, dashes and underscores are allowed, must start with a lower case letter.<br />Once saved, the identifier cannot be changed.'
   text_caracters_maximum: "%{count} characters maximum."
   text_caracters_minimum: "Must be at least %{count} characters long."
@@ -883,10 +883,10 @@ en-GB:
   text_comma_separated: Multiple values allowed (comma separated).
   text_line_separated: Multiple values allowed (one line for each value).
   text_issues_ref_in_commit_messages: Referencing and fixing issues in commit messages
-  text_issue_added: "Issue %{id} has been reported by %{author}."
-  text_issue_updated: "Issue %{id} has been updated by %{author}."
+  text_issue_added: "Incident %{id} has been reported by %{author}."
+  text_issue_updated: "Incident %{id} has been updated by %{author}."
   text_wiki_destroy_confirmation: Are you sure you want to delete this wiki and all its content?
-  text_issue_category_destroy_question: "Some issues (%{count}) are assigned to this category. What do you want to do?"
+  text_issue_category_destroy_question: "Some incidents (%{count}) are assigned to this category. What do you want to do?"
   text_issue_category_destroy_assignments: Remove category assignments
   text_issue_category_reassign_to: Reassign issues to this category
   text_user_mail_option: "For unselected projects, you will only receive notifications about things you watch or you're involved in (eg. issues you're the author or assignee)."
@@ -953,13 +953,13 @@ en-GB:
   label_issue_note_added: Note added
   label_issue_status_updated: Status updated
   label_issue_priority_updated: Priority updated
-  label_issues_visibility_own: Issues created by or assigned to the user
-  field_issues_visibility: Issues visibility
-  label_issues_visibility_all: All issues
-  permission_set_own_issues_private: Set own issues public or private
+  label_issues_visibility_own: Incidents created by or assigned to the user
+  field_issues_visibility: Incidents visibility
+  label_issues_visibility_all: All incidents
+  permission_set_own_issues_private: Set own incidents public or private
   field_is_private: Private
-  permission_set_issues_private: Set issues public or private
-  label_issues_visibility_public: All non private issues
+  permission_set_issues_private: Set incidents public or private
+  label_issues_visibility_public: All non private incidents
   text_issues_destroy_descendants_confirmation: This will also delete %{count} subtask(s).
   field_commit_logs_encoding: Commit messages encoding
   field_scm_path_encoding: Path encoding
@@ -974,7 +974,7 @@ en-GB:
   label_git_report_last_commit: Report last commit for files and directories
   text_scm_config: You can configure your SCM commands in config/configuration.yml. Please restart the application after editing it.
   text_scm_command_not_available: SCM command is not available. Please check settings on the administration panel.
-  notice_issue_successful_create: Issue %{id} created.
+  notice_issue_successful_create: Incident %{id} created.
   label_between: between
   label_diff: diff
   text_git_repository_note: Repository is bare and local (e.g. /gitrepo, c:\gitrepo)
@@ -986,7 +986,7 @@ en-GB:
   description_message_content: Message content
   description_available_columns: Available Columns
   description_date_range_interval: Choose range by selecting start and end date
-  description_issue_category_reassign: Choose issue category
+  description_issue_category_reassign: Choose incident category
   description_search: Searchfield
   description_notes: Notes
   description_date_range_list: Choose range from list
@@ -1005,21 +1005,21 @@ en-GB:
   error_attachment_too_big: This file cannot be uploaded because it exceeds the maximum allowed file size (%{max_size})
   notice_failed_to_save_time_entries: "Failed to save %{count} time entrie(s) on %{total} selected: %{ids}."
   label_x_issues:
-    zero:  0 issue
-    one:   1 issue
-    other: "%{count} issues"
+    zero:  0 incident
+    one:   1 incident
+    other: "%{count} incidents"
   label_repository_new: New repository
   field_repository_is_default: Main repository
   label_copy_attachments: Copy attachments
   label_item_position: "%{position} of %{count}"
   label_completed_versions: Completed versions
   field_multiple: Multiple values
-  setting_commit_cross_project_ref: Allow issues of all the other projects to be referenced and fixed
+  setting_commit_cross_project_ref: Allow incidents of all the other categorys to be referenced and fixed
   text_issue_conflict_resolution_add_notes: Add my notes and discard my other changes
   text_issue_conflict_resolution_overwrite: Apply my changes anyway (previous notes will be kept but some changes may be overwritten)
-  notice_issue_update_conflict: The issue has been updated by an other user while you were editing it.
+  notice_issue_update_conflict: The incident has been updated by an other user while you were editing it.
   text_issue_conflict_resolution_cancel: Discard all my changes and redisplay %{link}
-  permission_manage_related_issues: Manage related issues
+  permission_manage_related_issues: Manage related incidents
   field_auth_source_ldap_filter: LDAP filter
   label_search_for_watchers: Search for watchers to add
   notice_account_deleted: Your account has been permanently deleted.
@@ -1033,14 +1033,14 @@ en-GB:
   setting_session_lifetime: Session maximum lifetime
   setting_session_timeout: Session inactivity timeout
   label_session_expiration: Session expiration
-  permission_close_project: Close / reopen the project
-  label_show_closed_projects: View closed projects
+  permission_close_project: Close / reopen the category
+  label_show_closed_projects: View closed categorys
   button_close: Close
   button_reopen: Reopen
   project_status_active: active
   project_status_closed: closed
   project_status_archived: archived
-  text_project_closed: This project is closed and read-only.
+  text_project_closed: This category is closed and read-only.
   notice_user_successful_create: User %{id} created.
   field_core_fields: Standard fields
   field_timeout: Timeout (in seconds)
@@ -1052,26 +1052,26 @@ en-GB:
   label_required: Required
   text_repository_identifier_info: 'Only lower case letters (a-z), numbers, dashes and underscores are allowed.<br />Once saved, the identifier cannot be changed.'
   field_board_parent: Parent forum
-  label_attribute_of_project: Project's %{name}
+  label_attribute_of_project: Category's %{name}
   label_attribute_of_author: Author's %{name}
   label_attribute_of_assigned_to: Assignee's %{name}
   label_attribute_of_fixed_version: Target version's %{name}
   label_copy_subtasks: Copy subtasks
   label_copied_to: copied to
   label_copied_from: copied from
-  label_any_issues_in_project: any issues in project
-  label_any_issues_not_in_project: any issues not in project
+  label_any_issues_in_project: any incidents in category
+  label_any_issues_not_in_project: any incidents not in category
   field_private_notes: Private notes
   permission_view_private_notes: View private notes
   permission_set_notes_private: Set notes as private
-  label_no_issues_in_project: no issues in project
+  label_no_issues_in_project: no incidents in category
   label_any: all
   label_last_n_weeks: last %{count} weeks
-  setting_cross_project_subtasks: Allow cross-project subtasks
-  label_cross_project_descendants: With subprojects
-  label_cross_project_tree: With project tree
-  label_cross_project_hierarchy: With project hierarchy
-  label_cross_project_system: With all projects
+  setting_cross_project_subtasks: Allow cross-category subtasks
+  label_cross_project_descendants: With subcategorys
+  label_cross_project_tree: With category tree
+  label_cross_project_hierarchy: With category hierarchy
+  label_cross_project_system: With all categorys
   button_hide: Hide
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
@@ -1079,7 +1079,7 @@ en-GB:
   label_attribute_of_user: User's %{name}
   text_turning_multiple_off: If you disable multiple values, multiple values will be
     removed in order to preserve only one value per item.
-  label_attribute_of_issue: Issue's %{name}
+  label_attribute_of_issue: Incident's %{name}
   permission_add_documents: Add documents
   permission_edit_documents: Edit documents
   permission_delete_documents: Delete documents
@@ -1087,5 +1087,5 @@ en-GB:
   setting_jsonp_enabled: Enable JSONP support
   field_inherit_members: Inherit members
   field_closed_on: Closed
-  setting_default_projects_tracker_ids: Default trackers for new projects
+  setting_default_projects_tracker_ids: Default trackers for new categorys
   label_total_time: Total

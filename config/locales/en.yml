@@ -231,7 +231,7 @@ en:
   field_updated_on: Updated
   field_closed_on: Closed
   field_field_format: Format
-  field_is_for_all: For all categoriess
+  field_is_for_all: For all categories
   field_possible_values: Possible values
   field_regexp: Regular expression
   field_min_length: Minimum length
