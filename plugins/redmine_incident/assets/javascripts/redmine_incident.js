@@ -10,4 +10,8 @@ $(document).ready(function() {
 			$('#issue_table_guide').hide();
 		}
 	}
+	
+	if($('.controller-issues').length > 0 && $('form#issue-form').length > 0) {
+		$('form#issue-form input#issue_subject').attr('placeholder', 'Naming conventions of incident title, please follow this format: Site/System | Incident Title or LicenseeName | Incident title');
+	}
 });
