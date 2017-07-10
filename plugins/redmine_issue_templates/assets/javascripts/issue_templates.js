@@ -91,9 +91,7 @@ function set_pulldown(tracker, target_url, token) {
                 $('#issue_template').val(firstOptionValue);
 
                 if($("#errorExplanation").length === 0) {                	
-    				setTimeout(function() {
-    					load_template(load_url, token, '', true);
-    				}, 200);
+    				load_template(load_url, token, '', true);
                 }
             }
         }
