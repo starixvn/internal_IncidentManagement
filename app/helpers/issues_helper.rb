@@ -86,8 +86,6 @@ module IssuesHelper
              content_tag('td', check_box_tag("ids[]", child.id, false, :id => nil), :class => 'checkbox') +
              content_tag('td', link_to_issue(child, :truncate => 60, :project => (issue.project_id != child.project_id)), :class => 'subject') +
              content_tag('td', h(child.status)) +
-             content_tag('td', format_date(child.start_date)) +
-             content_tag('td', format_date(child.due_date)) +
              content_tag('td', link_to_user(child.assigned_to)) +
              content_tag('td', progress_bar(child.done_ratio, :width => '80px')),
              :class => css)
@@ -100,8 +98,7 @@ module IssuesHelper
   def link_to_new_subtask(issue)
     attrs = {
       :tracker_id => issue.tracker,
-      :parent_issue_id => issue,
-      :category_id => h(@issue.category ? @issue.category.id : "-")
+      :parent_issue_id => issue
     }
     link_to(l(:button_add), new_project_issue_path(issue.project, :issue => attrs))
   end
@@ -198,13 +195,13 @@ module IssuesHelper
 
   def query_links(title, queries)
     # links to #index on issues/show
-    url_params = {:controller => 'issues', :action => 'index'}
+    url_params = controller_name == 'issues' ? {:controller => 'issues', :action => 'index', :project_id => @project} : params
 
     content_tag('h3', h(title)) +
       queries.collect {|query|
           css = 'query'
           css << ' selected' if query == @query
-          link_to(h(query.name), url_params.merge(:query_id => query, :project_id => query.project_id), :class => css)
+          link_to(h(query.name), url_params.merge(:query_id => query), :class => css)
         }.join('<br />').html_safe
   end
 
@@ -307,12 +304,7 @@ module IssuesHelper
       old_value = content_tag("del", old_value) if detail.old_value and detail.value.blank?
       if detail.property == 'attachment' && !value.blank? && atta = Attachment.find_by_id(detail.prop_key)
         # Link to the attachment if it has not been removed
-        begin
-          value = link_to_attachment(atta, :download => true, :only_path => options[:only_path])
-        rescue
-          
-        end
-        
+        value = link_to_attachment(atta, :download => true, :only_path => options[:only_path])
         if options[:only_path] != false && atta.is_text?
           value += link_to(
                        image_tag('magnifier.png'),
