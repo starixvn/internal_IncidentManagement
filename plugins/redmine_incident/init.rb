@@ -1,5 +1,6 @@
 require 'redmine'
 require 'redmine_incident/view_hooks'
+require 'redmine_incident/gantt_helper_patch'
 
 Redmine::Plugin.register :redmine_incident do
   name 'Redmine Incident plugin'
