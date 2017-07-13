@@ -4,4 +4,10 @@ $(document).ready(function() {
 		containerCssClass: "issue_assigned_container",
      	dropdownCssClass: "issue_assigned_dropdown"
 	});
+	
+	$('#issue_custom_field_values_21').select2({
+		width: '60%',
+		containerCssClass: "licensee_container",
+     	dropdownCssClass: "licensee_dropdown"
+	});
 });
