@@ -6,10 +6,6 @@
     <th><%=l(:field_project)%></th>
     <th><%=l(:field_tracker)%></th>
     <th><%=l(:field_subject)%></th>
-    <th><%=l(:field_priority)%></th>
-    <th><%=l(:field_start_date)%></th>
-    <th><%=l(:field_due_date)%></th>
-    <th><%=l(:label_spent_time)%></th> 
     </tr></thead>
     <tbody>
     <% for issue in issues %>
@@ -23,10 +19,6 @@
       <td class="subject">
         <%= link_to truncate(issue.subject, :length => 60), issue_path(issue) %> (<%=h issue.status %>)
       </td>
-      <td class="priority-3"><%=h issue.priority %></td>
-      <td class="start_date"><%=format_date issue.start_date %></td>
-      <td class="due_date"><%=format_date issue.due_date %></td>
-      <td class="spent_time"><%=l_hours issue.total_spent_hours %></td>
     </tr>
     <% end %>
     </tbody>

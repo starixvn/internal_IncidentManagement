@@ -24,13 +24,8 @@
 <% if @issue.safe_attribute? 'description' %>
 <p>
   <%= f.label_for_field :description, :required => @issue.required_attribute?('description') %>
-  
-  <%# Quinn - 14/03/2017 remove description edit icon %>
-  <div>
-  <%= content_tag 'span', :id => "issue_description_and_toolbar", :style => (@issue.new_record? ? nil : 'display:inline') do %>
-
-  <%# End edit %>
-  
+  <%= link_to_function image_tag('edit.png'), '$(this).hide(); $("#issue_description_and_toolbar").show()' unless @issue.new_record? %>
+  <%= content_tag 'span', :id => "issue_description_and_toolbar", :style => (@issue.new_record? ? nil : 'display:none') do %>
     <%= f.text_area :description,
                    :cols => 60,
                    :rows => (@issue.description.blank? ? 10 : [[10, @issue.description.length / 50].max, 100].min),
@@ -38,7 +33,6 @@
                    :class => 'wiki-edit',
                    :no_label => true %>
   <% end %>
-  </div>
 </p>
 <%= wikitoolbar_for 'issue_description' %>
 <% end %>
@@ -49,4 +43,3 @@
 
 <%= call_hook(:view_issues_form_details_bottom, { :issue => @issue, :form => f }) %>
 <% end %>
-
