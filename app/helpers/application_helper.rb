@@ -189,12 +189,8 @@ module ApplicationHelper
   end
 
   def format_activity_description(text)
-    
-    # Qui@20131014 Fix show html tag in activity preview
-    
-    CGI.unescapeHTML(strip_tags(truncate(text.to_s, :length => 120)).gsub(%r{[\r\n]*<(pre|code)>.*$}m, '...')
+    h(truncate(text.to_s, :length => 120).gsub(%r{[\r\n]*<(pre|code)>.*$}m, '...')
        ).gsub(/[\r\n]+/, "<br />").html_safe
-       
   end
 
   def format_version_name(version)
@@ -328,28 +324,21 @@ module ApplicationHelper
 
   # Returns a string for users/groups option tags
   def principals_options_for_select(collection, selected=nil)
-    result = ''
     s = ''
-
     if collection.include?(User.current)
-      result << content_tag('option', "<< #{l(:label_me)} >>", :value => User.current.id)
+      s << content_tag('option', "<< #{l(:label_me)} >>", :value => User.current.id)
     end
-
     groups = ''
     collection.sort.each do |element|
       selected_attribute = ' selected="selected"' if option_value_selected?(element, selected)
       (element.is_a?(Group) ? groups : s) << %(<option value="#{element.id}"#{selected_attribute}>#{h element.name}</option>)
     end
-
     unless groups.empty?
-      result << %(<optgroup label="#{h(l(:label_group_plural))}">#{groups}</optgroup>)
-      result << s
+      s << %(<optgroup label="#{h(l(:label_group_plural))}">#{groups}</optgroup>)
     end
-    
-    result.html_safe
+    s.html_safe
   end
 
- 
   # Options for the new membership projects combo-box
   def options_for_membership_project_select(principal, projects)
     options = content_tag('option', "--- #{l(:actionview_instancetag_blank_option)} ---")
@@ -512,8 +501,7 @@ module ApplicationHelper
 
     text = text.dup
     macros = catch_macros(text)
-    
-    # text = Redmine::WikiFormatting.to_html(Setting.text_formatting, text, :object => obj, :attribute => attr)
+    text = Redmine::WikiFormatting.to_html(Setting.text_formatting, text, :object => obj, :attribute => attr)
 
     @parsed_headings = []
     @heading_anchors = {}
@@ -532,7 +520,6 @@ module ApplicationHelper
     end
 
     text.html_safe
-    
   end
 
   def parse_non_pre_blocks(text, obj, macros)
@@ -1255,4 +1242,3 @@ module ApplicationHelper
     link_to(text, url_params, html_options)
   end
 end
-

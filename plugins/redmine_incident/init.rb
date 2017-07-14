@@ -1,5 +1,6 @@
 require 'redmine'
 require 'redmine_incident/view_hooks'
+require 'redmine_incident/application_helper_patch'
 require 'redmine_incident/gantt_helper_patch'
 require 'redmine_incident/issues_helper_patch'
 
