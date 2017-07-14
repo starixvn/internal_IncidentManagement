@@ -52,13 +52,8 @@ class IssuesController < ApplicationController
   helper :timelog
   include Redmine::Export::PDF
 
-  
   def index
     retrieve_query
-    @is_short_by_parent = params['sort_by_parent'] == '1'
-    if @is_short_by_parent && params[:sort].nil?
-      params[:sort] = "parent:desc"
-    end
     sort_init(@query.sort_criteria.empty? ? [['id', 'desc']] : @query.sort_criteria)
     sort_update(@query.sortable_columns)
     @query.sort_criteria = sort_criteria.to_a
@@ -144,7 +139,6 @@ class IssuesController < ApplicationController
     call_hook(:controller_issues_new_before_save, { :params => params, :issue => @issue })
     @issue.save_attachments(params[:attachments] || (params[:issue] && params[:issue][:uploads]))
     if @issue.save
-      
       call_hook(:controller_issues_new_after_save, { :params => params, :issue => @issue})
       respond_to do |format|
         format.html {
@@ -157,9 +151,7 @@ class IssuesController < ApplicationController
             redirect_to issue_path(@issue)
           end
         }
-        
         format.api  { render :action => 'show', :status => :created, :location => issue_url(@issue) }
-        
       end
       return
     else
@@ -194,10 +186,9 @@ class IssuesController < ApplicationController
     end
 
     if saved
-            
       render_attachment_warning_if_needed(@issue)
-      flash[:notice] = l(:notice_successful_update) unless @issue.current_journal.new_record?         
-      
+      flash[:notice] = l(:notice_successful_update) unless @issue.current_journal.new_record?
+
       respond_to do |format|
         format.html { redirect_back_or_default issue_path(@issue) }
         format.api  { render_api_ok }
@@ -446,4 +437,3 @@ class IssuesController < ApplicationController
     attributes
   end
 end
-
