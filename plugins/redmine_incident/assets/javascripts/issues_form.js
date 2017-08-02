@@ -5,9 +5,9 @@ $(document).ready(function() {
      	dropdownCssClass: "issue_assigned_dropdown"
 	});
 	
-	$('#issue_custom_field_values_21').select2({
+	/*$('#issue_custom_field_values_21').select2({
 		width: '60%',
 		containerCssClass: "licensee_container",
      	dropdownCssClass: "licensee_dropdown"
-	});
+	});*/
 });

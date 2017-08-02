@@ -1,5 +1,4 @@
-.issue_assigned_container.select2-selection--single,
-.select2-container .licensee_container {
+.issue_assigned_container.select2-selection--single {
 	border-radius: 0;
 	border: 1px solid #d7d7d7;
 }
@@ -20,13 +19,4 @@
 {
 	border-color: transparent transparent #0e0e0e transparent !important;
 	border-width: 0 3px 6px 3px !important;
-}
-
-.select2-container.select2-container--focus .licensee_container {
-	max-height: 55px;
-    overflow-y: auto;
-}
-
-.select2-container.select2-container--focus .licensee_container {
-	border: 1px solid #d7d7d7;
 }

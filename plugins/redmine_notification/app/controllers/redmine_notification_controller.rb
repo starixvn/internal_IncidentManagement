@@ -7,7 +7,7 @@ class RedmineNotificationController < ApplicationController
   def index
     IssueNotification.where('user_id = ? and is_new = true', User.current.id).update_all(is_new: false)
     
-    notifications = IssueNotification.where('user_id = ?', User.current.id).order('is_viewed, updated_at DESC')
+    notifications = IssueNotification.joins(:issue).where('user_id = ?', User.current.id).order('is_viewed, updated_at DESC')
     
     respond_to do |format|
       format.html {

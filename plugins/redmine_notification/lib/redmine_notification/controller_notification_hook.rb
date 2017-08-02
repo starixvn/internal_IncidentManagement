@@ -97,7 +97,7 @@ module RedmineNotification
                 IssueNotification.create(
                     issue_id: issue_id,
                     user_id: watcher.user_id,
-                    journal_id: context[:issue].current_journal.id,
+                    journal_id: context[:issue].current_journal.present? ? context[:issue].current_journal.id : nil,
                     updated_by: current_user_id,
                     updated_at: Time.now,
                     is_issue_new: is_issue_new ? true : false,
