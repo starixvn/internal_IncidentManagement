@@ -1,18 +1,18 @@
 @import url(../../../stylesheets/application.css);
 
-body, #wrapper { background-color:#fff; }
+body, #wrapper { background-color:#EEEEEE; }
 #header, #top-menu { margin: 0px 10px 0px 11px; }
-#main { background: #fff; margin: 8px 10px 0px 10px; }
-#content, #main.nosidebar #content { background: #fff; }
-#footer { background-color:#000; border: 0px; }
+#main { background: #EEEEEE; margin: 8px 10px 0px 10px; }
+#content, #main.nosidebar #content { background: #fff; border-right: 1px solid #bbb; border-bottom: 1px solid #bbb; border-left: 1px solid #d7d7d7; border-top: 1px solid #d7d7d7; }
+#footer { background-color:#EEEEEE; border: 0px; }
 
 /* Headers */
 h2, h3, h4, .wiki h1, .wiki h2, .wiki h3 {border-bottom: 0px;}
 
 /* Menu */
-#main-menu li a { background-color: #DD4814; font-weight: bold;}
-#main-menu li a:hover { background: #DD4814; text-decoration: underline; }
-#main-menu li a.selected, #main-menu li a.selected:hover { background-color:#000; }
+#main-menu li a { background-color: #507AAA; font-weight: bold;}
+#main-menu li a:hover { background: #507AAA; text-decoration: underline; }
+#main-menu li a.selected, #main-menu li a.selected:hover { background-color:#EEEEEE; }
 
 /* Tables */
 table.list tbody td, table.list tbody tr:hover td { border: solid 1px #d7d7d7; }
@@ -57,21 +57,14 @@ tr.priority-lowest a { color: #559; }
 tr.odd.priority-lowest td, tr.even.priority-lowest td { border-color: #add7f3; }
 
 /* Buttons */
-input[type="button"], input[type="submit"], input[type="reset"] { background-color: #DD4814; color: #fff; border: 1px solid #fff; border-radius:5px; padding:3px; }
-input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover { background-color: #DD4814; cursor:pointer; }
+input[type="button"], input[type="submit"], input[type="reset"] { background-color: #f2f2f2; color: #222222; border: 1px outset #cccccc; }
+input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover { background-color: #ccccbb; }
 
 /* Fields */
 input[type="text"], input[type="password"], textarea, select { padding: 2px; border: 1px solid #d7d7d7; }
-input[type="text"], input[type="password"] { padding: 3px; padding-left: 8px;}
+input[type="text"], input[type="password"] { padding: 3px; }
 input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus { border: 1px solid #888866; }
 option { border-bottom: 1px dotted #d7d7d7; }
 
 /* Misc */
 .box { background-color: #fcfcfc; }
-
-.query{min-width: 270px; display: inline-block;}
-
-#history div.journal {
-    border-top: 1px solid #DDD;
-    margin-bottom: 5px;
-}

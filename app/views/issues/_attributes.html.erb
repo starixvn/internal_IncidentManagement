@@ -3,7 +3,8 @@
 <div class="splitcontent">
 <div class="splitcontentleft">
 <% if @issue.safe_attribute?('status_id') && @allowed_statuses.present? %>
-<p><%= f.select :status_id, (@allowed_statuses.collect {|p| [p.name, p.id]}), {:required => true} %></p>
+<p><%= f.select :status_id, (@allowed_statuses.collect {|p| [p.name, p.id]}), {:required => true},
+                :onchange => "updateIssueFrom('#{escape_javascript project_issue_form_path(@project, :id => @issue, :format => 'js')}')" %></p>
 
 <% else %>
 <p><label><%= l(:field_status) %></label> <%= h(@issue.status.name) %></p>
@@ -70,4 +71,3 @@
 <% end %>
 
 <% include_calendar_headers_tags %>
-
