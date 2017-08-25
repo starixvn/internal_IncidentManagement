@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2013  Jean-Philippe Lang
+# Copyright (C) 2006-2017  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -17,10 +17,10 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class RepositoriesDarcsControllerTest < ActionController::TestCase
+class RepositoriesDarcsControllerTest < Redmine::ControllerTest
   tests RepositoriesController
 
-  fixtures :projects, :users, :roles, :members, :member_roles,
+  fixtures :projects, :users, :email_addresses, :roles, :members, :member_roles,
            :repositories, :enabled_modules
 
   REPOSITORY_PATH = Rails.root.join('tmp/test/darcs_repository').to_s
@@ -42,11 +42,14 @@ class RepositoriesDarcsControllerTest < ActionController::TestCase
     def test_get_new
       @request.session[:user_id] = 1
       @project.repository.destroy
-      get :new, :project_id => 'subproject1', :repository_scm => 'Darcs'
+      get :new, :params => {
+          :project_id => 'subproject1',
+          :repository_scm => 'Darcs'
+        }
       assert_response :success
-      assert_template 'new'
-      assert_kind_of Repository::Darcs, assigns(:repository)
-      assert assigns(:repository).new_record?
+      assert_select 'select[name=?]', 'repository_scm' do
+        assert_select 'option[value=?][selected=selected]', 'Darcs'
+      end
     end
 
     def test_browse_root
@@ -54,14 +57,15 @@ class RepositoriesDarcsControllerTest < ActionController::TestCase
       @repository.fetch_changesets
       @project.reload
       assert_equal NUM_REV, @repository.changesets.count
-      get :show, :id => PRJ_ID
-      assert_response :success
-      assert_template 'show'
-      assert_not_nil assigns(:entries)
-      assert_equal 3, assigns(:entries).size
-      assert assigns(:entries).detect {|e| e.name == 'images' && e.kind == 'dir'}
-      assert assigns(:entries).detect {|e| e.name == 'sources' && e.kind == 'dir'}
-      assert assigns(:entries).detect {|e| e.name == 'README' && e.kind == 'file'}
+      get :show, :params => {
+          :id => PRJ_ID
+        }
+      assert_select 'table.entries tbody' do
+        assert_select 'tr', 3
+        assert_select 'tr.dir td.filename a', :text => 'images'
+        assert_select 'tr.dir td.filename a', :text => 'sources'
+        assert_select 'tr.file td.filename a', :text => 'README'
+      end
     end
 
     def test_browse_directory
@@ -69,15 +73,16 @@ class RepositoriesDarcsControllerTest < ActionController::TestCase
       @repository.fetch_changesets
       @project.reload
       assert_equal NUM_REV, @repository.changesets.count
-      get :show, :id => PRJ_ID, :path => repository_path_hash(['images'])[:param]
+      get :show, :params => {
+          :id => PRJ_ID,
+          :path => repository_path_hash(['images'])[:param]
+        }
       assert_response :success
-      assert_template 'show'
-      assert_not_nil assigns(:entries)
-      assert_equal ['delete.png', 'edit.png'], assigns(:entries).collect(&:name)
-      entry = assigns(:entries).detect {|e| e.name == 'edit.png'}
-      assert_not_nil entry
-      assert_equal 'file', entry.kind
-      assert_equal 'images/edit.png', entry.path
+      assert_select 'table.entries tbody' do
+        assert_select 'tr', 2
+        assert_select 'tr.file td.filename a', :text => 'delete.png'
+        assert_select 'tr.file td.filename a', :text => 'edit.png'
+      end
     end
 
     def test_browse_at_given_revision
@@ -85,12 +90,16 @@ class RepositoriesDarcsControllerTest < ActionController::TestCase
       @repository.fetch_changesets
       @project.reload
       assert_equal NUM_REV, @repository.changesets.count
-      get :show, :id => PRJ_ID, :path => repository_path_hash(['images'])[:param],
+      get :show, :params => {
+          :id => PRJ_ID,
+          :path => repository_path_hash(['images'])[:param],
           :rev => 1
+        }
       assert_response :success
-      assert_template 'show'
-      assert_not_nil assigns(:entries)
-      assert_equal ['delete.png'], assigns(:entries).collect(&:name)
+      assert_select 'table.entries tbody' do
+        assert_select 'tr', 1
+        assert_select 'tr.file td.filename a', :text => 'delete.png'
+      end
     end
 
     def test_changes
@@ -98,11 +107,12 @@ class RepositoriesDarcsControllerTest < ActionController::TestCase
       @repository.fetch_changesets
       @project.reload
       assert_equal NUM_REV, @repository.changesets.count
-      get :changes, :id => PRJ_ID,
+      get :changes, :params => {
+          :id => PRJ_ID,
           :path => repository_path_hash(['images', 'edit.png'])[:param]
+        }
       assert_response :success
-      assert_template 'changes'
-      assert_tag :tag => 'h2', :content => 'edit.png'
+      assert_select 'h2', :text => /edit.png/
     end
 
     def test_diff
@@ -112,15 +122,14 @@ class RepositoriesDarcsControllerTest < ActionController::TestCase
       assert_equal NUM_REV, @repository.changesets.count
       # Full diff of changeset 5
       ['inline', 'sbs'].each do |dt|
-        get :diff, :id => PRJ_ID, :rev => 5, :type => dt
+        get :diff, :params => {
+            :id => PRJ_ID,
+            :rev => 5,
+            :type => dt
+          }
         assert_response :success
-        assert_template 'diff'
         # Line 22 removed
-        assert_tag :tag => 'th',
-                   :content => '22',
-                   :sibling => { :tag => 'td',
-                                 :attributes => { :class => /diff_out/ },
-                                 :content => /def remove/ }
+        assert_select 'th.line-num:contains(22) ~ td.diff_out', :text => /def remove/
       end
     end
 
@@ -132,7 +141,9 @@ class RepositoriesDarcsControllerTest < ActionController::TestCase
       assert_equal NUM_REV, @repository.changesets.count
 
       assert_difference 'Repository.count', -1 do
-        delete :destroy, :id => @repository.id
+        delete :destroy, :params => {
+            :id => @repository.id
+          }
       end
       assert_response 302
       @project.reload
@@ -152,7 +163,9 @@ class RepositoriesDarcsControllerTest < ActionController::TestCase
       assert_equal 0, @repository.changesets.count
 
       assert_difference 'Repository.count', -1 do
-        delete :destroy, :id => @repository.id
+        delete :destroy, :params => {
+            :id => @repository.id
+          }
       end
       assert_response 302
       @project.reload

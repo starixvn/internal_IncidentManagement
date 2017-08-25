@@ -1,9 +1,0 @@
-<div style="display: none" id="total_notifications">	
-	
-<% if defined? count_new_notifications %>
-	<input type="hidden" value="<%= count_new_notifications %>" />
-<% end %>
-
-</div>
-
-<%= javascript_include_tag 'redmine_notification.js', :plugin => 'redmine_notification' %>

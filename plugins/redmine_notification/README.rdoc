@@ -1,3 +1,0 @@
-= redmine_push_notification
-
-Description goes here

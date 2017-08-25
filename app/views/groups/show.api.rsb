@@ -1,6 +1,7 @@
 api.group do
   api.id         @group.id
   api.name       @group.lastname
+  api.builtin    @group.builtin_type if @group.builtin_type
 
   render_api_custom_values @group.visible_custom_field_values, api
 
@@ -8,10 +9,10 @@ api.group do
     @group.users.each do |user|
       api.user :id => user.id, :name => user.name
     end
-  end if include_in_api_response?('users')
+  end if include_in_api_response?('users') && !@group.builtin?
 
   api.array :memberships do
-    @group.memberships.each do |membership|
+    @group.memberships.preload(:roles, :project).each do |membership|
       api.membership do
         api.id membership.id
         api.project :id => membership.project.id, :name => membership.project.name
@@ -21,7 +22,7 @@ api.group do
               attrs = {:id => member_role.role.id, :name => member_role.role.name}
               attrs.merge!(:inherited => true) if member_role.inherited_from.present?
               api.role attrs
-            end 
+            end
           end
         end
       end if membership.project

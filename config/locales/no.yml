@@ -44,8 +44,8 @@
         one: "rundt 1 time"
         other: "rundt %{count} timer"
       x_hours:
-        one:   "1 hour"
-        other: "%{count} hours"
+        one:   "1 time"
+        other: "%{count} timer"
       x_days:
         one: "1 dag"
         other: "%{count} dager"
@@ -118,6 +118,9 @@
         not_same_project: "hører ikke til samme prosjekt"
         circular_dependency: "Denne relasjonen ville lagd en sirkulær avhengighet"
         cant_link_an_issue_with_a_descendant: "En sak kan ikke kobles mot en av sine undersaker"
+        earlier_than_minimum_start_date: "cannot be earlier than %{date} because of preceding issues"
+        not_a_regexp: "is not a valid regular expression"
+        open_issue_with_closed_parent: "An open issue cannot be attached to a closed parent task"
 
 
   actionview_instancetag_blank_option: Vennligst velg
@@ -130,11 +133,12 @@
   general_csv_separator: ','
   general_csv_decimal_separator: '.'
   general_csv_encoding: ISO-8859-1
-  general_pdf_encoding: UTF-8
+  general_pdf_fontname: freesans
+  general_pdf_monospaced_fontname: freemono
   general_first_day_of_week: '1'
 
   notice_account_updated: Kontoen er oppdatert.
-  notice_account_invalid_creditentials: Feil brukernavn eller passord
+  notice_account_invalid_credentials: Feil brukernavn eller passord
   notice_account_password_updated: Passordet er oppdatert.
   notice_account_wrong_password: Feil passord
   notice_account_register_done: Kontoen er opprettet. Klikk lenken som er sendt deg i e-post for å aktivere kontoen.
@@ -151,7 +155,7 @@
   notice_not_authorized: Du har ikke adgang til denne siden.
   notice_email_sent: "En e-post er sendt til %{value}"
   notice_email_error: "En feil oppstod under sending av e-post (%{value})"
-  notice_feeds_access_key_reseted: Din RSS-tilgangsnøkkel er nullstilt.
+  notice_feeds_access_key_reseted: Din Atom-tilgangsnøkkel er nullstilt.
   notice_failed_to_save_issues: "Lykkes ikke å lagre %{count} sak(er) på %{total} valgt: %{ids}."
   notice_no_issue_selected: "Ingen sak valgt! Vennligst merk sakene du vil endre."
   notice_account_pending: "Din konto ble opprettet og avventer nå administrativ godkjenning."
@@ -412,10 +416,6 @@
   label_open_issues_plural: åpne
   label_closed_issues: lukket
   label_closed_issues_plural: lukkede
-  label_x_open_issues_abbr_on_total:
-    zero:  0 åpne / %{total}
-    one:   1 åpen / %{total}
-    other: "%{count} åpne / %{total}"
   label_x_open_issues_abbr:
     zero:  0 åpne
     one:   1 åpen
@@ -436,14 +436,12 @@
   label_used_by: Brukt av
   label_details: Detaljer
   label_add_note: Legg til notat
-  label_per_page: Pr. side
   label_calendar: Kalender
   label_months_from: måneder fra
   label_gantt: Gantt
   label_internal: Intern
   label_last_changes: "siste %{count} endringer"
   label_change_view_all: Vis alle endringer
-  label_personalize_page: Tilpass denne siden
   label_comment: Kommentar
   label_comment_plural: Kommentarer
   label_x_comments:
@@ -542,10 +540,6 @@
   label_blocked_by: blokkert av
   label_precedes: kommer før
   label_follows: følger
-  label_end_to_start: slutt til start
-  label_end_to_end: slutt til slutt
-  label_start_to_start: start til start
-  label_start_to_end: start til slutt
   label_stay_logged_in: Hold meg innlogget
   label_disabled: avslått
   label_show_completed_versions: Vis ferdige versjoner
@@ -568,7 +562,7 @@
   label_language_based: Basert på brukerens språk
   label_sort_by: "Sorter etter %{value}"
   label_send_test_email: Send en epost-test
-  label_feeds_access_key_created_on: "RSS tilgangsnøkkel opprettet for %{value} siden"
+  label_feeds_access_key_created_on: "Atom tilgangsnøkkel opprettet for %{value} siden"
   label_module_plural: Moduler
   label_added_time_by: "Lagt til av %{author} for %{age} siden"
   label_updated_time: "Oppdatert for %{value} siden"
@@ -591,7 +585,6 @@
   label_age: Alder
   label_change_properties: Endre egenskaper
   label_general: Generell
-  label_more: Mer
   label_scm: SCM
   label_plugins: Tillegg
   label_ldap_authentication: LDAP-autentisering
@@ -601,7 +594,6 @@
   label_preferences: Brukerinnstillinger
   label_chronological_order: I kronologisk rekkefølge
   label_reverse_chronological_order: I omvendt kronologisk rekkefølge
-  label_planning: Planlegging
 
   button_login: Logg inn
   button_submit: Send
@@ -860,11 +852,11 @@
   label_revision_id: Revision %{value}
   label_api_access_key: API tilgangsnøkkel
   label_api_access_key_created_on: API tilgangsnøkkel opprettet for %{value} siden
-  label_feeds_access_key: RSS tilgangsnøkkel
+  label_feeds_access_key: Atom tilgangsnøkkel
   notice_api_access_key_reseted: Din API tilgangsnøkkel ble resatt.
   setting_rest_api_enabled: Aktiver REST webservice
   label_missing_api_access_key: Mangler en API tilgangsnøkkel
-  label_missing_feeds_access_key: Mangler en RSS tilgangsnøkkel
+  label_missing_feeds_access_key: Mangler en Atom tilgangsnøkkel
   button_show: Vis
   text_line_separated: Flere verdier er tillatt (en linje per verdi).
   setting_mail_handler_body_delimiters: Avkort epost etter en av disse linjene
@@ -890,7 +882,6 @@
   error_can_not_remove_role: Denne rollen er i bruk og kan ikke slettes.
   error_can_not_delete_tracker: Denne sakstypen inneholder saker og kan ikke slettes.
   field_principal: Principal
-  label_my_page_block: Min side felt
   notice_failed_to_save_members: "Feil ved lagring av medlem(mer): %{errors}."
   text_zoom_out: Zoom ut
   text_zoom_in: Zoom inn
@@ -901,10 +892,8 @@
   project_module_calendar: Kalender
   button_edit_associated_wikipage: "Rediger tilhørende Wiki-side: %{page_title}"
   field_text: Tekstfelt
-  label_user_mail_option_only_owner: Kun for ting jeg eier
   setting_default_notification_option: Standardvalg for varslinger
   label_user_mail_option_only_my_events: Kun for ting jeg overvåker eller er involvert i
-  label_user_mail_option_only_assigned: Kun for ting jeg er tildelt
   label_user_mail_option_none: Ingen hendelser
   field_member_of_group: Den tildeltes gruppe
   field_assigned_to_role: Den tildeltes rolle
@@ -967,16 +956,12 @@
   description_project_scope: Search scope
   description_filter: Filter
   description_user_mail_notification: Mail notification settings
-  description_date_from: Oppgi startdato
   description_message_content: Meldingsinnhold
   description_available_columns: Tilgjengelige kolonner
-  description_date_range_interval: Velg datointervall ved å spesifisere start- og sluttdato
   description_issue_category_reassign: Choose issue category
   description_search: Søkefelt
   description_notes: Notes
-  description_date_range_list: Choose range from list
   description_choose_project: Prosjekter
-  description_date_to: Oppgi sluttdato
   description_query_sort_criteria_attribute: Sort attribute
   description_wiki_subpages_reassign: Velg ny overordnet side
   description_selected_columns: Valgte kolonner
@@ -1045,8 +1030,8 @@
   label_attribute_of_assigned_to: Assignee's %{name}
   label_attribute_of_fixed_version: Target version's %{name}
   label_copy_subtasks: Copy subtasks
-  label_copied_to: copied to
-  label_copied_from: copied from
+  label_copied_to: kopiert til
+  label_copied_from: kopiert fra
   label_any_issues_in_project: any issues in project
   label_any_issues_not_in_project: any issues not in project
   field_private_notes: Private notes
@@ -1075,5 +1060,161 @@
   setting_jsonp_enabled: Enable JSONP support
   field_inherit_members: Inherit members
   field_closed_on: Closed
+  field_generate_password: Generate password
   setting_default_projects_tracker_ids: Default trackers for new projects
   label_total_time: Totalt
+  notice_account_not_activated_yet: You haven't activated your account yet. If you want
+    to receive a new activation email, please <a href="%{url}">click this link</a>.
+  notice_account_locked: Your account is locked.
+  label_hidden: Hidden
+  label_visibility_private: to me only
+  label_visibility_roles: to these roles only
+  label_visibility_public: to any users
+  field_must_change_passwd: Must change password at next logon
+  notice_new_password_must_be_different: The new password must be different from the
+    current password
+  setting_mail_handler_excluded_filenames: Exclude attachments by name
+  text_convert_available: ImageMagick convert available (optional)
+  label_link: Link
+  label_only: only
+  label_drop_down_list: drop-down list
+  label_checkboxes: checkboxes
+  label_link_values_to: Link values to URL
+  setting_force_default_language_for_anonymous: Force default language for anonymous
+    users
+  setting_force_default_language_for_loggedin: Force default language for logged-in
+    users
+  label_custom_field_select_type: Select the type of object to which the custom field
+    is to be attached
+  label_issue_assigned_to_updated: Assignee updated
+  label_check_for_updates: Check for updates
+  label_latest_compatible_version: Latest compatible version
+  label_unknown_plugin: Unknown plugin
+  label_radio_buttons: radio buttons
+  label_group_anonymous: Anonymous users
+  label_group_non_member: Non member users
+  label_add_projects: Add projects
+  field_default_status: Default status
+  text_subversion_repository_note: 'Examples: file:///, http://, https://, svn://, svn+[tunnelscheme]://'
+  field_users_visibility: Users visibility
+  label_users_visibility_all: All active users
+  label_users_visibility_members_of_visible_projects: Members of visible projects
+  label_edit_attachments: Edit attached files
+  setting_link_copied_issue: Link issues on copy
+  label_link_copied_issue: Link copied issue
+  label_ask: Ask
+  label_search_attachments_yes: Search attachment filenames and descriptions
+  label_search_attachments_no: Do not search attachments
+  label_search_attachments_only: Search attachments only
+  label_search_open_issues_only: Open issues only
+  field_address: E-post
+  setting_max_additional_emails: Maximum number of additional email addresses
+  label_email_address_plural: Emails
+  label_email_address_add: Add email address
+  label_enable_notifications: Enable notifications
+  label_disable_notifications: Disable notifications
+  setting_search_results_per_page: Search results per page
+  label_blank_value: blank
+  permission_copy_issues: Copy issues
+  error_password_expired: Your password has expired or the administrator requires you
+    to change it.
+  field_time_entries_visibility: Time logs visibility
+  setting_password_max_age: Require password change after
+  label_parent_task_attributes: Parent tasks attributes
+  label_parent_task_attributes_derived: Calculated from subtasks
+  label_parent_task_attributes_independent: Independent of subtasks
+  label_time_entries_visibility_all: All time entries
+  label_time_entries_visibility_own: Time entries created by the user
+  label_member_management: Member management
+  label_member_management_all_roles: All roles
+  label_member_management_selected_roles_only: Only these roles
+  label_password_required: Confirm your password to continue
+  label_total_spent_time: All tidsbruk
+  notice_import_finished: "%{count} items have been imported"
+  notice_import_finished_with_errors: "%{count} out of %{total} items could not be imported"
+  error_invalid_file_encoding: The file is not a valid %{encoding} encoded file
+  error_invalid_csv_file_or_settings: The file is not a CSV file or does not match the
+    settings below
+  error_can_not_read_import_file: An error occurred while reading the file to import
+  permission_import_issues: Import issues
+  label_import_issues: Import issues
+  label_select_file_to_import: Select the file to import
+  label_fields_separator: Field separator
+  label_fields_wrapper: Field wrapper
+  label_encoding: Encoding
+  label_comma_char: Comma
+  label_semi_colon_char: Semicolon
+  label_quote_char: Quote
+  label_double_quote_char: Double quote
+  label_fields_mapping: Fields mapping
+  label_file_content_preview: File content preview
+  label_create_missing_values: Create missing values
+  button_import: Import
+  field_total_estimated_hours: Total estimated time
+  label_api: API
+  label_total_plural: Totals
+  label_assigned_issues: Assigned issues
+  label_field_format_enumeration: Key/value list
+  label_f_hour_short: '%{value} h'
+  field_default_version: Default version
+  error_attachment_extension_not_allowed: Attachment extension %{extension} is not allowed
+  setting_attachment_extensions_allowed: Allowed extensions
+  setting_attachment_extensions_denied: Disallowed extensions
+  label_any_open_issues: any open issues
+  label_no_open_issues: no open issues
+  label_default_values_for_new_users: Default values for new users
+  error_ldap_bind_credentials: Invalid LDAP Account/Password
+  setting_sys_api_key: API-nøkkel
+  setting_lost_password: Mistet passord
+  mail_subject_security_notification: Security notification
+  mail_body_security_notification_change: ! '%{field} was changed.'
+  mail_body_security_notification_change_to: ! '%{field} was changed to %{value}.'
+  mail_body_security_notification_add: ! '%{field} %{value} was added.'
+  mail_body_security_notification_remove: ! '%{field} %{value} was removed.'
+  mail_body_security_notification_notify_enabled: Email address %{value} now receives
+    notifications.
+  mail_body_security_notification_notify_disabled: Email address %{value} no longer
+    receives notifications.
+  mail_body_settings_updated: ! 'The following settings were changed:'
+  field_remote_ip: IP address
+  label_wiki_page_new: New wiki page
+  label_relations: Relations
+  button_filter: Filter
+  mail_body_password_updated: Your password has been changed.
+  label_no_preview: No preview available
+  error_no_tracker_allowed_for_new_issue_in_project: The project doesn't have any trackers
+    for which you can create an issue
+  label_tracker_all: All trackers
+  label_new_project_issue_tab_enabled: Display the "New issue" tab
+  setting_new_item_menu_tab: Project menu tab for creating new objects
+  label_new_object_tab_enabled: Display the "+" drop-down
+  error_no_projects_with_tracker_allowed_for_new_issue: There are no projects with trackers
+    for which you can create an issue
+  field_textarea_font: Font used for text areas
+  label_font_default: Default font
+  label_font_monospace: Monospaced font
+  label_font_proportional: Proportional font
+  setting_timespan_format: Time span format
+  label_table_of_contents: Table of contents
+  setting_commit_logs_formatting: Apply text formatting to commit messages
+  setting_mail_handler_enable_regex_delimiters: Enable regular expressions
+  error_move_of_child_not_possible: 'Subtask %{child} could not be moved to the new
+    project: %{errors}'
+  error_cannot_reassign_time_entries_to_an_issue_about_to_be_deleted: Spent time cannot
+    be reassigned to an issue that is about to be deleted
+  setting_timelog_required_fields: Required fields for time logs
+  label_attribute_of_object: '%{object_name}''s %{name}'
+  label_user_mail_option_only_assigned: Only for things I watch or I am assigned to
+  label_user_mail_option_only_owner: Only for things I watch or I am the owner of
+  warning_fields_cleared_on_bulk_edit: Changes will result in the automatic deletion
+    of values from one or more fields on the selected objects
+  field_updated_by: Updated by
+  field_last_updated_by: Last updated by
+  field_full_width_layout: Full width layout
+  label_last_notes: Last notes
+  field_digest: Checksum
+  field_default_assigned_to: Default assignee
+  setting_show_custom_fields_on_registration: Show custom fields on registration
+  permission_view_news: View news
+  label_no_preview_alternative_html: No preview available. %{link} the file instead.
+  label_no_preview_download: Download

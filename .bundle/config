@@ -1,2 +1,2 @@
 ---
-BUNDLE_WITHOUT: "test:development"
+BUNDLE_WITHOUT: "rmagick:test:development"

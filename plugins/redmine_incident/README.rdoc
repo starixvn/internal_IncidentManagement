@@ -1,3 +1,0 @@
-= redmine_incident
-
-Description goes here

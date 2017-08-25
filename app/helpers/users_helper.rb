@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 # Redmine - project management software
-# Copyright (C) 2006-2013  Jean-Philippe Lang
+# Copyright (C) 2006-2017  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 module UsersHelper
   def users_status_options_for_select(selected)
-    user_count_by_status = User.count(:group => 'status').to_hash
+    user_count_by_status = User.group('status').count.to_hash
     options_for_select([[l(:label_all), ''],
                         ["#{l(:status_active)} (#{user_count_by_status[1].to_i})", '1'],
                         ["#{l(:status_registered)} (#{user_count_by_status[2].to_i})", '2'],
@@ -28,6 +28,10 @@ module UsersHelper
 
   def user_mail_notification_options(user)
     user.valid_notification_options.collect {|o| [l(o.last), o.first]}
+  end
+
+  def textarea_font_options
+    [[l(:label_font_default), '']] + UserPreference::TEXTAREA_FONT_OPTIONS.map {|o| [l("label_font_#{o}"), o]}
   end
 
   def change_status_link(user)
@@ -42,11 +46,17 @@ module UsersHelper
     end
   end
 
+  def additional_emails_link(user)
+    if user.email_addresses.count > 1 || Setting.max_additional_emails.to_i > 0
+      link_to l(:label_email_address_plural), user_email_addresses_path(@user), :class => 'icon icon-email-add', :remote => true
+    end
+  end
+
   def user_settings_tabs
     tabs = [{:name => 'general', :partial => 'users/general', :label => :label_general},
             {:name => 'memberships', :partial => 'users/memberships', :label => :label_project_plural}
             ]
-    if Group.all.any?
+    if Group.givable.any?
       tabs.insert 1, {:name => 'groups', :partial => 'users/groups', :label => :label_group_plural}
     end
     tabs

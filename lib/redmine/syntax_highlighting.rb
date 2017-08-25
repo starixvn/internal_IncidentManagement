@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2013  Jean-Philippe Lang
+# Copyright (C) 2006-2017  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@ module Redmine
 
     class << self
       attr_reader :highlighter
-      delegate :highlight_by_filename, :highlight_by_language, :to => :highlighter
 
       def highlighter=(name)
         if name.is_a?(Module)
@@ -29,11 +28,43 @@ module Redmine
           @highlighter = const_get(name)
         end
       end
+
+      def highlight_by_filename(text, filename)
+        highlighter.highlight_by_filename(text, filename)
+      rescue
+        ERB::Util.h(text)
+      end
+
+      def highlight_by_language(text, language)
+        highlighter.highlight_by_language(text, language)
+      rescue
+        ERB::Util.h(text)
+      end
+
+      def language_supported?(language)
+        if highlighter.respond_to? :language_supported?
+          highlighter.language_supported? language
+        else
+          true
+        end
+      rescue
+        false
+      end
     end
 
     module CodeRay
       require 'coderay'
-      require 'coderay/helpers/file_type'
+
+      def self.retrieve_supported_languages
+        ::CodeRay::Scanners.list +
+        # Add CodeRay scanner aliases
+        ::CodeRay::Scanners.plugin_hash.keys.map(&:to_sym) -
+        # Remove internal CodeRay scanners
+        %w(debug default raydebug scanner).map(&:to_sym)
+      end
+      private_class_method :retrieve_supported_languages
+
+      SUPPORTED_LANGUAGES = retrieve_supported_languages
 
       class << self
         # Highlights +text+ as the content of +filename+
@@ -47,6 +78,12 @@ module Redmine
         # Should not return outer pre tag
         def highlight_by_language(text, language)
           ::CodeRay.scan(text, language).html(:wrap => :span)
+        end
+
+        def language_supported?(language)
+          SUPPORTED_LANGUAGES.include?(language.to_s.downcase.to_sym)
+        rescue
+          false
         end
       end
     end

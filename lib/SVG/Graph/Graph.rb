@@ -1,8 +1,7 @@
 begin
   require 'zlib'
-  @@__have_zlib = true
 rescue
-  @@__have_zlib = false
+  # Zlib not available
 end
 
 require 'rexml/document'
@@ -211,7 +210,7 @@ module SVG
         @doc.write( data, 0 )
 
         if @config[:compress]
-          if @@__have_zlib
+          if Object.const_defined?(:Zlib)
             inp, out = IO.pipe
             gz = Zlib::GzipWriter.new( out )
             gz.write data
@@ -235,7 +234,7 @@ module SVG
       #   scales to fix the space.
       attr_accessor :width
       #   Set the path to an external stylesheet, set to '' if
-      #   you want to revert back to using the defaut internal version.
+      #   you want to revert back to using the default internal version.
       #
       #   To create an external stylesheet create a graph using the
       #   default internal version and copy the stylesheet section to

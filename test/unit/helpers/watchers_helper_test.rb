@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2013  Jean-Philippe Lang
+# Copyright (C) 2006-2017  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -17,17 +17,11 @@
 
 require File.expand_path('../../../test_helper', __FILE__)
 
-class WatchersHelperTest < ActionView::TestCase
+class WatchersHelperTest < Redmine::HelperTest
   include WatchersHelper
-  include Redmine::I18n
+  include Rails.application.routes.url_helpers
 
   fixtures :users, :issues
-
-  def setup
-    super
-    set_language_if_valid('en')
-    User.current = nil
-  end
 
   test '#watcher_link with a non-watched object' do
     expected = link_to(
@@ -54,6 +48,10 @@ class WatchersHelperTest < ActionView::TestCase
       :remote => true, :method => 'post', :class => "issue-bulk-watcher icon icon-fav-off"
     )
     assert_equal expected, watcher_link([Issue.find(1), Issue.find(3)], User.find(1))
+  end
+
+  def test_watcher_link_with_nil_should_return_empty_string
+    assert_equal '', watcher_link(nil, User.find(1))
   end
 
   test '#watcher_link with a watched object' do

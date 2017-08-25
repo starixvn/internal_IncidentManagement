@@ -1,3 +1,0 @@
-= letstalk_integration
-
-Description goes here
