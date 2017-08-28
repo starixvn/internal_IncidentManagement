@@ -134,6 +134,29 @@ ActiveRecord::Schema.define(version: 20170807123321) do
   add_index "changesets_issues", ["changeset_id", "issue_id"], name: "changesets_issues_ids", unique: true, using: :btree
   add_index "changesets_issues", ["issue_id"], name: "index_changesets_issues_on_issue_id", using: :btree
 
+  create_table "checklist_template_categories", force: :cascade do |t|
+    t.string  "name",     limit: 255
+    t.integer "position", limit: 4,   default: 1
+  end
+
+  create_table "checklist_templates", force: :cascade do |t|
+    t.string  "name",           limit: 255
+    t.integer "project_id",     limit: 4
+    t.integer "category_id",    limit: 4
+    t.integer "user_id",        limit: 4
+    t.boolean "is_public"
+    t.text    "template_items", limit: 65535
+  end
+
+  create_table "checklists", force: :cascade do |t|
+    t.boolean  "is_done",                default: false
+    t.string   "subject",    limit: 255
+    t.integer  "position",   limit: 4,   default: 1
+    t.integer  "issue_id",   limit: 4,                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255, null: false
     t.string   "data_content_type", limit: 255
@@ -513,13 +536,6 @@ ActiveRecord::Schema.define(version: 20170807123321) do
   add_index "issue_categories", ["assigned_to_id"], name: "index_issue_categories_on_assigned_to_id", using: :btree
   add_index "issue_categories", ["project_id"], name: "issue_categories_project_id", using: :btree
 
-  create_table "issue_checklists", force: :cascade do |t|
-    t.boolean "is_done",              default: false
-    t.string  "subject",  limit: 255
-    t.integer "position", limit: 4,   default: 1
-    t.integer "issue_id", limit: 4,                   null: false
-  end
-
   create_table "issue_notifications", force: :cascade do |t|
     t.integer  "issue_id",     limit: 4,                 null: false
     t.integer  "user_id",      limit: 4,                 null: false
@@ -754,6 +770,57 @@ ActiveRecord::Schema.define(version: 20170807123321) do
     t.string  "salt",       limit: 255, null: false
   end
 
+  create_table "people_announcements", force: :cascade do |t|
+    t.string   "description", limit: 255
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "frequency",   limit: 255
+    t.string   "kind",        limit: 255
+    t.boolean  "active",                  default: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  create_table "people_holidays", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.date     "start_date"
+    t.date     "end_date"
+    t.text     "description", limit: 65535
+    t.boolean  "is_workday"
+    t.datetime "created_on"
+    t.datetime "updated_on"
+  end
+
+  create_table "people_information", primary_key: "user_id", force: :cascade do |t|
+    t.string  "phone",           limit: 255
+    t.string  "address",         limit: 255
+    t.string  "skype",           limit: 255
+    t.date    "birthday"
+    t.string  "job_title",       limit: 255
+    t.string  "company",         limit: 255
+    t.string  "middlename",      limit: 255
+    t.integer "gender",          limit: 1
+    t.string  "twitter",         limit: 255
+    t.string  "facebook",        limit: 255
+    t.string  "linkedin",        limit: 255
+    t.text    "background",      limit: 65535
+    t.date    "appearance_date"
+    t.integer "department_id",   limit: 4
+    t.boolean "is_system",                     default: false
+    t.integer "manager_id",      limit: 4
+  end
+
+  create_table "people_work_experiences", force: :cascade do |t|
+    t.string   "previous_company_name", limit: 255
+    t.string   "job_title",             limit: 255
+    t.datetime "from_date"
+    t.datetime "to_date"
+    t.text     "description",           limit: 65535
+    t.integer  "user_id",               limit: 4
+  end
+
+  add_index "people_work_experiences", ["user_id"], name: "index_people_work_experiences_on_user_id", using: :btree
+
   create_table "projects", force: :cascade do |t|
     t.string   "name",                   limit: 255,   default: "",    null: false
     t.text     "description",            limit: 65535
@@ -951,36 +1018,22 @@ ActiveRecord::Schema.define(version: 20170807123321) do
   add_index "user_preferences", ["user_id"], name: "index_user_preferences_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "login",              limit: 255,   default: "",    null: false
-    t.string   "hashed_password",    limit: 40,    default: "",    null: false
-    t.string   "firstname",          limit: 30,    default: "",    null: false
-    t.string   "lastname",           limit: 255,   default: "",    null: false
-    t.boolean  "admin",                            default: false, null: false
-    t.integer  "status",             limit: 4,     default: 1,     null: false
+    t.string   "login",              limit: 255, default: "",    null: false
+    t.string   "hashed_password",    limit: 40,  default: "",    null: false
+    t.string   "firstname",          limit: 30,  default: "",    null: false
+    t.string   "lastname",           limit: 255, default: "",    null: false
+    t.boolean  "admin",                          default: false, null: false
+    t.integer  "status",             limit: 4,   default: 1,     null: false
     t.datetime "last_login_on"
-    t.string   "language",           limit: 5,     default: ""
+    t.string   "language",           limit: 5,   default: ""
     t.integer  "auth_source_id",     limit: 4
     t.datetime "created_on"
     t.datetime "updated_on"
     t.string   "type",               limit: 255
     t.string   "identity_url",       limit: 255
-    t.string   "mail_notification",  limit: 255,   default: "",    null: false
+    t.string   "mail_notification",  limit: 255, default: "",    null: false
     t.string   "salt",               limit: 64
-    t.string   "phone",              limit: 255
-    t.string   "address",            limit: 255
-    t.string   "skype",              limit: 255
-    t.date     "birthday"
-    t.string   "job_title",          limit: 255
-    t.string   "company",            limit: 255
-    t.string   "middlename",         limit: 255
-    t.integer  "gender",             limit: 2
-    t.string   "twitter",            limit: 255
-    t.string   "facebook",           limit: 255
-    t.string   "linkedin",           limit: 255
-    t.text     "background",         limit: 65535
-    t.date     "appearance_date"
-    t.integer  "department_id",      limit: 4
-    t.boolean  "must_change_passwd",               default: false, null: false
+    t.boolean  "must_change_passwd",             default: false, null: false
     t.datetime "passwd_changed_on"
   end
 

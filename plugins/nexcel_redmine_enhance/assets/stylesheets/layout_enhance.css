@@ -1,0 +1,26 @@
+select2.select2-container.select2-container--default {
+    width: 250px;
+}
+
+#quick-search .small {
+    height: 20px;
+    margin-bottom: 0;
+}
+
+pre {
+    -moz-tab-size: 4 !important;
+}
+
+
+/* Code for Firefox */
+
+pre {
+    -o-tab-size: 4 !important;
+}
+
+
+/* Code for Opera 10.6-12.1 */
+
+pre {
+    tab-size: 4 !important;
+}
