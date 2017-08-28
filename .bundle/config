@@ -1,2 +1,2 @@
 ---
-BUNDLE_WITHOUT: "rmagick:test:development"
+BUNDLE_WITHOUT: "xapian:rmagick:test:development"
