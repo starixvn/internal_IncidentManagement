@@ -9,4 +9,14 @@ $(document).ready(function () {
     $(".dmsf_uploader").remove();
 
     $(".dmsf-approvalworkflows").addClass("icon");
+
+    ApplySelect2ToLicensee();
+
+    $("#content .contextual:first a").on("click", function () {
+        ApplySelect2ToLicensee();
+    });
 });
+
+function ApplySelect2ToLicensee(){
+    $("#issue_custom_field_values_21").select2();
+}
