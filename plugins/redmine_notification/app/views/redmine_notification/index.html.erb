@@ -1,0 +1,81 @@
+<% html_title "Notifications" %>
+
+<h2>Notifications</h2>
+
+<table class="list tbl-notifications">
+	<thead>
+	  <tr>
+		<th style="width: 5%">#</th>
+		<th><%= l(:label_incident_title) %></th>
+		<th><%= l(:label_history) %></th>
+		<th style="width: 15%"><%= l(:label_updated_by) %></th>
+		<th style="width: 15%"><%= l(:label_updated_at) %></th>
+		<th style="width: 10%; text-align: center;">
+			<%= l(:label_mark_viewed) %>
+			<% if @notifications.any? %>
+				<br />
+				<%= link_to 'Update', { :action => 'mark_all_viewed' }, :method => :put, :style => 'display: none;' %>
+				<%= check_box_tag '', @is_all_viewed, @is_all_viewed, :class => 'mark_all_viewed', :disabled => @is_all_viewed, :autocomplete => :off %>
+			<% end %>
+		</th>
+		<th style="width: 5%; text-align: center;">
+			<%= l(:label_delete) %>
+			<% if @notifications.any? %>
+				<br />
+				<%= link_to '', { :action => 'delete_all' }, :method => :delete,
+		  			:class => 'icon icon-del',
+		  			:data => { confirm: 'Are you sure you want to delete all notifications?' } %>
+	  			<% end %>
+		</th>
+	  </tr>
+	</thead>
+	<tbody>
+		<% @notifications.each do |notification| %>
+	  		<tr>
+	  			<td>
+	  				<%= link_to notification.issue_id, { :action => 'mark_viewed', :id => notification.id, :issue_id => notification.issue_id }, :method => :post %>
+	  			</td>
+	  			<td>
+	  				<%= link_to notification.issue.subject, { :action => 'mark_viewed', :id => notification.id, :issue_id => notification.issue_id }, :method => :post %>
+	  			</td>
+	  			<td>
+			  		<% if notification.is_issue_new %>
+			  			<%= l(:label_incident_reported) %>
+			  		<% end %>
+			  		<% if notification.journal_id.present? %>
+				  		<ul class="details">
+					      	<% redmine_notification_details_to_strings(notification.id, notification.journal_id).each do |string| %>
+					       		<li><%= string %></li>
+					      	<% end %>
+					    </ul>
+					    <%= redmine_notification_render_notes(notification.issue, notification.journal_id) %>
+				    <% end %>
+			  	</td>
+			  	<td>
+			  		<%= redmine_notification_render_user_info(notification.updated_by) %>
+			  	</td>
+			  	<td>
+			  		<%= format_time(notification.updated_at) %>
+			  	</td>
+			  	<td align="center">
+					<%= link_to 'Update', { :action => 'mark_viewed', :id => notification.id }, :method => :post, :style => 'display: none;' %>
+			  		<%= check_box_tag '', notification.is_viewed, notification.is_viewed, :class => 'mark_viewed', :disabled => notification.is_viewed, :autocomplete => :off %>
+			  	</td>
+			  	<td align="center">
+			  		<%= link_to '', { :action => 'delete', :id => notification.id }, :method => :delete,
+			  			:class => 'icon icon-del',
+			  			:data => { confirm: 'Are you sure you want to delete the selected notification?' } %>
+			  	</td>
+		  	</tr>
+		<% end %>
+		<% if @notifications.empty? %>
+		  	<tr>
+			  	<td colspan="7" align="center">
+			  		<%= l(:label_no_data) %>
+			  	</td>
+		  	</tr>
+		<% end %>
+	</tbody>
+</table>
+<p class="pagination"><%= pagination_links_full @notification_pages, @notification_count, :per_page_links => false %></p>
+

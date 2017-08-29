@@ -1,0 +1,19 @@
+# English strings go here for Rails i18n
+en:
+  label_incident_title: 'Incident title'
+  label_history: 'History'
+  label_updated_by: 'Updated by'
+  label_updated_at: 'Updated at'
+  label_incident_reported: 'Incident has been reported'
+  label_no_data: 'No data to display!'
+  label_tab_diff: Diff
+  label_tab_comparison: 'Manual Comparison'
+  label_before: Before
+  label_after: After
+  label_mark_viewed: 'Mark viewed'
+  label_delete: Delete
+  notification_to_creator: 'Creator'
+  notification_to_modifier: 'Modifier'
+  notification_to_assignee: 'Assignee'
+  notification_to_watcher: 'Watcher'
+  
