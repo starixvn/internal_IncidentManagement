@@ -1,0 +1,30 @@
+<% content_for :header_tags do %>
+    <%= javascript_include_tag 'board.js', plugin: 'scrum2b' %>
+<% end %>
+
+<%= render :partial => "/shared/plugin_header", :locals => {
+    :is_board => true,
+    :member => @member,
+    :list_versions_open => @list_versions_open,
+    :list_versions_closed => @list_versions_closed } %>
+
+<div class="container-fluid">
+  <%= render :partial => "screen_board", :locals => { 
+      :id_member =>@id_member,
+      :new_issues => @new_issues,
+      :started_issues => @started_issues,
+      :completed_issues => @completed_issues,
+      :issue => @issue,
+      :tracker => @tracker ,
+      :priority => @priority,
+      :member => @member,
+      :status => @status,
+      :sprints => @sprints } %>
+</div>
+
+<script>
+    var project_id = <%= @project.id %>;
+    SetJsProjectId(project_id);
+
+    initialize();
+</script>
