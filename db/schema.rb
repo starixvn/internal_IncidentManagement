@@ -479,16 +479,18 @@ ActiveRecord::Schema.define(version: 20170807123321) do
   add_index "favorite_projects", ["project_id", "user_id"], name: "index_favorite_projects_on_project_id_and_user_id", using: :btree
 
   create_table "global_issue_templates", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.string   "issue_title", limit: 255
-    t.integer  "tracker_id",  limit: 4
-    t.integer  "author_id",   limit: 4
-    t.string   "note",        limit: 255
-    t.text     "description", limit: 65535
-    t.boolean  "enabled"
-    t.integer  "position",    limit: 4
+    t.string   "title",          limit: 255
+    t.string   "issue_title",    limit: 255
+    t.integer  "tracker_id",     limit: 4
+    t.integer  "author_id",      limit: 4
+    t.string   "note",           limit: 255
+    t.text     "description",    limit: 65535
+    t.boolean  "enabled",                      default: false, null: false
+    t.integer  "position",       limit: 4
     t.datetime "created_on"
     t.datetime "updated_on"
+    t.text     "checklist_json", limit: 65535
+    t.boolean  "is_default",                   default: false, null: false
   end
 
   add_index "global_issue_templates", ["author_id"], name: "index_global_issue_templates_on_author_id", using: :btree
@@ -585,13 +587,14 @@ ActiveRecord::Schema.define(version: 20170807123321) do
     t.integer  "author_id",       limit: 4,                     null: false
     t.string   "note",            limit: 255
     t.text     "description",     limit: 65535
-    t.boolean  "enabled"
+    t.boolean  "enabled",                       default: false, null: false
     t.datetime "created_on"
     t.datetime "updated_on"
     t.string   "issue_title",     limit: 255
     t.integer  "position",        limit: 4,     default: 1
     t.boolean  "is_default",                    default: false
     t.boolean  "enabled_sharing",               default: false
+    t.text     "checklist_json",  limit: 65535
   end
 
   add_index "issue_templates", ["author_id"], name: "index_issue_templates_on_author_id", using: :btree
