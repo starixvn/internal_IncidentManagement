@@ -1,3 +1,6 @@
 [submodule "plugins/redmine_issue_templates"]
 	path = plugins/redmine_issue_templates
 	url = https://github.com/akiko-pusu/redmine_issue_templates.git
+[submodule "plugins/redmine_highlightjs"]
+	path = plugins/redmine_highlightjs
+	url = https://github.com/dominch/redmine_highlightjs.git

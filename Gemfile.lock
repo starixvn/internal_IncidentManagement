@@ -223,6 +223,7 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2017.2)
       tzinfo (>= 1.0.0)
+    useragent (0.16.8)
     uuidtools (2.1.5)
     vcard (0.2.15)
     websocket (1.2.4)
@@ -277,6 +278,7 @@ DEPENDENCIES
   simplecov (~> 0.9.1)
   test_after_commit (~> 0.4.2)
   tzinfo-data
+  useragent
   uuidtools
   vcard (~> 0.2.8)
   xapian-full-alaveteli

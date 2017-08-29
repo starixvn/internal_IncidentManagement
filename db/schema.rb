@@ -173,6 +173,12 @@ ActiveRecord::Schema.define(version: 20170807123321) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
+  create_table "code_theme_user_settings", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.string   "code_theme", limit: 255
+    t.datetime "updated_at"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string   "commented_type", limit: 30,    default: "", null: false
     t.integer  "commented_id",   limit: 4,     default: 0,  null: false
