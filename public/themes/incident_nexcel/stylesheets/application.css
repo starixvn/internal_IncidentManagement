@@ -124,7 +124,7 @@ a.logout {
 }
 
 #main-menu {
-    position: absolute;
+    /* position: absolute; */
     bottom: 0px;
     left: 6px;
     margin-right: -500px;
@@ -144,6 +144,7 @@ a.logout {
 }
 
 #main-menu li a {
+    background-color: #DD4814;
     display: block;
     color: #fff;
     text-decoration: none;
@@ -159,7 +160,7 @@ a.logout {
 
 #main-menu li a.selected,
 #main-menu li a.selected:hover {
-    background: #fff;
+    background: #000;
     color: #fff;
 }
 
