@@ -4,3 +4,9 @@
 [submodule "plugins/redmine_highlightjs"]
 	path = plugins/redmine_highlightjs
 	url = https://github.com/dominch/redmine_highlightjs.git
+[submodule "plugins/fedmine"]
+	path = plugins/fedmine
+	url = https://github.com/Froiden/fedmine.git
+[submodule "public/themes/fedmine"]
+	path = public/themes/fedmine
+	url = https://github.com/Froiden/fedmine.git

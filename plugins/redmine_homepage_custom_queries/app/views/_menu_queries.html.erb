@@ -1,7 +1,7 @@
 <div style="display: none" id="custom_queries">	
 	<%=
 	begin
-		render_sidebar_queries
+		render_sidebar_queries(IssueQuery, @project)
 	rescue
 		
 	end
