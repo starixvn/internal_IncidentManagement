@@ -7,3 +7,6 @@
 [submodule "public/themes/fedmine"]
 	path = public/themes/fedmine
 	url = https://github.com/Froiden/fedmine.git
+[submodule "plugins/redmine_blocks_layout"]
+	path = plugins/redmine_blocks_layout
+	url = https://github.com/tastapod/redmine_blocks_layout.git
