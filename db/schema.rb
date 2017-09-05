@@ -514,6 +514,10 @@ ActiveRecord::Schema.define(version: 20170807123321) do
 
   add_index "groups_users", ["group_id", "user_id"], name: "groups_users_ids", unique: true, using: :btree
 
+  create_table "home_blocks", force: :cascade do |t|
+    t.string "name", limit: 255, null: false
+  end
+
   create_table "import_items", force: :cascade do |t|
     t.integer "import_id", limit: 4,     null: false
     t.integer "position",  limit: 4,     null: false
@@ -777,6 +781,11 @@ ActiveRecord::Schema.define(version: 20170807123321) do
     t.integer "timestamp",  limit: 4,   null: false
     t.string  "server_url", limit: 255
     t.string  "salt",       limit: 255, null: false
+  end
+
+  create_table "overview_blocks", force: :cascade do |t|
+    t.integer "project_id", limit: 4,   null: false
+    t.string  "name",       limit: 255, null: false
   end
 
   create_table "people_announcements", force: :cascade do |t|
