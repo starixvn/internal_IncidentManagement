@@ -10,3 +10,6 @@
 [submodule "plugins/redmine_blocks_layout"]
 	path = plugins/redmine_blocks_layout
 	url = https://github.com/tastapod/redmine_blocks_layout.git
+[submodule "plugins/ajax_counters"]
+	path = plugins/ajax_counters
+	url = https://bitbucket.org/dkuk/ajax_counters.git
