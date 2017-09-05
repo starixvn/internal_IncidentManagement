@@ -46,11 +46,11 @@ module RedminePeople
           end
           if user.is_a?(User) && (avatar = user.avatar)
             avatar_url = url_for :only_path => false, :controller => "people", :action => "avatar", :id => avatar, :size => options[:size]
-            image_tag(avatar_url, options.merge({:class => "gravatar"}))
+            image_tag(avatar_url, options.merge({:class => "gravatar", :alt => ""}))
           elsif user.respond_to?(:twitter) && !user.twitter.blank?
-            image_tag("https://twitter.com/#{user.twitter}/profile_image?size=original", options.merge({:class => "gravatar"}))
+            image_tag("https://twitter.com/#{user.twitter}/profile_image?size=original", options.merge({:class => "gravatar", :alt => ""}))
           elsif !Setting.gravatar_enabled?
-            image_tag('person.png', options.merge({:plugin => "redmine_people", :class => "gravatar"}))
+            image_tag('person.png', options.merge({:plugin => "redmine_people", :class => "gravatar", :alt => ""}))
           else
             avatar_without_people(user, options)
           end
