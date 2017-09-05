@@ -123,6 +123,13 @@ a.logout {
     float: right;
 }
 
+#q {
+    height: 15px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 5px;
+}
+
 #main-menu {
     /* position: absolute; */
     bottom: 0px;
@@ -2591,40 +2598,6 @@ div.wiki img {
 }
 
 
-/***** My page layout *****/
-
-.block-receiver {
-    border: 1px dashed #c0c0c0;
-    margin-bottom: 20px;
-    padding: 15px 0 15px 0;
-}
-
-.mypage-box {
-    margin: 0 0 20px 0;
-    color: #505050;
-    line-height: 1.5em;
-}
-
-.handle {
-    cursor: move;
-}
-
-a.close-icon {
-    display: block;
-    margin-top: 3px;
-    overflow: hidden;
-    width: 12px;
-    height: 12px;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    background-image: url('../images/close.png');
-}
-
-a.close-icon:hover {
-    background-image: url('../images/close_hl.png');
-}
-
-
 /***** Gantt chart *****/
 
 .gantt_hdr {
@@ -2800,6 +2773,24 @@ a.close-icon:hover {
     padding-bottom: 3px;
 }
 
+.icon-only {
+    background-position: 0% 50%;
+    background-repeat: no-repeat;
+    padding-left: 16px;
+    display: inline-block;
+    width: 0;
+    height: 16px;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 8px;
+    vertical-align: middle !important;
+}
+
+.icon-only::after {
+    content: "&nbsp;";
+}
+
 .icon-add {
     background-image: url(../images/add.png);
 }
@@ -2828,6 +2819,10 @@ a.close-icon:hover {
     background-image: url(../images/save.png);
 }
 
+.icon-download {
+    background-image: url(../images/download.png);
+}
+
 .icon-cancel {
     background-image: url(../images/cancel.png);
 }
@@ -2852,6 +2847,7 @@ a.close-icon:hover {
     background-image: url(../images/user.png);
 }
 
+.icon-project,
 .icon-projects {
     background-image: url(../images/projects.png);
 }
@@ -2868,6 +2864,7 @@ a.close-icon:hover {
     background-image: url(../images/history.png);
 }
 
+.icon-time-entry,
 .icon-time {
     background-image: url(../images/time.png);
 }
@@ -2884,6 +2881,10 @@ a.close-icon:hover {
     background-image: url(../images/warning.png);
 }
 
+.icon-error {
+    background-image: url(../images/exclamation.png);
+}
+
 .icon-fav {
     background-image: url(../images/fav.png);
 }
@@ -2896,7 +2897,8 @@ a.close-icon:hover {
     background-image: url(../images/reload.png);
 }
 
-.icon-lock {
+.icon-lock,
+.icon-locked {
     background-image: url(../images/locked.png);
 }
 
@@ -2905,18 +2907,15 @@ a.close-icon:hover {
 }
 
 .icon-checked {
-    background-image: url(../images/true.png);
-}
-
-.icon-details {
-    background-image: url(../images/zoom_in.png);
+    background-image: url(../images/toggle_check.png);
 }
 
 .icon-report {
     background-image: url(../images/report.png);
 }
 
-.icon-comment {
+.icon-comment,
+.icon-comments {
     background-image: url(../images/comment.png);
 }
 
@@ -2940,12 +2939,144 @@ a.close-icon:hover {
     background-image: url(../images/zoom_out.png);
 }
 
+.icon-magnifier {
+    background-image: url(../images/magnifier.png);
+}
+
 .icon-passwd {
     background-image: url(../images/textfield_key.png);
 }
 
-.icon-test {
+.icon-arrow-right,
+.icon-test,
+.icon-sticky {
     background-image: url(../images/bullet_go.png);
+}
+
+.icon-email {
+    background-image: url(../images/email.png);
+}
+
+.icon-email-disabled {
+    background-image: url(../images/email_disabled.png);
+}
+
+.icon-email-add {
+    background-image: url(../images/email_add.png);
+}
+
+.icon-move-up {
+    background-image: url(../images/1uparrow.png);
+}
+
+.icon-move-top {
+    background-image: url(../images/2uparrow.png);
+}
+
+.icon-move-down {
+    background-image: url(../images/1downarrow.png);
+}
+
+.icon-move-bottom {
+    background-image: url(../images/2downarrow.png);
+}
+
+.icon-ok {
+    background-image: url(../images/true.png);
+}
+
+.icon-not-ok {
+    background-image: url(../images/false.png);
+}
+
+.icon-link-break {
+    background-image: url(../images/link_break.png);
+}
+
+.icon-list {
+    background-image: url(../images/text_list_bullets.png);
+}
+
+.icon-close {
+    background-image: url(../images/close.png);
+}
+
+.icon-close:hover {
+    background-image: url(../images/close_hl.png);
+}
+
+.icon-settings {
+    background-image: url(../images/changeset.png);
+}
+
+.icon-group,
+.icon-groupnonmember,
+.icon-groupanonymous {
+    background-image: url(../images/group.png);
+}
+
+.icon-roles {
+    background-image: url(../images/database_key.png);
+}
+
+.icon-issue-edit {
+    background-image: url(../images/ticket_edit.png);
+}
+
+.icon-workflows {
+    background-image: url(../images/ticket_go.png);
+}
+
+.icon-custom-fields {
+    background-image: url(../images/textfield.png);
+}
+
+.icon-plugins {
+    background-image: url(../images/plugin.png);
+}
+
+.icon-news {
+    background-image: url(../images/news.png);
+}
+
+.icon-issue-closed {
+    background-image: url(../images/ticket_checked.png);
+}
+
+.icon-issue-note {
+    background-image: url(../images/ticket_note.png);
+}
+
+.icon-changeset {
+    background-image: url(../images/changeset.png);
+}
+
+.icon-message {
+    background-image: url(../images/message.png);
+}
+
+.icon-reply {
+    background-image: url(../images/comments.png);
+}
+
+.icon-wiki-page {
+    background-image: url(../images/wiki_edit.png);
+}
+
+.icon-document {
+    background-image: url(../images/document.png);
+}
+
+.icon-project {
+    background-image: url(../images/projects.png);
+}
+
+.icon-add-bullet {
+    background-image: url(../images/bullet_add.png);
+}
+
+.icon-shared {
+    background-image: url(../images/link.png);
 }
 
 .icon-file {
@@ -3301,8 +3432,6 @@ h2 img {
     color: #40E
 }
 
-.syntaxhl .operator {}
-
 .syntaxhl .predefined {
     color: #369;
     font-weight: bold
@@ -3657,4 +3786,107 @@ tr:hover td {
 #sidebar ul {
     padding: 0;
     list-style-type: none;
+}
+
+
+/* My page */
+
+.splitcontent {
+    overflow: auto;
+}
+
+.splitcontentleft,
+#list-left {
+    float: left;
+    width: 49%;
+}
+
+.splitcontentright,
+#list-right {
+    float: right;
+    width: 49%;
+}
+
+.contextual {
+    float: right;
+    white-space: nowrap;
+    line-height: 1.4em;
+    margin: 5px 0px;
+    padding-left: 10px;
+    font-size: 0.9em;
+}
+
+.contextual .icon {
+    padding-top: 2px;
+    padding-bottom: 3px;
+}
+
+.contextual input,
+.contextual select {
+    font-size: 0.9em;
+}
+
+.message .contextual {
+    margin-top: 0;
+}
+
+.sort-handle {
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    background: url(../images/reorder.png) no-repeat 0 50%;
+    cursor: move;
+}
+
+.sort-handle.ajax-loading {
+    background-image: url(../images/loading.gif);
+}
+
+tr.ui-sortable-helper {
+    border: 1px solid #e4e4e4;
+}
+
+.contextual>*:not(:first-child),
+.buttons>.icon:not(:first-child) {
+    margin-left: 5px;
+}
+
+
+/***** My page layout *****/
+
+.block-receiver {
+    border: 1px dashed #fff;
+    padding: 15px 0 0 0;
+}
+
+.dragging .block-receiver {
+    border: 1px dashed #777;
+    margin-bottom: 20px;
+}
+
+.mypage-box {
+    border: 1px solid #ddd;
+    padding: 8px;
+    margin: 0 0 20px 0;
+    color: #505050;
+    line-height: 1.5em;
+}
+
+.mypage-box>.contextual {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.mypage-box:hover>.contextual {
+    opacity: 1;
+}
+
+.handle {
+    cursor: move;
+}
+
+#my-page .list th.checkbox,
+#my-page .list td.checkbox {
+    display: none;
 }

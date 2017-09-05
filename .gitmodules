@@ -1,3 +1,6 @@
+[submodule "plugins/a_common_libs"]
+	path = plugins/a_common_libs
+	url = https://bitbucket.org/dkuk/a_common_libs.git
 [submodule "plugins/redmine_highlightjs"]
 	path = plugins/redmine_highlightjs
 	url = https://github.com/dominch/redmine_highlightjs.git
@@ -13,3 +16,6 @@
 [submodule "plugins/ajax_counters"]
 	path = plugins/ajax_counters
 	url = https://bitbucket.org/dkuk/ajax_counters.git
+[submodule "plugins/redmine_my_page_queries"]
+	path = plugins/redmine_my_page_queries
+	url = https://github.com/cuoilennaocacban/redmine_my_page_queries.git

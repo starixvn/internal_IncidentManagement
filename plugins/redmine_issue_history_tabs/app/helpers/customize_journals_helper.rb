@@ -72,6 +72,7 @@ module CustomizeJournalsHelper
       if custom_field
         multiple = custom_field.multiple?
         label = custom_field.name
+        byebug
         value = format_value(detail.value, custom_field.field_format) if detail.value
         old_value = format_value(detail.old_value, custom_field.field_format) if detail.old_value
       end
