@@ -3653,7 +3653,8 @@ tr:hover td {
 
 /* sidebar queries*/
 
-.queries {
+.queries,
+#sidebar ul {
     padding: 0;
     list-style-type: none;
 }
