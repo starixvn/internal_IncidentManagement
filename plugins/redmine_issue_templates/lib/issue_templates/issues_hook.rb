@@ -30,10 +30,12 @@ module IssueTemplates
       return unless create_action?(parameters[:action]) && project_id.present?
 
       is_triggered_by_status = triggered_by_status?(parameters)
+      is_triggered_by_change_tracker = triggered_by_change_tracker?(parameters)
+      
       context[:controller].send(
         :render_to_string,
         partial: 'issue_templates/issue_select_form',
-        locals: { setting: setting(project_id), issue: issue, is_triggered_by_status: is_triggered_by_status,
+        locals: { setting: setting(project_id), issue: issue, is_triggered_by_status: is_triggered_by_status, is_triggered_by_change_tracker: is_triggered_by_change_tracker,
                   project_id: project_id }
       )
     end
@@ -66,6 +68,11 @@ module IssueTemplates
 
     def need_template_js?(controller)
       CONTROLLERS.include?(controller.class.name)
+    end
+    
+    def triggered_by_change_tracker?(parameters)
+      triggered = parameters[:form_update_triggered_by]
+      triggered ? triggered == 'issue_tracker_id' : false
     end
   end
 end

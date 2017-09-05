@@ -50,6 +50,64 @@
   <!-- dialog box -->
 
 </div>
+
+<% if is_triggered_by_change_tracker %>
+<script type="text/javascript">
+	(function() {
+        var templateNS = new ISSUE_TEMPLATE();
+        var pulldown_url = '<%= url_for(controller: 'issue_templates',
+        action:'set_pulldown', project_id: project_id, is_triggered_by_status: is_triggered_by_status) %>';
+        var tracker =  '<%= @issue.tracker.id %>';
+        templateNS.set_pulldown(tracker, pulldown_url);
+
+        $('#template_area').insertBefore($('#issue_subject').parent());
+
+        $("#issue_template").change(function(){
+            var is_triggered_by_status = '<%= is_triggered_by_status %>';
+            var load_url = '<%= url_for(controller: 'issue_templates', action: 'load',
+        project_id: project_id, is_triggered_by_status: is_triggered_by_status) %>';
+            var should_replaced = '<%= setting.should_replaced %>';
+            var confirmation = '<%=h l(:label_confirmation) %>';
+            var general_text_Yes = '<%=h l(:general_text_Yes) %>';
+            var general_text_No = '<%=h l(:general_text_No) %>';
+
+            templateNS.load_template(load_url, undefined, should_replaced, false, confirmation, general_text_Yes, general_text_No);
+        });
+
+        // Show dialog
+        $('#link_template_dialog').click(function() {
+            var template_list_url = '<%= url_for(controller: 'issue_templates',
+        action:'list_templates', project_id: project_id, issue_tracker_id: @issue.tracker.id) %>';
+            var template_list_title = '<%= "#{l(:issue_template)}: #{@issue.tracker.name}".html_safe %>';
+
+            templateNS.openDialog(template_list_url, template_list_title);
+        });
+
+        // revert template
+        $('#revert_template').click(function() {
+            templateNS.revertAppliedTemplate();
+        });
+
+        $('#erase_template').click(function() {
+            templateNS.eraseSubjectAndDescription();
+        });
+
+        $("input[name='template_search_filter']").on("keydown keyup",function(){
+            var cols = $(".template_data");
+            var searchWord = $(this).val();
+            reg = new RegExp(searchWord,"gi");
+            cols.each(function(i,val){
+                var col_name = $(val).children("td").text();
+                if(col_name.match(reg)){
+                    $(val).show();
+                }else{
+                    $(val).hide();
+                }
+            })
+        });
+    })();
+</script>
+<% else %>
 <script type="text/javascript">
     //<![CDATA[
     $(function() {
@@ -106,3 +164,4 @@
         });
     });
 </script>
+<% end %>
