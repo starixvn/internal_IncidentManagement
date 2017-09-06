@@ -73,8 +73,13 @@ module CustomizeJournalsHelper
         multiple = custom_field.multiple?
         label = custom_field.name
         byebug
-        value = format_value(detail.value, custom_field.field_format) if detail.value
-        old_value = format_value(detail.old_value, custom_field.field_format) if detail.old_value
+        begin
+          value = format_value(detail.value, custom_field.field_format) if detail.value
+          old_value = format_value(detail.old_value, custom_field.field_format) if detail.old_value
+        rescue NoMethodError
+          value = detail.value.to_s
+          old_value = detail.old_value.to_s
+        end
       end
     when 'attachment'
       label = l(:label_attachment)
