@@ -367,26 +367,56 @@ html>body #content {
     margin: 0px 10px 0px 11px;
 }
 
-#login-form table {
-    margin-top: 5em;
-    padding: 1em;
-    margin-left: auto;
-    margin-right: auto;
+#login-form {
+    margin: 5em auto 2em auto;
+    padding: 20px;
+    width: 340px;
     border: 1px solid #FDBF3B;
-    border-radius: 15px;
+    background-color: #FFEBC1;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-#login-form table td {
-    padding: 6px;
+#login-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#login-form input[type=text],
+#login-form input[type=password] {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    padding: 7px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #login-form label {
     font-weight: bold;
 }
 
-#login-form input#username,
-#login-form input#password {
-    width: 300px;
+#login-form label[for=autologin] {
+    font-weight: normal;
+}
+
+#login-form a.lost_password {
+    float: right;
+    font-weight: normal;
+}
+
+#login-form input#openid_url {
+    background: #fff url(../images/openid-bg.gif) no-repeat 4px 50%;
+    padding-left: 24px !important;
+}
+
+#login-form input#login-submit {
+    margin-top: 15px;
+    padding: 7px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 div.modal {
