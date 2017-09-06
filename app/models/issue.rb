@@ -237,6 +237,7 @@ class Issue < ActiveRecord::Base
     super
   end
 
+  # [HARDCODE]
   # alias :base_reload :reload
   def reload(*args)
     @workflow_rule_by_attribute = nil
@@ -247,6 +248,7 @@ class Issue < ActiveRecord::Base
     @total_estimated_hours = nil
     @last_updated_by = nil
     @last_notes = nil
+    # [HARDCODE]
     super
     # base_reload(*args)
   end
