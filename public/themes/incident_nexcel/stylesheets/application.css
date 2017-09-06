@@ -3809,8 +3809,7 @@ span.pagination>span {
 /* table borders */
 
 table.list tbody td,
-table.list tbody,
-tr:hover td {
+table.list tbody{
     border: solid 1px #d7d7d7;
 }
 
