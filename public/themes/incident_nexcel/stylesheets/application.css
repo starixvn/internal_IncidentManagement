@@ -131,7 +131,7 @@ a.logout {
 }
 
 #main-menu {
-    /* position: absolute; */
+    position: absolute;
     bottom: 0px;
     left: 6px;
     margin-right: -500px;
@@ -243,7 +243,8 @@ a.logout {
 }
 
 #main {
-    background-color: #EEEEEE;
+    background-color: #fff;
+    margin: 8px 10px 0px 10px;
 }
 
 #sidebar {
