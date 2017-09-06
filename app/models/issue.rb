@@ -237,7 +237,7 @@ class Issue < ActiveRecord::Base
     super
   end
 
-  alias :base_reload :reload
+  # alias :base_reload :reload
   def reload(*args)
     @workflow_rule_by_attribute = nil
     @assignable_versions = nil
@@ -247,7 +247,8 @@ class Issue < ActiveRecord::Base
     @total_estimated_hours = nil
     @last_updated_by = nil
     @last_notes = nil
-    base_reload(*args)
+    super
+    # base_reload(*args)
   end
 
   # Overrides Redmine::Acts::Customizable::InstanceMethods#available_custom_fields
