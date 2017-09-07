@@ -24,6 +24,9 @@ class FavoriteProjectsController < ApplicationController
         @offset, @limit = api_offset_and_limit
       else
         @limit = per_page_option
+        # Nexcel Request
+        # [HARDCODE]
+        @limit = 1000
       end
 
       @project_count = @query.object_count
