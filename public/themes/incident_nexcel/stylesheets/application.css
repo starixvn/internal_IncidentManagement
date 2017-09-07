@@ -1439,10 +1439,18 @@ fieldset#filters td.values input {
     height: 1em;
 }
 
-fieldset#filters td.add-filter {
-    text-align: right;
-    vertical-align: top;
-}
+fieldset#filters table { border-collapse: collapse; }
+fieldset#filters table td { padding: 0; vertical-align: middle; }
+fieldset#filters tr.filter { height: 2.1em; }
+fieldset#filters td.field { width:230px; }
+fieldset#filters td.operator { width:130px; }
+fieldset#filters td.operator select {max-width:120px;}
+fieldset#filters td.values { white-space:nowrap; }
+fieldset#filters td.values select {min-width:130px; max-width:200px;}
+fieldset#filters td.values input {height:1em;}
+
+#filters-table {width:60%; float:left;}
+.add-filter {width:35%; float:right; text-align: right; vertical-align: top;}
 
 .toggle-multiselect {
     background: url(../images/bullet_toggle_plus.png) no-repeat 0% 40%;
