@@ -10,12 +10,14 @@ ISSUE_TEMPLATE.prototype = {
         $('#issue_description').val('');
         $('#issue_subject').val('');
 
-        try {
-            if (CKEDITOR.instances.issue_description)
-                CKEDITOR.instances.issue_description.setData('');
-        } catch (e) {
-            // do nothing.
-        }
+        // try {
+        //     if (CKEDITOR.instances.issue_description)
+        //         CKEDITOR.instances.issue_description.setData('');
+        // } catch (e) {
+        //     // do nothing.
+        //     console.log("CKEDITOR ERROR: " + e);
+        // }
+        this.set_ckeditor_data('');
     },
     openDialog: function(url, title) {
         // Open dialog (modal window) to display selectable templates list.
@@ -50,8 +52,32 @@ ISSUE_TEMPLATE.prototype = {
         old_description.text = '';
         $('#revert_template').addClass('disabled');
     },
+    set_ckeditor_data: function (data) {
+        var self = this;
+        try {
+            if (CKEDITOR.instances.issue_description) {
+                // CKEDITOR.on('instanceReady', function(){
+                    CKEDITOR.instances.issue_description.setData(data, {
+                        callback: function() {
+                            // console.log("data: " + data);
+                            // console.log("ckeditor: " + CKEDITOR.instances.issue_description.getData());
+
+                            var dataInserted = CKEDITOR.instances.issue_description.getData();
+                            if(data.replace(/(\r\n|\n|\r)/gm,"") !== dataInserted.replace(/(\r\n|\n|\r)/gm,"")){
+                                ISSUE_TEMPLATE.prototype.set_ckeditor_data(data);
+                            }
+                        }
+                    });
+                // });
+            }
+        } catch (e) {
+            // do nothing.
+            console.log("CKEDITOR ERROR: " + e);
+        }
+    },
     load_template: function(target_url, confirm_msg, should_replaced,
                             confirm_to_replace, confirmation, general_text_Yes, general_text_No) {
+        console.log("load template");
         var selected_template = $('#issue_template');
         var ns = this;
         if (selected_template.val() !== '') {
@@ -110,12 +136,14 @@ ISSUE_TEMPLATE.prototype = {
                         if (oldSubj.trim() != obj.issue_title.trim())
                             issue_subject.val(oldSubj + obj.issue_title);
 
-                        try {
-                            if (CKEDITOR.instances.issue_description)
-                                CKEDITOR.instances.issue_description.setData(oldVal + template[issue_template].description);
-                        } catch (e) {
-                            // do nothing.
-                        }
+                        // try {
+                        //     if (CKEDITOR.instances.issue_description)
+                        //         CKEDITOR.instances.issue_description.setData(oldVal + template[issue_template].description);
+                        // } catch (e) {
+                        //     // do nothing.
+                        //     console.log("CKEDITOR ERROR: " + e);
+                        // }
+                        ns.set_ckeditor_data(oldVal + template[issue_template].description);
                         // show message just after default template loaded.
                         if (confirm_msg)
                             ns.show_loaded_message(confirm_msg, issue_description);
