@@ -2066,6 +2066,7 @@ em.info.error {
 
 textarea.text_cf {
     width: 90%;
+    height: 45px;
 }
 
 #tab-content-modules fieldset p {
