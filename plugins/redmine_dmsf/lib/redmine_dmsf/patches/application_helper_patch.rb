@@ -28,7 +28,7 @@ module RedmineDmsf
         base.class_eval do
           unloadable
           
-          alias_method_chain :calendar_for, :square_brackets
+          # alias_method_chain :calendar_for, :square_brackets
         end
       end
 
@@ -37,9 +37,9 @@ module RedmineDmsf
         # If the field_id contains square brackets, jQuery is unable to find the tag by it's ID and therefore the Date
         # picker is missing when a DMSF custom filed has got the date format.
         def calendar_for_with_square_brackets(field_id)
-          field_id.gsub! '[', '\\\\\\['
-          field_id.gsub! ']', '\\\\\\]'
-          calendar_for_without_square_brackets field_id
+          # field_id.gsub! '[', '\\\\\\['
+          # field_id.gsub! ']', '\\\\\\]'
+          # calendar_for_without_square_brackets field_id
         end
       
       end

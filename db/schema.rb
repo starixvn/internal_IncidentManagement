@@ -215,7 +215,7 @@ ActiveRecord::Schema.define(version: 20170807123321) do
     t.boolean "editable",                           default: true
     t.boolean "visible",                            default: true,  null: false
     t.boolean "multiple",                           default: false
-    t.boolean "is_for_new",                         default: true,  null: false
+    t.boolean "significant",                        default: true,  null: false
     t.string  "hint",                 limit: 255
     t.text    "format_store",         limit: 65535
     t.text    "description",          limit: 65535
