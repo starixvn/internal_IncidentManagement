@@ -19,3 +19,9 @@
 [submodule "plugins/redmine_my_page_queries"]
 	path = plugins/redmine_my_page_queries
 	url = https://github.com/cuoilennaocacban/redmine_my_page_queries.git
+[submodule "plugins/redmine_datetime_custom_field"]
+	path = plugins/redmine_datetime_custom_field
+	url = https://github.com/nanego/redmine_datetime_custom_field.git
+[submodule "plugins/redmine_base_deface"]
+	path = plugins/redmine_base_deface
+	url = https://github.com/jbbarth/redmine_base_deface.git
