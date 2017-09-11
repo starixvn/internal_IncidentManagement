@@ -42,6 +42,7 @@ function ApplySelect2ToLicensee(){
 }
 
 function CopyDateCustomFieldToRedmineCoreField(){
+    // TODO: change the number accordingly to the record on database after created the custom field
     $issueStartDate = $("#issue_custom_field_values_39");
     $issueDueDate = $("#issue_custom_field_values_40");
 
