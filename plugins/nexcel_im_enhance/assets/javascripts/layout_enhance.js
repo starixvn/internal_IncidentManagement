@@ -28,6 +28,11 @@ $(document).ready(function () {
     $(".dropit-submenu").on("mouseleave", function(){
         $('.dropit-open').removeClass('dropit-open').find('.dropit-submenu').hide();
     });
+
+    //Placeholder text for new incidents
+    if($('.controller-issues').length > 0 && $('form#issue-form').length > 0) {
+		$('form#issue-form input#issue_subject').attr('placeholder', 'Naming conventions of incident title, please follow this format: Site/System | Incident Title or LicenseeName | Incident title');
+	}
 });
 
 function ApplySelect2ToLicensee(){
