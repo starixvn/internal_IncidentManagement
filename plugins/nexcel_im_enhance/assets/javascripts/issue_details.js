@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    alert("details loaded");
+    // alert("details loaded");
 
     ApplySelect2ToLicensee();
     CopyDateCustomFieldToRedmineCoreField();
