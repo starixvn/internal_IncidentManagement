@@ -25,3 +25,6 @@
 [submodule "plugins/redmine_base_deface"]
 	path = plugins/redmine_base_deface
 	url = https://github.com/jbbarth/redmine_base_deface.git
+[submodule "plugins/redmine_dmsf"]
+	path = plugins/redmine_dmsf
+	url = https://github.com/cuoilennaocacban/redmine_dmsf.git

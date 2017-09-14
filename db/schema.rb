@@ -325,18 +325,25 @@ ActiveRecord::Schema.define(version: 20170807123321) do
   add_index "dmsf_file_revisions", ["dmsf_file_id"], name: "index_dmsf_file_revisions_on_dmsf_file_id", using: :btree
 
   create_table "dmsf_files", force: :cascade do |t|
-    t.integer  "container_id",       limit: 4,                       null: false
+    t.integer  "project_id",         limit: 4,                   null: false
     t.integer  "dmsf_folder_id",     limit: 4
-    t.string   "name",               limit: 255,                     null: false
+    t.string   "name",               limit: 255,                 null: false
     t.boolean  "notification",                   default: false
-    t.integer  "deleted",            limit: 4,   default: 0,         null: false
+    t.integer  "deleted",            limit: 4,   default: 0,     null: false
     t.integer  "deleted_by_user_id", limit: 4
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
-    t.string   "container_type",     limit: 30,  default: "Project", null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
-  add_index "dmsf_files", ["container_id", "container_type"], name: "index_dmsf_files_on_container_id_and_container_type", using: :btree
+  add_index "dmsf_files", ["project_id"], name: "index_dmsf_files_on_project_id", using: :btree
+
+  create_table "dmsf_folder_permissions", force: :cascade do |t|
+    t.integer "dmsf_folder_id", limit: 4
+    t.integer "object_id",      limit: 4,  null: false
+    t.string  "object_type",    limit: 30, null: false
+  end
+
+  add_index "dmsf_folder_permissions", ["dmsf_folder_id"], name: "index_dmsf_folder_permissions_on_dmsf_folder_id", using: :btree
 
   create_table "dmsf_folders", force: :cascade do |t|
     t.integer  "project_id",         limit: 4,                     null: false
@@ -349,6 +356,7 @@ ActiveRecord::Schema.define(version: 20170807123321) do
     t.datetime "updated_at",                                       null: false
     t.integer  "deleted",            limit: 4,     default: 0,     null: false
     t.integer  "deleted_by_user_id", limit: 4
+    t.boolean  "system",                           default: false, null: false
   end
 
   add_index "dmsf_folders", ["project_id"], name: "index_dmsf_folders_on_project_id", using: :btree
@@ -856,6 +864,7 @@ ActiveRecord::Schema.define(version: 20170807123321) do
     t.boolean  "dmsf_notification",                    default: false
     t.integer  "default_version_id",     limit: 4
     t.integer  "default_assigned_to_id", limit: 4
+    t.integer  "dmsf_act_as_attachable", limit: 4,     default: 1,     null: false
   end
 
   add_index "projects", ["lft"], name: "index_projects_on_lft", using: :btree
