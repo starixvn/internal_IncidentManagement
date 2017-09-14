@@ -35,6 +35,11 @@ $(document).ready(function () {
     };
     
     CopyDateCustomFieldToRedmineCoreField();
+
+    $("#content .contextual a:first").on("click", function(){
+        $summaryElement = $("#issue_description_and_toolbar").parent();
+        $summaryElement.children()[1].click();
+    });
 });
 
 function ApplySelect2ToLicensee(){
