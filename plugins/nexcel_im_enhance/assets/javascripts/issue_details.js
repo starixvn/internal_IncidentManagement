@@ -4,6 +4,10 @@ $(document).ready(function () {
     ApplySelect2ToLicensee();
     CopyDateCustomFieldToRedmineCoreField();
     ExpandSummaryDetailAutomatically();
+
+    $("#content .contextual:first a").on("click", function () {
+        ApplySelect2ToLicensee();
+    });
 })
 
 function ApplySelect2ToLicensee(){
