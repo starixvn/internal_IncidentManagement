@@ -6,7 +6,11 @@
     <thead><tr>
     <th></th>
     <% @query.columns.each do |column| %>
-      <%= content_tag('th', h(column.caption)) %>
+      <% column_header = column.caption
+        if(column_header == "Name")
+            column_header = "Category" %>
+      <% end %>
+      <%= content_tag('th', h(column_header)) %>
     <% end %>
     </tr></thead>
     <tbody>
