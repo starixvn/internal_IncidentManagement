@@ -1,5 +1,6 @@
 require 'layout_header_hook'
 require 'view_issues_form_details_bottom_hook'
+require 'view_issues_index_bottom_hook'
 
 Redmine::Plugin.register :nexcel_im_enhance do
   name 'Nexcel Redmine Enhance plugin'
