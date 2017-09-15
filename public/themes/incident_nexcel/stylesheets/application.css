@@ -4011,3 +4011,7 @@ div.issue.overdue .due-date .value { color: #c22; }
 #projects_list>div>table>tbody tr.project>td:nth-child(1) {
     display: none;
 }
+
+.xdsoft_datetimepicker {
+    display: none;
+}
