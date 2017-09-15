@@ -2,11 +2,20 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
-    "tasks": [
-        {
+    "tasks": [{
             "taskName": "removeserver",
             "type": "shell",
             "command": "if(Test-Path 'D:/Project/Nexus/Redmine/IM/tmp/pids/server.pid') { Remove-Item 'D:/Project/Nexus/Redmine/IM/tmp/pids/server.pid'}"
+        },
+        {
+            "taskName": "Ruby format",
+            "command": "sh",
+            "args": ["rbeautify ${file}"]
+        },
+        {
+            "taskName": "ERB format",
+            "command": "sh",
+            "args": ["htmlbeautifier ${file}"]
         }
     ]
 }
