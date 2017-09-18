@@ -8,7 +8,7 @@
     <% @query.columns.each do |column| %>
       <% column_header = column.caption
         if(column_header == "Name")
-            column_header = "Category" %>
+            column_header = "Categories" %>
       <% end %>
       <%= content_tag('th', h(column_header)) %>
     <% end %>
