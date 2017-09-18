@@ -4007,11 +4007,6 @@ div.issue .attribute .value {overflow:auto; text-overflow: ellipsis;}
 div.issue .attribute .value p {margin-top: 0;}
 div.issue.overdue .due-date .value { color: #c22; }
 
-#projects_list>div>table>thead>tr>th:nth-child(1),
-#projects_list>div>table>tbody tr.project>td:nth-child(1) {
-    display: none;
-}
-
 .xdsoft_datetimepicker {
     display: none;
 }
