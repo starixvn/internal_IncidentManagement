@@ -18,11 +18,19 @@ $(document).ready(function () {
 
     // On mouse leave for drop-it
     $(".dropit-submenu").on("mouseleave", function(){
-        $('.dropit-open').removeClass('dropit-open').find('.dropit-submenu').hide();
+        HideCustomQueriesDropitMenu();
     });
+
+    $(".dropit-trigger").on("mouseleave", function(){
+        HideCustomQueriesDropitMenu();
+    })
 
     //Placeholder text for new incidents
     if($('.controller-issues').length > 0 && $('form#issue-form').length > 0) {
 		$('form#issue-form input#issue_subject').attr('placeholder', 'Naming conventions of incident title, please follow this format: Site/System | Incident Title or LicenseeName | Incident title');
     };
 });
+
+function HideCustomQueriesDropitMenu(){
+    $('.dropit-open').removeClass('dropit-open').find('.dropit-submenu').hide();
+}
