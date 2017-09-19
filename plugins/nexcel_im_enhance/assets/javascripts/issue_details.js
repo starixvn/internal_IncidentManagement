@@ -25,8 +25,18 @@ function CopyDateCustomFieldToRedmineCoreField() {
     $("#start_date_area").hide();
     $("#due_date_area").hide();
 
-    $(".cf_39").hide();
-    $(".cf_40").hide();
+    // $(".cf_39").hide();
+    // $(".cf_40").hide();
+
+    // Replace redmine core field with custom field when showing
+    $startDateAttr = $(".start-date.attribute");
+    $dueDateAttr = $(".due-date.attribute");
+
+    $($startDateAttr).hide();
+    $($dueDateAttr).hide();
+
+    $(".cf_39").detach().appendTo($($startDateAttr).parent());
+    $(".cf_40").detach().appendTo($($dueDateAttr).parent());
 
     // In case of new issue
     if ($issueStartDate.val() == "" && $("#issue_start_date").val() != "") {
