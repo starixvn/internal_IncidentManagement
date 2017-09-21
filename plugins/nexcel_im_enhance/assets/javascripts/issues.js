@@ -1,9 +1,8 @@
 $(document).ready(function () {
-    HightlightCriticalImpactIssues('#EAF7FF');
-    HightlightNewlyUpdatedIssues('#FDEEE8');
+    HightlightNewlyUpdatedIssues();
 });
 
-function HightlightNewlyUpdatedIssues(color){
+function HightlightNewlyUpdatedIssues() {
     const HOURS_AS_LATEST = 24;
     var issues = $('tr.issue');
     var today = new Date();
@@ -12,11 +11,7 @@ function HightlightNewlyUpdatedIssues(color){
         var t = new Date($(issue).data("updatedon"));
         var msDiff = today - t;
         if (msDiff <= diff) {
-            $(issue).css('background-color', color);
+            $(issue).addClass("newly-updated");
         }
     });
-}
-
-function HightlightCriticalImpactIssues(color){
-    $('.priority-1').css('background-color', color);
-}
+};
