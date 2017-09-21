@@ -1,25 +1,22 @@
 $(document).ready(function () {
-    HightlightNewlyUpdatedIssues('#FDEEE8');
     HightlightCriticalImpactIssues('#EAF7FF');
+    HightlightNewlyUpdatedIssues('#FDEEE8');
 });
 
 function HightlightNewlyUpdatedIssues(color){
     const HOURS_AS_LATEST = 24;
-    var updates = $('tr.issue td.updated_on');
+    var issues = $('tr.issue');
     var today = new Date();
     var diff = 60 * 60 * 1000 * HOURS_AS_LATEST;
-    updates.each(function (i, issue) {
-        var t = new Date($(issue).text());
+    issues.each(function (i, issue) {
+        var t = new Date($(issue).data("updatedon"));
         var msDiff = today - t;
         if (msDiff <= diff) {
-            $(issue).parent().css('background-color', color);
+            $(issue).css('background-color', color);
         }
     });
 }
 
 function HightlightCriticalImpactIssues(color){
-    var criticals = $('tr.issue td.priority:contains("Critical")');
-    criticals.each(function(i, issue){
-        $(issue).parent().css('background-color', color);
-    });
+    $('.priority-1').css('background-color', color);
 }
