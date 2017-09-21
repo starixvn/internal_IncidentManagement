@@ -143,7 +143,7 @@ ISSUE_TEMPLATE.prototype = {
                         //     // do nothing.
                         //     console.log("CKEDITOR ERROR: " + e);
                         // }
-                        ns.set_ckeditor_data(oldVal + template[issue_template].description);
+                        ns.set_ckeditor_data(template[issue_template].description);
                         // show message just after default template loaded.
                         if (confirm_msg)
                             ns.show_loaded_message(confirm_msg, issue_description);
