@@ -4,6 +4,8 @@ var CORE = (function ($) {
 			if ($('#issue_priority_id').val() == 1) {
 				$('.lbl-letstalk-checkbox').show();
 				$('#chkLetstalk_yesno_attribute').attr('checked', false);
+			} else {
+				$('.lbl-letstalk-checkbox').hide();
 			}
 
 			$('#chkLetstalk_yesno_attribute').on('change', function () {
@@ -29,7 +31,6 @@ var CORE = (function ($) {
 				if (!isConfirm) {
 					return false;
 				}
-
 			}
 		},
 
@@ -44,14 +45,11 @@ var CORE = (function ($) {
 		lblLetstalkChecking: function (obj) {
 			if ($(obj).val() == 1) {
 				$('.lbl-letstalk-checkbox').show();
-
 			} else {
 				$('.lbl-letstalk-checkbox').hide();
 				$('#chkLetstalk_yesno_attribute').attr('checked', false);
 				$('.lbl-letstalk-comment').hide();
-
 			}
-
 		}
 	};
 }(jQuery));
