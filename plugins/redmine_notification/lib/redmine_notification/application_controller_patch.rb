@@ -19,7 +19,9 @@ module RedmineNotificationViewHelper
   def redmine_notification_render_notes(issue, journal_id)
     journal = Journal.where('id = ?', journal_id).first
     content = ''
-    content << textilizable(journal, :notes) unless journal.notes.blank?
+    if journal != nil
+      content << textilizable(journal, :notes) unless journal.notes.blank?
+    end
     css_classes = "wiki"
     content_tag('div', content.html_safe, :class => css_classes)
   end
