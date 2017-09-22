@@ -31,7 +31,8 @@ module RedmineNotificationViewHelper
     strings = []
     values_by_field = {}
     
-    details = Journal.where('id = ?', journal_id).first.details
+    # details = Journal.where('id = ?', journal_id).first.details
+    details = JournalDetail.where('journal_id = ?', journal_id)
     
     details.each do |detail|
       if detail.property == 'cf'
