@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    // Remove file tab in people plugins
+    $("#tab-files").hide();
+
     // Re-arrange in home page
     $(".news.box").detach().appendTo('.splitcontentleft');
 
