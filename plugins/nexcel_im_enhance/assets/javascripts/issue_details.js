@@ -2,7 +2,7 @@ $(document).ready(function () {
     // alert("details loaded");
 
     ApplySelect2ToLicensee();
-    CopyDateCustomFieldToRedmineCoreField();
+    CopyDateCustomFieldToRedmineCoreField(39, 40, 41);
     ExpandSummaryDetailAutomatically();
 
     $("#content .contextual:first a").on("click", function () {
@@ -14,19 +14,28 @@ function ApplySelect2ToLicensee() {
     $("#issue_custom_field_values_21").select2();
 }
 
-function CopyDateCustomFieldToRedmineCoreField() {
+function CopyDateCustomFieldToRedmineCoreField(startDateCfId, dueDateCfId, customerFeedbackCfId) {
     // TODO: change the number accordingly to the record on database after created the custom field
-    $issueStartDate = $("#issue_custom_field_values_39");
-    $issueDueDate = $("#issue_custom_field_values_40");
 
-    $($issueStartDate.parent()).detach().appendTo($("#start_date_area").parent());
-    $($issueDueDate.parent()).detach().appendTo($("#start_date_area").parent());
+    var startDateCfIdString = "issue_custom_field_values_" + startDateCfId;
+    var dueDateCfIdString = "issue_custom_field_values_" + dueDateCfId;
+    var customerFeedbackCfIdString = "issue_custom_field_values_" + customerFeedbackCfId;
+
+    $issueStartDate = $("#" + startDateCfIdString);
+    $issueDueDate = $("#" + dueDateCfIdString);
+    $customerFeedbackDate = $("#" + customerFeedbackCfIdString);
+
+    // Set size for 3 custom_field
+    $($issueStartDate).attr("size", 30);
+    $($issueDueDate).attr("size", 30);
+    $($customerFeedbackDate).attr("size", 30);
+
+    $($customerFeedbackDate.parent()).detach().appendTo($("#attributes > div:nth-child(1) > div.splitcontentright"));
+    $($issueStartDate.parent()).detach().appendTo($("#attributes > div:nth-child(1) > div.splitcontentright"));
+    $($issueDueDate.parent()).detach().appendTo($("#attributes > div:nth-child(1) > div.splitcontentright"));
 
     $("#start_date_area").hide();
     $("#due_date_area").hide();
-
-    // $(".cf_39").hide();
-    // $(".cf_40").hide();
 
     // Replace redmine core field with custom field when showing
     $startDateAttr = $(".start-date.attribute");
@@ -35,8 +44,9 @@ function CopyDateCustomFieldToRedmineCoreField() {
     $($startDateAttr).hide();
     $($dueDateAttr).hide();
 
-    $(".cf_39").detach().appendTo($($startDateAttr).parent());
-    $(".cf_40").detach().appendTo($($dueDateAttr).parent());
+    $(".cf_" + customerFeedbackCfId).detach().appendTo($("#content .attributes:first .splitcontent:first .splitcontentleft:last"));
+    $(".cf_" + startDateCfId).detach().appendTo($("#content .attributes:first .splitcontent:first .splitcontentleft:last"));
+    $(".cf_" + dueDateCfId).detach().appendTo($("#content .attributes:first .splitcontent:first .splitcontentleft:last"));
 
     // In case of new issue
     if ($issueStartDate.val() == "" && $("#issue_start_date").val() != "") {
@@ -52,8 +62,8 @@ function CopyDateCustomFieldToRedmineCoreField() {
 
         if (month.length < 2) month = '0' + month;
         if (day.length < 2) day = '0' + day;
-        if(hours.length < 2) hours = '0' + hours;
-        if(minutes.length < 2) minutes = '0' + minutes;
+        if (hours.length < 2) hours = '0' + hours;
+        if (minutes.length < 2) minutes = '0' + minutes;
 
         var inputString = day + "/" + month + "/" + year + " " + hours + ":" + minutes;
 
