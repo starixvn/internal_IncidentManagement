@@ -5,7 +5,7 @@ $(document).ready(function () {
     CopyDateCustomFieldToRedmineCoreField(39, 40, 41);
     ExpandSummaryDetailAutomatically();
 
-    $("#content .contextual:first a").on("click", function () {
+    $("#content .contextual .icon-edit").on("click", function () {
         ApplySelect2ToLicensee();
     });
 })
