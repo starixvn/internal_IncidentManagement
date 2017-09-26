@@ -12,6 +12,10 @@ $(document).ready(function () {
     $("#watchers .contextual").on("click", function () {
         ConstructSelect2ForWatcher();
     });
+
+    $("#watchers_form a").on("click", function () {
+        ConstructSelect2ForWatcher();
+    });
 })
 
 function ConstructSelect2ForWatcher() {
@@ -26,14 +30,16 @@ function ConstructSelect2ForWatcher() {
             // Append crated html to dom
             $("#users_for_watcher > label").hide();
 
-            $("#new-watcher-form > p:nth-child(5)").hide();
+            // Hire redmine core search box
+            $("#user_search").parent().hide();
 
             $("#users_for_watcher_select2").remove();
 
             $("#users_for_watcher").append(html);
 
             $("#users_for_watcher_select2").select2({
-                width: "100%"
+                width: "100%",
+                placeholder: "Start typing a name"
             });
 
             $("#users_for_watcher_select2").on("change", function(e){
