@@ -32,7 +32,9 @@ function ConstructSelect2ForWatcher() {
 
             $("#users_for_watcher").append(html);
 
-            $("#users_for_watcher_select2").select2();
+            $("#users_for_watcher_select2").select2({
+                width: "100%"
+            });
 
             $("#users_for_watcher_select2").on("change", function(e){
                 ids = $("#users_for_watcher_select2").val();
