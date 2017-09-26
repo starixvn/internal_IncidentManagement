@@ -8,7 +8,60 @@ $(document).ready(function () {
     $("#content .contextual .icon-edit").on("click", function () {
         ApplySelect2ToLicensee();
     });
+
+    $("#watchers .contextual").on("click", function () {
+        ConstructSelect2ForWatcher();
+    });
 })
+
+function ConstructSelect2ForWatcher() {
+
+    $("#ajax-modal").on("dialogopen", function () {
+        if ($("#ajax-modal").html().indexOf("users_for_watcher_select2") <= -1) {
+            // element not existed
+            var html = "";
+            // Use old watcher
+            html = GetHtmlOptionString();
+
+            // Append crated html to dom
+            $("#users_for_watcher > label").hide();
+
+            $("#new-watcher-form > p:nth-child(5)").hide();
+
+            $("#users_for_watcher_select2").remove();
+
+            $("#users_for_watcher").append(html);
+
+            $("#users_for_watcher_select2").select2();
+
+            $("#users_for_watcher_select2").on("change", function(e){
+                ids = $("#users_for_watcher_select2").val();
+                ReplicateSelectedWatchersOnRedmineCore(ids);
+            });
+        }
+    });
+}
+
+function ReplicateSelectedWatchersOnRedmineCore(selectedIds){
+    // Reset all pre-selected input
+    $("#users_for_watcher input[type='checkbox']").prop("checked", false);
+
+    selectedIds.forEach(function(element) {
+        $("#users_for_watcher input[value='" + element +"']").prop("checked", true);
+    }, this);
+}
+
+function GetHtmlOptionString() {
+    // Get data
+    var datas = $("#users_for_watcher > label");
+    var htmlToReplace = "<select id='users_for_watcher_select2' multiple='multiple'>";
+    datas.each(function (i, data) {
+        htmlToReplace += "<option value='" + data.firstChild.value + "'>" + data.innerText + "</option>";
+    });
+    htmlToReplace += "</select>";
+
+    return htmlToReplace;
+}
 
 function ApplySelect2ToLicensee() {
     $("#issue_custom_field_values_21").select2();
