@@ -2,7 +2,7 @@ $(document).ready(function () {
     // alert("details loaded");
 
     ApplySelect2ToLicensee();
-    CopyDateCustomFieldToRedmineCoreField(34, 35, 36);
+    CopyDateCustomFieldToRedmineCoreField(35, 36, 34);
     ExpandSummaryDetailAutomatically();
 
     $("#content .contextual .icon-edit").on("click", function () {
