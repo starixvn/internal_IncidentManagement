@@ -96,6 +96,29 @@ END
 call CopyStartDateEndDateData
 ```
 
+# Files and Folder Permission
+1. Ckeditor Rich File Manager
+```
+create folder 'system` in
+app > redmine > public
+
+set permission '0777' for that folder recursively (rwxrwxrwx)
+```
+
+2. Redmine Document system
+```
+create folder 'files' in
+app > redmine
+
+set permission '0777' for that folder recursively (rwxrwxrwx)
+```
+
+# Docker Timezone
+
+```
+Set timezone for Docker to GMT+8
+```
+
 # Administration > Settings
 1. Administration --> Settings --> Display
     1. Themes: `Incident Nexcel`
