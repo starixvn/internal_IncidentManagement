@@ -136,7 +136,9 @@ Set timezone for Docker to GMT+8
 2. Redmine CKEditor plugin
     1. Skin: moono-lisa
     2. Remove seperator and line break at the end
+
     ![Remove seperator and line break at the end](https://farm5.staticflickr.com/4498/37556753222_f4fcc9505f_o.png)
+    
     3. Add `Insert code Snippet`
 3. Syntax highlighting with highlightjs
     1. Highlight using theme: `vs`
