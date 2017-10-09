@@ -14,6 +14,88 @@ rake redmine:plugins:migrate
 supervisorctl restart nginx
 ```
 
+# Run Store Procedure to copy date data from Redmine Core to newly created custom field
+
+1. Create new Store procedure
+
+```
+IMPORTANT: Change declare value to match id of newly created custom field
+```
+
+```sql
+CREATE PROCEDURE `CopyStartDateEndDateData`()
+BEGIN
+	declare reportedDateCustomFieldId int default 34;
+    declare resolvedDateCustomFieldId int default 35;
+	declare ind int default 0;
+    declare total int default 0;
+    declare isValueExisted bit default 0;
+    declare isRowExisted bit default 0;
+    
+    declare issueId int(11) default 0;
+    declare startDate datetime;
+    declare dueDate datetime;
+
+    create temporary table if not exists CoreData as (
+	select id, start_date, due_date
+	from issues
+	where start_date is not null or due_date is not null);
+    
+    set total = (select count(*) from CoreData);
+        
+	CoreDataLoop: LOOP
+		if ind > total then
+			leave CoreDataLoop;
+		end if;
+        
+        set ind:= ind + 1;
+        
+        select id from CoreData limit ind, 1 into issueId;
+        select start_date from CoreData limit ind, 1 into startDate;
+        select due_date from CoreData limit ind, 1 into dueDate;
+        
+        set isRowExisted = 0;
+        set isValueExisted = 0;
+        
+        if startDate is not null then
+			-- value existed
+			select 1 from custom_values where customized_id = issueId and custom_field_id = reportedDateCustomFieldId and `value` <> '' into isValueExisted;
+            if isValueExisted <> 1 then
+				select 1 from custom_values where customized_id = issueId and custom_field_id = reportedDateCustomFieldId and `value` = '' into isRowExisted;
+				if isRowExisted = 1 then
+					update custom_values set `value` = DATE_FORMAT(startDate, '%d/%m/%Y 00:01') where customized_id = issueId and custom_field_id = reportedDateCustomFieldId;
+				else
+					insert into custom_values(customized_type, customized_id, custom_field_id, `value`) values('Issue', issueId, reportedDateCustomFieldId, DATE_FORMAT(startDate, '%d/%m/%Y 00:01'));
+				end if;
+			end if;
+		end if;
+        
+        set isRowExisted = 0;
+        set isValueExisted = 0;
+                
+        if dueDate is not null then
+			select 1 from custom_values where customized_id = issueId and custom_field_id = resolvedDateCustomFieldId and `value` <> '' into isValueExisted;
+				if isValueExisted <> 1 then
+				select 1 from custom_values where customized_id = issueId and custom_field_id = resolvedDateCustomFieldId and `value` = '' into isRowExisted;
+				if isRowExisted = 1 then
+					update custom_values set `value` = DATE_FORMAT(dueDate, '%d/%m/%Y 23:59') where customized_id = issueId and custom_field_id = resolvedDateCustomFieldId;
+				else
+					insert into custom_values(customized_type, customized_id, custom_field_id, `value`) values('Issue', issueId, resolvedDateCustomFieldId, DATE_FORMAT(dueDate, '%d/%m/%Y 23:59'));
+				end if;
+			end if;
+		end if;
+        
+        iterate CoreDataLoop;
+	end loop;
+END
+```
+
+2. Call procedure
+
+```sql
+call CopyStartDateEndDateData
+```
+
 # Administration > Settings
 1. Administration --> Settings --> Display
     1. Themes: `Incident Nexcel`
@@ -74,3 +156,5 @@ supervisorctl restart nginx
     Drag the green 2-way arrow
 
     ![drag the green 2-way arrow](https://farm5.staticflickr.com/4491/36878724584_2198d5a136_o.png)
+
+
