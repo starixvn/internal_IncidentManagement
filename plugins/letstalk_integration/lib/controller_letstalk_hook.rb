@@ -6,12 +6,12 @@ module Letstalk
 
       def controller_issues_new_after_save(context={})
         send_message(context)
-        context[:issue].save
+        #context[:issue].save
       end
       
       def controller_issues_edit_after_save(context={})        
         send_message(context)
-        context[:issue].save
+        #context[:issue].save
       end
       
     private

@@ -4,12 +4,12 @@ module RedmineNotification
 
       def controller_issues_new_after_save(context={})
         save_notification_to_issue(context, true)
-        context[:issue].save
+        # context[:issue].save
       end
       
       def controller_issues_edit_after_save(context={})        
         save_notification_to_issue(context, false)
-        context[:issue].save
+        # context[:issue].save
       end
       
     private
