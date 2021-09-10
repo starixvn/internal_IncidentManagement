@@ -30,7 +30,8 @@ module RedmineDmsf
         "\n".html_safe + stylesheet_link_tag('select2.min.css', :plugin => :redmine_dmsf) +
         "\n".html_safe + javascript_include_tag('select2.min.js', :plugin => :redmine_dmsf) +
         "\n".html_safe + javascript_include_tag('redmine_dmsf.js', :plugin => :redmine_dmsf) +
-        "\n".html_safe + javascript_include_tag('attachments_dmsf.js', :plugin => :redmine_dmsf)
+        "\n".html_safe + javascript_include_tag('attachments_dmsf.js', :plugin => :redmine_dmsf) +
+        "\n".html_safe + javascript_include_tag('issue_edit_validation.js', :plugin => :redmine_dmsf)
       end
 
       def easy_extensions_javascripts_hook(context={})

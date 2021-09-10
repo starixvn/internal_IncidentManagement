@@ -108,7 +108,7 @@ default:
       port: 25
       domain: "192.168.5.20"
 
-
+  
   # Absolute path to the directory where attachments are stored.
   # The default is the 'files' directory in your Redmine instance.
   # Your Redmine instance needs to have write permission on this
@@ -214,11 +214,15 @@ default:
 
   # Maximum number of simultaneous AJAX uploads
   #max_concurrent_ajax_uploads: 2
+  
 
 # specific configuration options for production environment
 # that overrides the default ones
 production:
-
+  custom_field_type_id: "#issue_custom_field_values_4"
+  cutom_field_type_value_validation: "Not Categorized"
 # specific configuration options for development environment
 # that overrides the default ones
 development:
+  custom_field_type_id: "#issue_custom_field_values_4"
+  cutom_field_type_value_validation: "Not Categorized"

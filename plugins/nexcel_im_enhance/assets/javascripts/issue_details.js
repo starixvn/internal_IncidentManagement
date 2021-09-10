@@ -42,7 +42,7 @@ function ConstructSelect2ForWatcher() {
                 placeholder: "Start typing a name"
             });
 
-            $("#users_for_watcher_select2").on("change", function(e){
+            $("#users_for_watcher_select2").on("change", function (e) {
                 ids = $("#users_for_watcher_select2").val();
                 ReplicateSelectedWatchersOnRedmineCore(ids);
             });
@@ -50,12 +50,12 @@ function ConstructSelect2ForWatcher() {
     });
 }
 
-function ReplicateSelectedWatchersOnRedmineCore(selectedIds){
+function ReplicateSelectedWatchersOnRedmineCore(selectedIds) {
     // Reset all pre-selected input
     $("#users_for_watcher input[type='checkbox']").prop("checked", false);
 
-    selectedIds.forEach(function(element) {
-        $("#users_for_watcher input[value='" + element +"']").prop("checked", true);
+    selectedIds.forEach(function (element) {
+        $("#users_for_watcher input[value='" + element + "']").prop("checked", true);
     }, this);
 }
 
@@ -72,7 +72,47 @@ function GetHtmlOptionString() {
 }
 
 function ApplySelect2ToLicensee() {
-    $("#issue_custom_field_values_21").select2();
+    $("#issue_custom_field_values_21").select2({
+        width: '60%',
+        tokenizer: function (input, selection, callback) {
+            if (input.indexOf(',') < 0) {
+                return;
+            }
+            var unitIds = [];
+            $("#issue_custom_field_values_21 option").each(function () {
+                unitIds.push($(this).val());
+            });
+
+            var values = input.split(",");
+            var parts = Object.fromEntries(values.map(s => [s.toLowerCase(), s]));
+            var uParts = Object.values(parts)
+
+            var invalidParts = [];
+            for (var i = 0; i < uParts.length; i++) {
+                var part = uParts[i];
+                part = part.trim();
+
+                var valid = false;
+                var value;
+                for (var j = 0; j < unitIds.length; j++) {
+
+                    if (part.toLowerCase() === unitIds[j].toLowerCase()) {
+                        value = unitIds[j];
+                        valid = true;
+                        break;
+                    }
+                }
+
+                if (valid) {
+                    callback({ id: value, text: value });
+                } else {
+                    invalidParts.push(part);
+                }
+            }
+
+            input = invalidParts.join(',');;
+        }
+    });
 }
 
 function CopyDateCustomFieldToRedmineCoreField(startDateCfId, dueDateCfId, customerFeedbackCfId) {
