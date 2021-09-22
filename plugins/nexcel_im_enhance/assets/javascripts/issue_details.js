@@ -85,9 +85,15 @@ function ApplySelect2ToLicensee() {
 
             var values = input.split(",");
             var parts = Object.fromEntries(values.map(s => [s.toLowerCase(), s]));
-            var uParts = Object.values(parts)
+            var uParts = Object.values(parts);
 
-            var invalidParts = [];
+            uParts.sort(function (a, b) {
+                if (a.toLowerCase() > b.toLowerCase()) {
+                    return 1;
+                }
+                return -1;
+            });
+
             for (var i = 0; i < uParts.length; i++) {
                 var part = uParts[i];
                 part = part.trim();
@@ -103,14 +109,18 @@ function ApplySelect2ToLicensee() {
                     }
                 }
 
-                if (valid) {
+                var isExisted = false;
+                for (let k = 0; k < selection.length; k++) {
+                    if (selection[k].id.toLowerCase() === part.toLowerCase()) {
+                        isExisted = true;
+                        break;
+                    }
+                }
+
+                if (valid && !isExisted) {
                     callback({ id: value, text: value });
-                } else {
-                    invalidParts.push(part);
                 }
             }
-
-            input = invalidParts.join(',');;
         }
     });
 }

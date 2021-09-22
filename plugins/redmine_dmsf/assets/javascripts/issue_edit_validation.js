@@ -45,7 +45,8 @@ var issueEditValidation = (function ($) {
 
 
 $(document).ready(function () {
-    if (customFieldTypeID && customFieldTypeValueValidation) {
+    if (typeof (customFieldTypeID) !== 'undefined' && typeof (customFieldTypeValueValidation) !== 'undefined'
+        && customFieldTypeID !== '' && customFieldTypeValueValidation != '') {
         issueEditValidation.init(customFieldTypeID, customFieldTypeValueValidation);
     }
-})
+});
