@@ -88,7 +88,7 @@ function ApplySelect2ToLicensee() {
             var uParts = Object.values(parts);
 
             uParts.sort(function (a, b) {
-                if (a.toLowerCase() > b.toLowerCase()) {
+                if (a.trim().toLowerCase() > b.trim().toLowerCase()) {
                     return 1;
                 }
                 return -1;
