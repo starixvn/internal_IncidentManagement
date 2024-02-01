@@ -1,4 +1,4 @@
-FROM registry.nexdev.net:5050/nexcel/nexus/nexdev
+FROM hub.nexdev.net/nexus/nexdev_base
 
 RUN rm -r /app/redmine/*
 COPY . /app/redmine/
