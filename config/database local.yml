@@ -6,19 +6,19 @@
 development:
   adapter: mysql2
   database: redmine_im
-  host: 10.18.200.141
-  port: 3308
-  username: oliver
-  password: 1234aa
+  host: 10.18.200.133
+  port: 33066
+  username: root
+  password: 1qaz@WSX
   encoding: utf8
 
 production:
   adapter: mysql2
   database: redmine_im
-  host: 10.18.200.141
-  port: 3308
-  username: oliver
-  password: 1234aa
+  host: 10.18.200.133
+  port: 33066
+  username: root
+  password: 1qaz@WSX
   encoding: utf8
 
 # Warning: The database defined as "test" will be erased and
