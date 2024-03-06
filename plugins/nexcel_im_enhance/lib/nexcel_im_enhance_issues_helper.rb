@@ -8,7 +8,7 @@ module NexcelImEnhanceIssuesHelper
             values.each_with_index do |value, i|
                 css = "cf_#{value.custom_field.id}"
                 m = (i < half ? :left : :right)
-                rows.send m, custom_field_name_tag(value.custom_field), show_value(value), :class => css
+                rows.send m, custom_field_name_tag(value.custom_field), show_value(value), :class => css, :default_value => value.custom_field.default_value
             end
         end
     end

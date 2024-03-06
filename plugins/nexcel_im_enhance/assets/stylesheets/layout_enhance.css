@@ -33,3 +33,7 @@ pre {
 textarea.text_cf {
     width: 59%;
 }
+
+textarea#issue_custom_field_values_19 {
+    height: 100px !important;
+}

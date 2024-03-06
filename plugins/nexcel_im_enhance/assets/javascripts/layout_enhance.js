@@ -1,4 +1,4 @@
-var defaultBusinessImpact = '';
+var customFieldBusinessImpactDefaultValue = '';
 $(document).ready(function () {
     // Remove file tab in people plugins
     $("#tab-files").hide();
@@ -34,19 +34,11 @@ $(document).ready(function () {
 		$('form#issue-form input#issue_subject').attr('placeholder', 'Naming conventions of incident title, please follow this format: Site/System | Incident Title or LicenseeName | Incident title');
     };
 
-    defaultBusinessImpact = $("textarea[name='issue[custom_field_values][19]']").val();
-
-    $('#issue_priority_id').on('change', function() {
-        var priority = $(this).val();
-        if (parseInt(priority, 10) === 1 || parseInt(priority, 10) === 2 || parseInt(priority, 10) === 3)
-        {
-            $("textarea[name='issue[custom_field_values][19]']").val(defaultBusinessImpact);
-        }
-        else
-        {
-            $("textarea[name='issue[custom_field_values][19]']").val('');
-        }
-    })
+    customFieldBusinessImpactDefaultValue = $('.cf_19').attr('default_value');
+    if (!customFieldBusinessImpactDefaultValue) {
+      customFieldBusinessImpactDefaultValue = $("textarea[name='issue[custom_field_values][19]']").val();
+    }
+    console.log(customFieldBusinessImpactDefaultValue);
 });
 
 function HideCustomQueriesDropitMenu(){
