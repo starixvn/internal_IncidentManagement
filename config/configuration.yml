@@ -104,9 +104,9 @@ default:
   email_delivery:
     delivery_method: :async_smtp
     async_smtp_settings:
-      address: "192.168.5.20"
+      address: "192.168.6.20"
       port: 25
-      domain: "192.168.5.20"
+      domain: "192.168.6.20"
 
   
   # Absolute path to the directory where attachments are stored.
