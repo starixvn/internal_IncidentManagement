@@ -53,7 +53,7 @@ function InitChangePriorityEvent() {
             }
             else
             {
-                $("textarea[name='issue[custom_field_values][19]']").val('');
+                $("textarea[name='issue[custom_field_values][19]']").val('N/A');
             }
         })
     }
