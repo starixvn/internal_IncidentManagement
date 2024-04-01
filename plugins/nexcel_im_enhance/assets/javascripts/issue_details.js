@@ -16,7 +16,6 @@ $(document).ready(function () {
     $("#watchers_form a").on("click", function () {
         ConstructSelect2ForWatcher();
     });
-    OnChangePriorityLoadBusinessImpactCustomField();
 })
 
 function ConstructSelect2ForWatcher() {
@@ -196,18 +195,4 @@ function CopyDateCustomFieldToRedmineCoreField(startDateCfId, dueDateCfId, custo
 function ExpandSummaryDetailAutomatically() {
     $summaryElement = $("#issue_description_and_toolbar").parent();
     $summaryElement.children()[1].click();
-}
-
-function OnChangePriorityLoadBusinessImpactCustomField() {
-    $('#issue_priority_id').on('change', function() {
-        var priority = $(this).val();
-        if (parseInt(priority, 10) === 1 || parseInt(priority, 10) === 2 || parseInt(priority, 10) === 3)
-        {
-            $("textarea[name='issue[custom_field_values][19]']").val(customFieldBusinessImpactDefaultValue);
-        }
-        else
-        {
-            $("textarea[name='issue[custom_field_values][19]']").val('N/A');
-        }
-    })
 }
