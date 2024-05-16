@@ -41,20 +41,28 @@ function HideCustomQueriesDropitMenu(){
 }
 
 function InitChangePriorityEvent() {
-    var isNewIssue = window.location.href.includes('issues/new');
-    if (isNewIssue === true) {
-        var defaultBusinessImpact = $("textarea[name='issue[custom_field_values][19]']").val();
-
         $('#issue_priority_id').on('change', function() {
             var priority = $(this).val();
             if (parseInt(priority, 10) === 1 || parseInt(priority, 10) === 2 || parseInt(priority, 10) === 3)
             {
-                $("textarea[name='issue[custom_field_values][19]']").val(defaultBusinessImpact);
+                FillValueToRequiredField('', true);
             }
-            else
-            {
-                $("textarea[name='issue[custom_field_values][19]']").val('N/A');
+            else {
+                FillValueToRequiredField('N/A');
             }
         })
-    }
+}
+
+function FillValueToRequiredField(value, isShowRequired = false) {
+    var requiredCustomFields = ['issue_custom_field_values_56', 'issue_custom_field_values_57', 'issue_custom_field_values_58'];
+    requiredCustomFields.forEach(function(item) {
+        $("#" + item).val(value);
+        var labelChilds = $('label[for="' + item +'"]').children();
+        if (isShowRequired) {
+            if (labelChilds.length < 2) $('label[for="' + item +'"]').append("<span class='required'>*</span>");
+        } else {
+            if (labelChilds.length === 2) labelChilds.eq(1).remove();;
+        }
+    });
+
 }
