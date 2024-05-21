@@ -1,3 +1,5 @@
+const requiredCustomFields = ['issue_custom_field_values_56', 'issue_custom_field_values_57', 'issue_custom_field_values_58'];
+
 $(document).ready(function () {
     // Remove file tab in people plugins
     $("#tab-files").hide();
@@ -32,37 +34,71 @@ $(document).ready(function () {
     if($('.controller-issues').length > 0 && $('form#issue-form').length > 0) {
 		$('form#issue-form input#issue_subject').attr('placeholder', 'Naming conventions of incident title, please follow this format: Site/System | Incident Title or LicenseeName | Incident title');
     };
+    var isNew = window.location.href.includes('issues/new');
 
-    InitChangePriorityEvent();
+    if (isNew) {
+        InitChangePriorityEventNewIssue();
+    } else {
+        InitChangePriorityEventEditIssue();
+    }
 });
 
 function HideCustomQueriesDropitMenu(){
     $('.dropit-open').removeClass('dropit-open').find('.dropit-submenu').hide();
 }
 
-function InitChangePriorityEvent() {
+function InitChangePriorityEventEditIssue() {
+    var currentPriority = $('#issue_priority_id').val();
+    $('#issue_priority_id').data('val', currentPriority);
+
+    $('#issue_priority_id').on('change', function() {
+        var initPriority = parseInt($(this).data('val'), 10);
+        var priority = parseInt($(this).val(), 10);
+
+        if (!isCriticalPriority(initPriority) && isCriticalPriority(priority))
+        {
+            requiredCustomFields.forEach(function(item) {
+                var currentValue = $("#" + item).val();
+                if (currentValue === 'N/A') {
+                    $("#" + item).val('');
+                }
+            });
+        }
+    })
+}
+
+function isCriticalPriority(id) {
+    return id === 1 || id === 2 || id === 3;
+}
+
+function InitChangePriorityEventNewIssue() {
         $('#issue_priority_id').on('change', function() {
-            var priority = $(this).val();
-            if (parseInt(priority, 10) === 1 || parseInt(priority, 10) === 2 || parseInt(priority, 10) === 3)
+            var priority = parseInt($(this).val(), 10);
+            if (isCriticalPriority(priority))
             {
-                FillValueToRequiredField('', true);
+                FillValueToRequiredField('');
+                ShowHideRequiredCustomFields(true);
             }
             else {
                 FillValueToRequiredField('N/A');
+                ShowHideRequiredCustomFields(true);
             }
         })
 }
 
-function FillValueToRequiredField(value, isShowRequired = false) {
-    var requiredCustomFields = ['issue_custom_field_values_56', 'issue_custom_field_values_57', 'issue_custom_field_values_58'];
+function FillValueToRequiredField(value) {
     requiredCustomFields.forEach(function(item) {
         $("#" + item).val(value);
+    });
+}
+
+function ShowHideRequiredCustomFields(isRequired = false) {
+    requiredCustomFields.forEach(function(item) {
         var labelChilds = $('label[for="' + item +'"]').children();
-        if (isShowRequired) {
+        if (isRequired) {
             if (labelChilds.length < 2) $('label[for="' + item +'"]').append("<span class='required'>*</span>");
         } else {
             if (labelChilds.length === 2) labelChilds.eq(1).remove();;
         }
     });
-
 }
