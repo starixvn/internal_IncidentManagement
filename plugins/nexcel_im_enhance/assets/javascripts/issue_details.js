@@ -23,20 +23,12 @@ $(document).ready(function () {
 })
 
 function initCustomFieldVerifyRuleBaseOnPriority() {
-    var currentLocation =window.location.href;
-    var isNew = currentLocation.includes('issues/new') || currentLocation.endsWith("issues");
-
-    if (isNew) {
-        var priority = parseInt($('#issue_priority_id').val(), 10);
-        if (isCriticalPriority(priority)) {
-            requiredCustomFields.forEach(function(item) {
-                $("#" + item).attr("placeholder", customFieldPlaceHolder);
-            });
-        }
-        InitChangePriorityEventNewIssue();
-    } else {
-        InitChangePriorityEventEditIssue();
-    }
+    requiredCustomFields.forEach(function(item) {
+        $("#" + item).attr("placeholder", customFieldPlaceHolder);
+    });
+    
+    InitChangePriorityEventNewIssue();
+    
 }
 
 function ConstructSelect2ForWatcher() {
@@ -218,41 +210,6 @@ function ExpandSummaryDetailAutomatically() {
     $summaryElement.children()[1].click();
 }
 
-function InitChangePriorityEventEditIssue() {
-    var currentPriority = $('#issue_priority_id').val();
-    $('#issue_priority_id').data('val', currentPriority);
-
-    $('#issue_priority_id').on('change', function() {
-        var initPriority = parseInt($(this).data('val'), 10);
-        var priority = parseInt($(this).val(), 10);
-
-        if (isCriticalPriority(priority)) {
-            requiredCustomFields.forEach(function(item) { 
-                $("#" + item).attr("placeholder", customFieldPlaceHolder);
-            });
-        } else {
-            requiredCustomFields.forEach(function(item) { 
-                $("#" + item).removeAttr("placeholder");
-                var curVal = $("#" + item).val();
-                if (curVal === '') {
-                    $("#" + item).val('N/A');
-                }
-            });
-        }
-
-        if (!isCriticalPriority(initPriority) && isCriticalPriority(priority))
-        {
-            requiredCustomFields.forEach(function(item) {
-                var currentValue = $("#" + item).val();
-                if (currentValue === 'N/A') {
-                    $("#" + item).attr("placeholder", customFieldPlaceHolder);
-                    $("#" + item).val('');
-                }
-            });
-        }
-    })
-}
-
 function isCriticalPriority(id) {
     return id === 1 || id === 2 || id === 3;
 }
@@ -263,30 +220,18 @@ function InitChangePriorityEventNewIssue() {
             if (isCriticalPriority(priority))
             {
                 FillValueToRequiredField('');
-                ShowHideRequiredCustomFields(true);
             }
             else {
                 FillValueToRequiredField('N/A');
-                ShowHideRequiredCustomFields(true);
             }
         })
 }
 
 function FillValueToRequiredField(value) {
     requiredCustomFields.forEach(function(item) {
-        $("#" + item).val(value);
-    });
-}
-
-function ShowHideRequiredCustomFields(isRequired = false) {
-    requiredCustomFields.forEach(function(item) {
-        var labelChilds = $('label[for="' + item +'"]').children();
-        if (isRequired) {
-            $("#" + item).attr("placeholder", customFieldPlaceHolder);
-            if (labelChilds.length < 2) $('label[for="' + item +'"]').append("<span class='required'>*</span>");
-        } else {
-            $("#" + item).removeAttr("placeholder");
-            if (labelChilds.length === 2) labelChilds.eq(1).remove();;
+        var currentValue = $("#" + item).val();
+        if (currentValue === 'N/A' || currentValue === '') {
+            $("#" + item).val(value);
         }
     });
 }
