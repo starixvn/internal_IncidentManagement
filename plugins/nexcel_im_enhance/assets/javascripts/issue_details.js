@@ -1,3 +1,5 @@
+const requiredCustomFields = ['issue_custom_field_values_56', 'issue_custom_field_values_57', 'issue_custom_field_values_58'];
+const customFieldPlaceHolder = "P1, P2, P3 must input value for this field";
 $(document).ready(function () {
     // alert("details loaded");
 
@@ -16,7 +18,18 @@ $(document).ready(function () {
     $("#watchers_form a").on("click", function () {
         ConstructSelect2ForWatcher();
     });
+
+    initCustomFieldVerifyRuleBaseOnPriority();
 })
+
+function initCustomFieldVerifyRuleBaseOnPriority() {
+    requiredCustomFields.forEach(function(item) {
+        $("#" + item).attr("placeholder", customFieldPlaceHolder);
+    });
+    
+    InitChangePriorityEventNewIssue();
+    
+}
 
 function ConstructSelect2ForWatcher() {
 
@@ -195,4 +208,30 @@ function CopyDateCustomFieldToRedmineCoreField(startDateCfId, dueDateCfId, custo
 function ExpandSummaryDetailAutomatically() {
     $summaryElement = $("#issue_description_and_toolbar").parent();
     $summaryElement.children()[1].click();
+}
+
+function isCriticalPriority(id) {
+    return id === 1 || id === 2 || id === 3;
+}
+
+function InitChangePriorityEventNewIssue() {
+        $('#issue_priority_id').on('change', function() {
+            var priority = parseInt($(this).val(), 10);
+            if (isCriticalPriority(priority))
+            {
+                FillValueToRequiredField('');
+            }
+            else {
+                FillValueToRequiredField('N/A');
+            }
+        })
+}
+
+function FillValueToRequiredField(value) {
+    requiredCustomFields.forEach(function(item) {
+        var currentValue = $("#" + item).val();
+        if (currentValue === 'N/A' || currentValue === '') {
+            $("#" + item).val(value);
+        }
+    });
 }
