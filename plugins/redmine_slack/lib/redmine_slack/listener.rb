@@ -6,7 +6,7 @@ class Listener < Redmine::Hook::Listener
 		begin
 			issue = context[:issue]
 			return if issue.is_private?
-			# return unless issue.priority.position.in?([1, 2, 3])
+			return unless issue.priority.position.in?([1, 2, 3])
 			attachment = build_slack_attachment(issue)
 			speak attachment
 		rescue Exception => e
