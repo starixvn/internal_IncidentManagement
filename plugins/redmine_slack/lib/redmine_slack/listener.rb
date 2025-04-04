@@ -20,38 +20,37 @@ class Listener < Redmine::Hook::Listener
 	end
 
 	def redmine_slack_issues_edit_after_save(context = {})
-		return
-		# begin
-		# 	issue = context[:issue]
-		# 	journal = context[:journal]
+		begin
+			issue = context[:issue]
+			journal = context[:journal]
 
-		# 	return if issue.is_private?
-		# 	return if journal.nil?
+			return if issue.is_private?
+			return if journal.nil?
 
-		# 	# Don't change priority => return
-		# 	priority_changed = journal.details.any? { |d| d.prop_key == "priority_id" }
-		# 	return unless priority_changed
+			# Don't change priority => return
+			priority_changed = journal.details.any? { |d| d.prop_key == "priority_id" }
+			return unless priority_changed
 
-		# 	old_priority_id = journal.details.find { |d| d.prop_key == "priority_id" }&.old_value&.to_i
-		# 	new_priority_id = issue.priority.id
-		# 	new_priority_position = issue.priority.position
+			old_priority_id = journal.details.find { |d| d.prop_key == "priority_id" }&.old_value&.to_i
+			new_priority_id = issue.priority.id
+			new_priority_position = issue.priority.position
 
-		# 	old_priority = IssuePriority.find_by(id: old_priority_id)
-		# 	old_priority_position = old_priority&.position
+			old_priority = IssuePriority.find_by(id: old_priority_id)
+			old_priority_position = old_priority&.position
 
-		# 	return if old_priority_position.in?([1, 2, 3]) 
-		# 	return unless issue.priority.position.in?([1, 2, 3])
+			return if old_priority_position.in?([1, 2, 3]) 
+			return unless issue.priority.position.in?([1, 2, 3])
 
-		# 	attachment = build_slack_attachment(issue)
-		# 	speak attachment
-		# rescue Exception => e
-		# 	handle_slack_exception(
-		# 	  client: HTTPClient.new,
-		# 	  exception: e,
-		# 	  params: { context: context },
-		# 	  context: "Hook#edit_after_save"
-		# 	)
-		# end
+			attachment = build_slack_attachment(issue)
+			speak attachment
+		rescue Exception => e
+			handle_slack_exception(
+			  client: HTTPClient.new,
+			  exception: e,
+			  params: { context: context },
+			  context: "Hook#edit_after_save"
+			)
+		end
 	end
 
 	def speak(params=nil)
