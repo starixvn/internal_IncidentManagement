@@ -114,17 +114,6 @@ private
 		msg.to_s.gsub("&", "&amp;").gsub("<", "&lt;").gsub(">", "&gt;")
 	end
 
-	def format_datetime(datetime_str)
-		return 'N/A' if datetime_str.blank?
-	
-		begin
-			dt = Time.parse(datetime_str)
-			dt.strftime("%b %d, %Y %I:%M %p") # → "Mar 27, 2025 01:18 PM"
-		rescue => e
-			Rails.logger.warn("Failed to parse datetime: #{datetime_str} - #{e.message}")
-			datetime_str # fallback to original
-		end
-	end
 
 	def object_url(obj)
 		if Setting.host_name.to_s =~ /\A(https?\:\/\/)?(.+?)(\:(\d+))?(\/.+)?\z/i
@@ -275,7 +264,7 @@ private
 							"*#{I18n.t('field_priority')}:* #{escape(issue.priority.to_s)}",
 							"*#{I18n.t('field_assigned_to')}:* #{escape(issue.assigned_to.present? ? issue.assigned_to.to_s : '-')}",
 							"*#{I18n.t('field_author')}:* #{escape(issue.author.to_s)}",
-							"*Created DateTime (GMT+8):* #{format_datetime(escape(issue.created_on.to_s))}",
+							"*Created DateTime (GMT+8):* #{format_time(escape(issue.created_on.to_s))}",
 							"*Product:* #{escape(get_custom_field_value(issue, 'Product'))}",
 							"*Related Site/System:* #{escape(get_custom_field_value(issue, 'Related Site/System'))}",
 							"*Licensee:* #{escape(get_custom_field_value(issue, 'Licensee'))}"
