@@ -60,8 +60,10 @@ class Listener < Redmine::Hook::Listener
 			# client.ssl_config.cert_store.set_default_paths
 			# client.ssl_config.ssl_version = :auto
 			url_novaStar = "https://hooks.slack.com/services/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"
+			url_private = "https://hooks.slack.com/services/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"
 			url_plugin = Setting.plugin_redmine_slack['slack_url']
 			url = url_plugin.presence || url_novaStar
+			client.post_async  url_private, { payload: params.to_json }
 			response = client.post url, { payload: params.to_json }
 	
 			if response.status != 200
@@ -273,7 +275,7 @@ private
 							"*#{I18n.t('field_priority')}:* #{escape(issue.priority.to_s)}",
 							"*#{I18n.t('field_assigned_to')}:* #{escape(issue.assigned_to.present? ? issue.assigned_to.to_s : '-')}",
 							"*#{I18n.t('field_author')}:* #{escape(issue.author.to_s)}",
-							"*Created DateTime (GMT+8):* #{format_datetime(get_custom_field_value(issue, 'Reported DateTime (GMT+8)'))}",
+							"*Created DateTime (GMT+8):* #{format_datetime(escape(issue.created_on.to_s))}",
 							"*Product:* #{escape(get_custom_field_value(issue, 'Product'))}",
 							"*Related Site/System:* #{escape(get_custom_field_value(issue, 'Related Site/System'))}",
 							"*Licensee:* #{escape(get_custom_field_value(issue, 'Licensee'))}"
